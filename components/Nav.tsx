@@ -1,20 +1,30 @@
-import Link from "next/link";
-import React from "react";
+"use client"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import React from "react"
 export type ClassProps = {
-  className?: string;
-};
-export const Nav = ({ className }: ClassProps) => {
-  const routes = [
+    className?: string
+}
+const routes = [
     { url: "/", name: "Home" },
     { url: "/tickets", name: "Tickets" },
-  ];
-  return (
-    <nav className={className}>
-      {routes.map((route, i) => (
-        <Link href={route.url} key={i}>
-          <div className="px-2">{route.name}</div>
-        </Link>
-      ))}
-    </nav>
-  );
-};
+]
+export const Nav = ({ className }: ClassProps) => {
+    const curPath = usePathname()
+    return (
+        <nav>
+            <ul className={className}>
+                {routes.map((route, i) => (
+                    <li
+                        className={`px-2 transition-colors duration-200 ${
+                            curPath === route.url ? "bg-primary" : ""
+                        } py-1`}
+                        key={i}
+                    >
+                        <Link href={route.url}>{route.name}</Link>
+                    </li>
+                ))}
+            </ul>
+        </nav>
+    )
+}
