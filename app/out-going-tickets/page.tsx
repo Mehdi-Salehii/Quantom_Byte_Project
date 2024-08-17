@@ -6,7 +6,7 @@ import { DataTable } from "./DataTable"
 import { columns } from "./Columns"
 import { useState } from "react"
 import { AddTicketForm } from "@/components/AddTicketForm"
-import { modifyDescription } from "../page"
+import { modifyDescription } from "@/utils/helpers"
 
 const OutGoingTicketsPage = () => {
   const [data, setData] = useState<TicketType[]>([

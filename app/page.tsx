@@ -6,20 +6,8 @@ import { DataTable } from "./DataTable"
 import { columns } from "./Columns"
 import { useState } from "react"
 import { AddTicketForm } from "@/components/AddTicketForm"
+import { modifyDescription } from "@/utils/helpers"
 
-export function modifyDescription(data: TicketType[], descLength: number) {
-  const howLong = descLength
-  const modifiedData = data.map((d) => {
-    const { description, ...rest } = d
-    const isLong = description.length > howLong
-
-    return {
-      ...rest,
-      description: isLong ? description.slice(0, howLong) + "..." : description,
-    }
-  })
-  return modifiedData
-}
 const Home = () => {
   const [data, setData] = useState<TicketType[]>([
     {
