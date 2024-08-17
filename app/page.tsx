@@ -7,16 +7,8 @@ import { columns } from "./Columns"
 import { useState } from "react"
 import { AddTicketForm } from "@/components/AddTicketForm"
 
-const Home = () => {
-  const [data, setData] = useState<TicketType[]>([
-    {
-      id: 1,
-      title: "windows broken",
-      description: "windows is broken",
-      department: "engineering",
-    },
-  ])
-  const howLong = 20
+export function modifyDescription(data: TicketType[], descLength: number) {
+  const howLong = descLength
   const modifiedData = data.map((d) => {
     const { description, ...rest } = d
     const isLong = description.length > howLong
@@ -26,6 +18,18 @@ const Home = () => {
       description: isLong ? description.slice(0, howLong) + "..." : description,
     }
   })
+  return modifiedData
+}
+const Home = () => {
+  const [data, setData] = useState<TicketType[]>([
+    {
+      id: 1,
+      title: "windows broken",
+      description: "windows is broken",
+      department: "engineering",
+    },
+  ])
+  const modifiedData = modifyDescription(data, 20)
   return (
     <>
       <div className="mt-10 grid px-1 sm:grid-cols-[15fr_1fr_4fr] sm:px-3 lg:px-6 xl:grid-cols-[15fr_2fr_3fr]">
