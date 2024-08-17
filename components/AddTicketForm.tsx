@@ -59,15 +59,22 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
       title: "",
     },
   })
+  const {
+    formState: { isSubmitting },
+  } = form
   const { toast } = useToast()
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    toast({
-      description: "Your ticket successfully submitted!",
-      className: "bg-green-600 text-lg font-semibold text-foreground",
-    })
-    console.log(values)
-    form.reset()
-    if (setOpen) setOpen(false)
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      console.log(values)
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+
+      form.reset()
+      if (setOpen) setOpen(false)
+      toast({
+        description: "Your ticket successfully submitted!",
+        className: "bg-green-600 text-lg font-semibold text-foreground",
+      })
+    } catch (err) {}
   }
 
   return (
@@ -139,7 +146,11 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
           )}
         />
         <div className="flex w-full">
-          <Button className="mx-auto block" type="submit">
+          <Button
+            className="mx-auto block"
+            type="submit"
+            disabled={isSubmitting}
+          >
             Submit
           </Button>
         </div>
