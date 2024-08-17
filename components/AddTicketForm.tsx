@@ -48,7 +48,7 @@ const formSchema = z.object({
   ),
 })
 type AddTicketFormProps = {
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setOpen?: React.Dispatch<React.SetStateAction<boolean>>
 }
 export function AddTicketForm({ setOpen }: AddTicketFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -67,7 +67,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
     })
     console.log(values)
     form.reset()
-    setOpen(false)
+    if (setOpen) setOpen(false)
   }
 
   return (
