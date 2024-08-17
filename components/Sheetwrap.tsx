@@ -30,7 +30,7 @@ export const Sheetwrap = ({
                 <NewTicketPopover />
               </div>
             </div>
-            <Nav className="mx-auto flex w-1/3 flex-col gap-5 font-semibold" />
+            <Nav className="mx-auto flex flex-col items-end gap-5 font-semibold" />
           </div>
         </SheetContent>
       </Sheet>
