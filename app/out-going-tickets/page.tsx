@@ -16,27 +16,12 @@ const Home = () => {
       department: "engineering",
     },
   ])
-  const howLong = 20
-  const modifiedData = data.map((d) => {
-    const { description, ...rest } = d
-    const isLong = description.length > howLong
-
-    return {
-      ...rest,
-      description: isLong ? description.slice(0, howLong) + "..." : description,
-    }
-  })
   return (
     <>
-      <div className="mt-10 grid px-1 sm:grid-cols-[15fr_1fr_4fr] sm:px-3 lg:px-6 xl:grid-cols-[15fr_2fr_3fr]">
+      <div className="xsm:w-11/12 lg:8/12 mx-auto mt-10 grid px-1 sm:w-10/12 sm:px-3 md:w-9/12 lg:px-6 xl:w-8/12 2xl:w-7/12">
         <div className="col-span-full col-start-1 col-end-[2]">
-          <h1 className="mb-2 text-center font-semibold">
-            Tickets to your department
-          </h1>
-          <DataTable columns={columns} data={modifiedData} />
-        </div>
-        <div className="col-start-3 col-end-[-1] hidden text-center sm:mt-0 sm:block">
-          <AddTicketForm />
+          <h1 className="mb-2 text-center font-semibold">Outgoing Tickets</h1>
+          <DataTable columns={columns} data={data} />
         </div>
       </div>
     </>

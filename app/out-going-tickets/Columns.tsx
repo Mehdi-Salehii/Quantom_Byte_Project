@@ -1,3 +1,5 @@
+"use client"
+
 import { TicketType } from "@/supabase/functions/common/schema"
 import { ColumnDef } from "@tanstack/react-table"
 
@@ -16,6 +18,6 @@ export const columns: ColumnDef<TicketType>[] = [
   },
   {
     accessorKey: "department",
-    header: "Sender",
+    header: "Recipient",
   },
 ]

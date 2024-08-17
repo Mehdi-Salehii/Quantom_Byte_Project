@@ -8,7 +8,7 @@ export type ClassProps = {
 }
 const routes = [
   { url: "/", name: "Home" },
-  { url: "/tickets", name: "Tickets" },
+  { url: "/out-going-tickets", name: "OutgoingTickets" },
 ]
 export const Nav = ({ className }: ClassProps) => {
   const curPath = usePathname()
@@ -18,7 +18,7 @@ export const Nav = ({ className }: ClassProps) => {
         {routes.map((route, i) => (
           <li
             className={twMerge(
-              `rounded px-2 text-primary transition-colors duration-200 ${
+              `rounded px-5 text-primary transition-colors duration-200 ${
                 curPath === route.url ? "bg-primary text-foreground" : ""
               } py-1`,
             )}
