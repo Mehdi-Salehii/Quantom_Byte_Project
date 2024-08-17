@@ -25,6 +25,7 @@ import {
 import { useToast } from "@/components/ui/use-toast"
 
 import Link from "next/link"
+import { useRef, useState } from "react"
 const departments = [
   "main office",
   "engineering",
@@ -46,10 +47,17 @@ const formSchema = z.object({
     },
   ),
 })
-
-export function AddTicketForm() {
+type AddTicketFormProps = {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+export function AddTicketForm({ setOpen }: AddTicketFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      department: "main office",
+      description: "",
+      title: "",
+    },
   })
   const { toast } = useToast()
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -58,6 +66,8 @@ export function AddTicketForm() {
       className: "bg-green-600 text-lg font-semibold text-foreground",
     })
     console.log(values)
+    form.reset()
+    setOpen(false)
   }
 
   return (
@@ -72,7 +82,7 @@ export function AddTicketForm() {
               <FormControl>
                 <Input
                   className="placeholder:italic placeholder:text-border"
-                  placeholder="my windows is BROKEN"
+                  placeholder="eg. my windows is BROKEN"
                   {...field}
                 />
               </FormControl>
@@ -87,15 +97,21 @@ export function AddTicketForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Department</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                value={field.value}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select target department" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {departments.map((dep) => (
-                    <SelectItem value={dep}>{dep}</SelectItem>
+                  {departments.map((dep, i) => (
+                    <SelectItem key={i} value={dep}>
+                      {dep}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>

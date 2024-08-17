@@ -2,6 +2,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import React from "react"
+import { twMerge } from "tailwind-merge"
 export type ClassProps = {
   className?: string
 }
@@ -16,9 +17,11 @@ export const Nav = ({ className }: ClassProps) => {
       <ul className={className}>
         {routes.map((route, i) => (
           <li
-            className={`rounded px-2 text-primary transition-colors duration-200 ${
-              curPath === route.url ? "bg-primary text-foreground" : ""
-            } py-1`}
+            className={twMerge(
+              `rounded px-2 text-primary transition-colors duration-200 ${
+                curPath === route.url ? "bg-primary text-foreground" : ""
+              } py-1`,
+            )}
             key={i}
           >
             <Link href={route.url}>{route.name}</Link>

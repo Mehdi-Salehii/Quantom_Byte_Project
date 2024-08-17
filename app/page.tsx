@@ -18,11 +18,11 @@ const Home = () => {
   ])
   return (
     <>
-      <div className="mt-10 grid grid-cols-10 px-10">
-        <div className="col-span-6 col-start-1">
+      <div className="mt-10 grid grid-cols-10 px-1">
+        <div className="col-span-full row-start-1">
           <DataTable columns={columns} data={data} />
         </div>
-        <div className="col-span-2 col-start-8">
+        <div className="col-span-full row-start-2 mt-3 hidden">
           <AddTicketForm />
         </div>
       </div>
