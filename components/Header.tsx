@@ -1,4 +1,5 @@
-import React from "react"
+"use client"
+import React, { useState } from "react"
 import { ClassProps, Nav } from "./Nav"
 import { ModeToggle } from "./ModeToggle"
 import { Logo } from "./Logo"
@@ -7,6 +8,7 @@ import { Sheetwrap } from "./Sheetwrap"
 import { twMerge } from "tailwind-merge"
 
 export const Header = ({ className }: ClassProps) => {
+  const [isOpen, setIsOpen] = useState(false)
   return (
     <header
       className={twMerge(
@@ -21,7 +23,7 @@ export const Header = ({ className }: ClassProps) => {
       </div>
       <ModeToggle className="hidden sm:block" />
 
-      <Sheetwrap className="sm:hidden" />
+      <Sheetwrap open={isOpen} setIsOpen={setIsOpen} className="sm:hidden" />
     </header>
   )
 }

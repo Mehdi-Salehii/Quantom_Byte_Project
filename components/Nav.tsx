@@ -5,18 +5,23 @@ import React from "react"
 import { twMerge } from "tailwind-merge"
 export type ClassProps = {
   className?: string
+  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>
+  open?: boolean
 }
 const routes = [
   { url: "/", name: "Home" },
   { url: "/out-going-tickets", name: "OutgoingTickets" },
 ]
-export const Nav = ({ className }: ClassProps) => {
+export const Nav = ({ className, setIsOpen, open }: ClassProps) => {
   const curPath = usePathname()
   return (
     <nav>
       <ul className={className}>
         {routes.map((route, i) => (
           <li
+            onClick={() => {
+              if (setIsOpen) setIsOpen(!open)
+            }}
             className={twMerge(
               `rounded px-5 text-primary transition-colors duration-200 ${
                 curPath === route.url ? "bg-primary text-foreground" : ""
