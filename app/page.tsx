@@ -8,7 +8,7 @@ import { useState } from "react"
 import { AddTicketForm } from "@/components/AddTicketForm"
 import { modifyDescription } from "@/utils/helpers"
 
-const Home = () => {
+const Home = async () => {
   const [data, setData] = useState<TicketType[]>([
     {
       id: 1,
@@ -16,8 +16,24 @@ const Home = () => {
       description: "windows is broken",
       department: "engineering",
     },
+    {
+      id: 55,
+      title: "windows broken",
+      description: "windows is broken",
+      department: "engineering",
+    },
+    {
+      id: 78,
+      title: "windows broken",
+      description: "windows is broken",
+      department: "engineering",
+    },
   ])
-  const modifiedData = modifyDescription(data, 20)
+  const modifiedData = await new Promise<TicketType[]>((resolve) =>
+    setTimeout(() => {
+      resolve(modifyDescription(data, 20))
+    }, 1000),
+  )
   return (
     <>
       <div className="mt-10 grid px-1 sm:grid-cols-[15fr_1fr_4fr] sm:px-3 lg:px-6 xl:grid-cols-[15fr_2fr_3fr]">

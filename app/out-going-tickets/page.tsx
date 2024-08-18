@@ -8,7 +8,7 @@ import { useState } from "react"
 import { AddTicketForm } from "@/components/AddTicketForm"
 import { modifyDescription } from "@/utils/helpers"
 
-const OutGoingTicketsPage = () => {
+const OutGoingTicketsPage = async () => {
   const [data, setData] = useState<TicketType[]>([
     {
       id: 1,
@@ -17,7 +17,12 @@ const OutGoingTicketsPage = () => {
       department: "engineering",
     },
   ])
-  const modifiedData = modifyDescription(data, 20)
+  const modifiedData = await new Promise<TicketType[]>((resolve) =>
+    setTimeout(() => {
+      resolve(modifyDescription(data, 20))
+    }, 1000),
+  )
+
   return (
     <>
       <div className="xsm:w-11/12 lg:8/12 mx-auto mt-10 grid px-1 sm:w-10/12 sm:px-3 md:w-9/12 lg:px-6 xl:w-8/12 2xl:w-7/12">
