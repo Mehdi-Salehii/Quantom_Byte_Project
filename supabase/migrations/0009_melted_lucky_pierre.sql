@@ -1,0 +1,1 @@
+ALTER TABLE "user_table" ALTER COLUMN "user_department" SET DATA TYPE text;
