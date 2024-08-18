@@ -27,7 +27,7 @@ export default function loading() {
                 </tr>
               </thead>
               <tbody>
-                {Array.from({ length: 10 }).map((_, index) => (
+                {Array.from({ length: 5 }).map((_, index) => (
                   <tr key={index}>
                     <td className="border-b px-4 py-4">
                       <Skeleton className="mx-auto h-4 w-8" />
