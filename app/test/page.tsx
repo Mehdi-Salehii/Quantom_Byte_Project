@@ -1,8 +1,10 @@
 import axios from "axios"
 import React from "react"
 
-export default async function test() {
-  const { data } = await axios.get("http://localhost:3000/api/tickets")
+export async function test() {
+  const { data } = await axios.get(
+    "http://quantom-byte-project.vercel.app/api/tickets",
+  )
 
   console.log(data, "***** api call from test")
   if (!Array.isArray(data)) {
