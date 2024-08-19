@@ -5,7 +5,8 @@ import { NextResponse } from "next/server"
 //TODO user authority for getting tickets hasnt approved yet after implementing clerk tickets should be filtered with user id
 export const GET = async (
   request: Request,
-): Promise<NextResponse<TicketType[]>> => {
+): Promise<NextResponse<TicketType[]> | void> => {
+  if (process.env.NODE_ENV === "production") return
   const data = await getAllTickets()
   return NextResponse.json(data)
 }
