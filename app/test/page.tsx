@@ -6,15 +6,14 @@ export async function test() {
     "http://quantom-byte-project.vercel.app/api/tickets",
   )
 
-  console.log(data, "***** api call from test")
   if (!Array.isArray(data)) {
     return <div>data is not array</div>
   }
   return (
     <div>
-      {data.map((d) => (
+      {/* {data.map((d) => (
         <p>{JSON.stringify(d)}</p>
-      ))}
+      ))} */}
     </div>
   )
 }
