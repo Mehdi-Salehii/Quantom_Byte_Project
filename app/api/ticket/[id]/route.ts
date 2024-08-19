@@ -5,8 +5,8 @@ import { NextResponse } from "next/server"
 export const GET = async (
   request: Request,
   route: { params: { id: string } },
-): Promise<NextResponse<TicketType[]> | void> => {
-  if (process.env.NODE_ENV === "production") return
+): Promise<NextResponse<TicketType[] | string>> => {
+  if (process.env.NODE_ENV === "production") return NextResponse.json("data")
   const data = await getOneTicket(route.params.id)
 
   return NextResponse.json(data)
