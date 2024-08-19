@@ -28,8 +28,8 @@ export const ticketTable = pgTable("ticket_table", {
   target_department: departmentEnum("target_department").notNull(),
   source_department: departmentEnum("source_department").notNull(),
   status: statusEnum("status").notNull().default("processing"),
-  fulfill_message: text("title"),
-  reject_message: text("title"),
+  fulfill_message: text("fulfill_message"),
+  reject_message: text("reject_message"),
 })
 export const userTable = pgTable("user_table", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -42,7 +42,10 @@ export const userTable = pgTable("user_table", {
     .notNull()
     .default(sql`'{}'::text[]`),
 })
-
+export const schema = {
+  ticketTable,
+  userTable,
+}
 export type TicketTypeInsert = typeof ticketTable.$inferInsert
 export type TicketType = typeof ticketTable.$inferSelect
 export type UserTypeInsert = typeof userTable.$inferInsert

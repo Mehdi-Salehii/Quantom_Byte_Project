@@ -5,7 +5,7 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- CREATE TYPE "public"."status" AS ENUM('fulfilled', 'processing', 'rejected ');
+ CREATE TYPE "public"."status" AS ENUM('fulfilled', 'processing', 'rejected');
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS "ticket_table" (
 	"title" text,
 	"description" text NOT NULL,
 	"target_department" "department" NOT NULL,
+	"source_department" "department" NOT NULL,
 	"status" "status" DEFAULT 'processing' NOT NULL
 );
 --> statement-breakpoint

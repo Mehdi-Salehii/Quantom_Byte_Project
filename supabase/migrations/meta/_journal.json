@@ -106,6 +106,27 @@
       "when": 1724060082783,
       "tag": "0014_outstanding_namorita",
       "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1724079419022,
+      "tag": "0015_young_wendigo",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1724079440920,
+      "tag": "0016_known_bromley",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1724079531655,
+      "tag": "0017_furry_komodo",
+      "breakpoints": true
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
-  "id": "68304f7e-a80e-44a1-b405-1e94df42dc60",
-  "prevId": "fb55bf23-c7f3-48bb-99be-5c95d6fa2401",
+  "id": "f404f92b-ca71-4c0d-be32-cb8bd0ce7f1a",
+  "prevId": "6bc2e91c-7bd6-4676-81e2-741fe596bcc5",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -25,7 +25,7 @@
           "name": "title",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "description": {
           "name": "description",
@@ -40,6 +40,13 @@
           "primaryKey": false,
           "notNull": true
         },
+        "source_department": {
+          "name": "source_department",
+          "type": "department",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
         "status": {
           "name": "status",
           "type": "status",
@@ -47,6 +54,18 @@
           "primaryKey": false,
           "notNull": true,
           "default": "'processing'"
+        },
+        "fulfill_message": {
+          "name": "fulfill_message",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "reject_message": {
+          "name": "reject_message",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},

@@ -1,1 +1,0 @@
-ALTER TABLE "ticket_table" ADD COLUMN "source_department" "department" NOT NULL;

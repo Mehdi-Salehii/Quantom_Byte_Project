@@ -1,6 +1,6 @@
 {
-  "id": "fb55bf23-c7f3-48bb-99be-5c95d6fa2401",
-  "prevId": "d7d32d65-61cf-4fb8-b674-a41b3cec24d7",
+  "id": "6bc2e91c-7bd6-4676-81e2-741fe596bcc5",
+  "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -35,6 +35,13 @@
         },
         "target_department": {
           "name": "target_department",
+          "type": "department",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "source_department": {
+          "name": "source_department",
           "type": "department",
           "typeSchema": "public",
           "primaryKey": false,
@@ -116,7 +123,7 @@
       "values": [
         "fulfilled",
         "processing",
-        "rejected "
+        "rejected"
       ]
     }
   },
