@@ -1,4 +1,8 @@
-import { ticketTable, TicketType } from "@/supabase/functions/common/schema"
+import {
+  ticketTable,
+  TicketType,
+  TicketTypeInsert,
+} from "@/supabase/functions/common/schema"
 import { db } from "@/utils/db"
 import { eq, sql } from "drizzle-orm"
 
@@ -27,7 +31,10 @@ export const getFilteredTicket = async (
     )
   return data
 }
-export const insertTicket = async (): Promise<TicketType[]> => {
+
+export const insertTicket = async (
+  ticket: TicketTypeInsert,
+): Promise<TicketType[]> => {
   const data = await db
     .insert(ticketTable)
     .values({

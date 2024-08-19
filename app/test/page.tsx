@@ -1,32 +1,18 @@
-// app/test/page.tsx
-"use client"
-
 import axios from "axios"
-import React, { useEffect, useState } from "react"
+import React from "react"
 
-export default function TestPage() {
-  const [data, setData] = useState([])
+export default async function test() {
+  const { data } = await axios.get("http://localhost:3000/api/tickets")
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("http://localhost:3000/api/tickets")
-        setData(response.data)
-      } catch (error) {
-        console.error("Error fetching data:", error)
-      }
-    }
-
-    fetchData()
-  }, [])
-
+  console.log(data, "***** api call from test")
+  if (!Array.isArray(data)) {
+    return <div>data is not array</div>
+  }
   return (
     <div>
-      {data.length > 0 ? (
-        data.map((d) => <p key={d.id}>{JSON.stringify(d)}</p>)
-      ) : (
-        <p>No data available</p>
-      )}
+      {data.map((d) => (
+        <p>{JSON.stringify(d)}</p>
+      ))}
     </div>
   )
 }

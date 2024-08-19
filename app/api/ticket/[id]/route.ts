@@ -1,11 +1,17 @@
 import { TicketType } from "@/supabase/functions/common/schema"
-import { getAllTickets } from "@/utils/db_functions"
+import { getOneTicket } from "@/utils/db_functions"
 import { NextResponse } from "next/server"
 
-//TODO user authority for getting tickets hasnt approved yet after implementing clerk tickets should be filtered with user id
 export const GET = async (
   request: Request,
+  route: { params: { id: string } },
 ): Promise<NextResponse<TicketType[]>> => {
-  const data = await getAllTickets()
+  let time = 0
+  const timer = setInterval(() => {
+    time += 1
+  }, 1)
+
+  const data = await getOneTicket(route.params.id)
+
   return NextResponse.json(data)
 }
