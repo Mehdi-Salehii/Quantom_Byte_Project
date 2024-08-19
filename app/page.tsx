@@ -7,28 +7,10 @@ import { columns } from "./Columns"
 import { useState } from "react"
 import { AddTicketForm } from "@/components/AddTicketForm"
 import { modifyDescription } from "@/utils/helpers"
+import { tickets } from "@/utils/dummyData"
 
 const Home = async () => {
-  const [data, setData] = useState<TicketType[]>([
-    {
-      id: 1,
-      title: "windows broken",
-      description: "windows is broken",
-      department: "engineering",
-    },
-    {
-      id: 55,
-      title: "windows broken",
-      description: "windows is broken",
-      department: "engineering",
-    },
-    {
-      id: 78,
-      title: "windows broken",
-      description: "windows is broken",
-      department: "engineering",
-    },
-  ])
+  const [data, setData] = useState<TicketType[]>(tickets.slice(0, 30))
   const modifiedData = await new Promise<TicketType[]>((resolve) =>
     setTimeout(() => {
       resolve(modifyDescription(data, 20))

@@ -3,19 +3,19 @@ import { ColumnDef } from "@tanstack/react-table"
 
 export const columns: ColumnDef<TicketType>[] = [
   {
-    accessorKey: "id",
-    header: "ID",
-  },
-  {
     accessorKey: "title",
     header: "Title",
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
   },
   {
     accessorKey: "description",
     header: "Description",
   },
   {
-    accessorKey: "department",
+    accessorKey: "source_department",
     header: "Sender",
   },
 ]

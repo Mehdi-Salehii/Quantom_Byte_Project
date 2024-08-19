@@ -92,6 +92,20 @@
       "when": 1724019518504,
       "tag": "0012_crazy_slipstream",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1724059871517,
+      "tag": "0013_regular_swordsman",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1724060082783,
+      "tag": "0014_outstanding_namorita",
+      "breakpoints": true
     }
   ]
 }

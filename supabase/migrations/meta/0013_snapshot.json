@@ -1,6 +1,6 @@
 {
-  "id": "1c456685-bfb3-4680-bf39-d14e0d6dbcf3",
-  "prevId": "96c2b54c-a9b2-460c-9b21-659e2b7a0891",
+  "id": "68304f7e-a80e-44a1-b405-1e94df42dc60",
+  "prevId": "fb55bf23-c7f3-48bb-99be-5c95d6fa2401",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -79,7 +79,8 @@
         },
         "user_department": {
           "name": "user_department",
-          "type": "text",
+          "type": "department",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
         },
@@ -115,7 +116,7 @@
       "values": [
         "fulfilled",
         "processing",
-        "rejected "
+        "rejected"
       ]
     }
   },

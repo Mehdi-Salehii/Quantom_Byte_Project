@@ -18,7 +18,7 @@ export const departmentEnum = pgEnum("department", [
 export const statusEnum = pgEnum("status", [
   "fulfilled",
   "processing",
-  "rejected ",
+  "rejected",
 ])
 export const ticketTable = pgTable("ticket_table", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -26,6 +26,7 @@ export const ticketTable = pgTable("ticket_table", {
   title: text("title").notNull(),
   description: text("description").notNull(),
   target_department: departmentEnum("target_department").notNull(),
+  source_department: departmentEnum("source_department").notNull(),
   status: statusEnum("status").notNull().default("processing"),
   fulfill_message: text("title"),
   reject_message: text("title"),
