@@ -1,11 +1,11 @@
+import { TicketType } from "@/supabase/functions/common/schema"
+import { getAllTickets } from "@/utils/db_functions"
 import { NextResponse } from "next/server"
 
-export const GET = async (request: Request) => {
-  const data = await db.todo.findMany()
+//TODO user authority for getting tickets hasnt approved yet after implementing clerk tickets should be filtered with user id
+export const GET = async (
+  request: Request,
+): Promise<NextResponse<{ data: TicketType[] }>> => {
+  const data = await getAllTickets()
   return NextResponse.json({ data })
-}
-export const POST = async (request: Request) => {
-  const data = await request.json()
-  const res = await db.todo.create({ data })
-  return NextResponse.json({ res })
 }
