@@ -13,6 +13,7 @@ import {
   SheetClose,
 } from "./ui/sheet"
 import React from "react"
+import { SignedIn, UserButton } from "@clerk/nextjs"
 type SheetWrapType = {
   className?: string
   open: boolean
@@ -43,6 +44,13 @@ export const Sheetwrap = ({
           <div className="flex w-full">
             <div className="ml-auto cursor-pointer">
               <X onClick={() => setIsOpen(!open)} />
+            </div>
+          </div>
+          <div className="flex w-full">
+            <div className="mx-auto">
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
             </div>
           </div>
           <div className="mt-10 flex flex-col justify-end gap-5">

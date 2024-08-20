@@ -1,3 +1,11 @@
+import {
+  ClerkProvider,
+  SignIn,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs"
 import { ThemeProvider } from "@/components/ThemeProvider"
 import "./globals.css"
 import { Header } from "@/components/Header"
@@ -9,14 +17,25 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="w-screen overflow-x-hidden">
-      <body className="w-screen overflow-x-hidden transition-colors duration-200">
-        <ThemeProvider attribute="class" defaultTheme="system">
-          <Header className="flex items-center justify-end gap-10 border-b-[1px] border-b-slate-100 p-2" />
-          {children}
-          <Toaster />
-        </ThemeProvider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" className="w-screen overflow-x-hidden">
+        <body className="w-screen overflow-x-hidden transition-colors duration-200">
+          <ThemeProvider attribute="class" defaultTheme="system">
+            <SignedOut>
+              <div className="grid h-screen w-screen place-items-center">
+                <div>
+                  <SignIn routing="hash" />
+                </div>
+              </div>
+            </SignedOut>
+            <SignedIn>
+              <Header className="flex items-center justify-end gap-10 border-b-[1px] border-b-slate-100 p-2" />
+              {children}
+              <Toaster />
+            </SignedIn>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }
