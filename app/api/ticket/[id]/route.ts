@@ -1,9 +1,6 @@
 import { getOneTicket } from "@/utils/db_functions"
 
-export const GET = async (
-  request: Request,
-  { params }: { params: { id: string } },
-) => {
+export const GET = async ({ params }: { params: { id: string } }) => {
   // if (process.env.NODE_ENV === "production") return Response.json("data")
   const data = await getOneTicket(params.id)
 
