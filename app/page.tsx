@@ -9,13 +9,9 @@ import { AddTicketForm } from "@/components/AddTicketForm"
 import { modifyDescription } from "@/utils/helpers"
 import { tickets } from "@/utils/dummyData"
 
-const Home = async () => {
+const Home = () => {
   const [data, setData] = useState<TicketType[]>(tickets.slice(0, 30))
-  const modifiedData = await new Promise<TicketType[]>((resolve) =>
-    setTimeout(() => {
-      resolve(modifyDescription(data, 20))
-    }, 1000),
-  )
+  const modifiedData = modifyDescription(data, 20)
   return (
     <>
       <div className="mt-10 grid px-1 sm:grid-cols-[15fr_1fr_4fr] sm:px-3 lg:px-6 xl:grid-cols-[15fr_2fr_3fr]">
