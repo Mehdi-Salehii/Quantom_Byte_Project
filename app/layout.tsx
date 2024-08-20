@@ -9,7 +9,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="w-screen overflow-x-hidden">
       <body className="w-screen overflow-x-hidden transition-colors duration-200">
         <ThemeProvider attribute="class" defaultTheme="system">
           <Header className="flex items-center justify-end gap-10 border-b-[1px] border-b-slate-100 p-2" />
