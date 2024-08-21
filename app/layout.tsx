@@ -28,7 +28,7 @@ export default function RootLayout({
       }}
     >
       <html lang="en" className="overflow-x-hidden">
-        <body className="overflow-x-hidden transition-colors duration-200">
+        <body className="flex min-h-screen flex-col overflow-x-hidden transition-colors duration-200">
           <ThemeProvider attribute="class" defaultTheme="system">
             <SignedOut>
               <div className="grid h-screen w-screen place-items-center">
@@ -44,7 +44,7 @@ export default function RootLayout({
             </SignedOut>
             <SignedIn>
               <Header className="flex items-center justify-end gap-10 border-b-[1px] border-b-slate-100 p-2" />
-              {children}
+              <main className="flex-grow">{children}</main>
               <Toaster />
               <Footer />
             </SignedIn>
