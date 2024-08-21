@@ -28,10 +28,10 @@ export default function RootLayout({
       }}
     >
       <html lang="en" className="overflow-x-hidden">
-        <body className="flex min-h-screen flex-col overflow-x-hidden transition-colors duration-200">
+        <body className="flex min-h-svh flex-col overflow-x-hidden transition-colors duration-200">
           <ThemeProvider attribute="class" defaultTheme="system">
             <SignedOut>
-              <div className="grid h-screen w-screen place-items-center">
+              <div className="grid h-full w-full place-items-center">
                 <div className="mr-3 mt-3 self-start justify-self-end">
                   <SignUpButton mode="modal">
                     <Button>Sign Up</Button>
