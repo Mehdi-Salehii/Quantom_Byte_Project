@@ -12,6 +12,7 @@ import "./globals.css"
 import { Header } from "@/components/Header"
 import { Toaster } from "@/components/ui/toaster"
 import { Button } from "@/components/ui/button"
+import { Footer } from "@/components/Footer"
 
 export default function RootLayout({
   children,
@@ -45,6 +46,7 @@ export default function RootLayout({
               <Header className="flex items-center justify-end gap-10 border-b-[1px] border-b-slate-100 p-2" />
               {children}
               <Toaster />
+              <Footer />
             </SignedIn>
           </ThemeProvider>
         </body>
