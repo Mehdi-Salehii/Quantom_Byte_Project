@@ -27,8 +27,8 @@ export default function RootLayout({
         },
       }}
     >
-      <html lang="en" className="w-screen overflow-x-hidden">
-        <body className="w-screen overflow-x-hidden transition-colors duration-200">
+      <html lang="en" className="overflow-x-hidden">
+        <body className="overflow-x-hidden transition-colors duration-200">
           <ThemeProvider attribute="class" defaultTheme="system">
             <SignedOut>
               <div className="grid h-screen w-screen place-items-center">

@@ -22,28 +22,32 @@ export const Footer = ({ className }: ClassProps) => {
     <footer
       className={twMerge(
         className +
-          " mt-5 grid grid-cols-2 place-items-center gap-y-4 border-t-[1px] border-t-slate-100 max-sm:p-4 max-sm:pb-0 sm:mt-10 sm:grid-cols-3 sm:px-6 sm:pb-0 sm:pt-4",
+          " mt-5 grid grid-cols-2 place-items-center gap-y-4 border-t-[1px] border-t-slate-100 max-sm:p-4 max-sm:pb-0 sm:mt-10 sm:px-6 sm:pb-0 sm:pt-4 md:grid-cols-4",
       )}
     >
-      <div>
-        {" "}
-        <Logo />
-      </div>
-      <div>
-        {" "}
+      <div className="text-center md:col-span-1 md:col-start-2">
         <div className="mb-5 border-b-[1px] border-slate-100/80 text-center font-semibold">
           Useful Links
         </div>
-        <Nav className="text-center" />
+        <Nav />
       </div>
-      <div className="col-span-full flex gap-5 sm:col-span-1">
-        <Link href="#">
+      <div className="md: col-span-1 flex gap-5 md:col-start-3">
+        <Link
+          href="#"
+          className="transition-colors duration-200 hover:text-pink-500"
+        >
           <Instagram />
         </Link>
-        <Link href="#">
+        <Link
+          href="#"
+          className="transition-colors duration-200 hover:text-blue-500"
+        >
           <Facebook />
         </Link>
-        <Link href="#">
+        <Link
+          href="#"
+          className="transition-colors duration-200 hover:text-foreground/50"
+        >
           <Github />
         </Link>
       </div>
