@@ -54,6 +54,7 @@ export const Sheetwrap = ({
                 appearance={{
                   elements: {
                     userButtonPopoverCard: { pointerEvents: "initial" },
+                    userButtonOuterIdentifier: "text-foreground",
                   },
                 }}
               />

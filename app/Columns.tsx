@@ -1,6 +1,8 @@
+import { Button } from "@/components/ui/button"
 import { TicketType } from "@/supabase/functions/common/schema"
 import { ColumnDef } from "@tanstack/react-table"
 import { boolean } from "drizzle-orm/mysql-core"
+import Link from "next/link"
 import { twMerge } from "tailwind-merge"
 
 export const columns: ColumnDef<TicketType>[] = [
@@ -33,19 +35,7 @@ export const columns: ColumnDef<TicketType>[] = [
       return <div className={twMerge("text-center", color)}>{status}</div>
     },
   },
-  {
-    accessorKey: "description",
-    header: () => (
-      <div className="text-center font-bold text-foreground/80">
-        Description
-      </div>
-    ),
-    cell: ({ row }) => {
-      const description: string = row.getValue("description")
 
-      return <div className="text-center">{description}</div>
-    },
-  },
   {
     accessorKey: "source_department",
     header: () => (
@@ -55,6 +45,25 @@ export const columns: ColumnDef<TicketType>[] = [
       const Sender: string = row.getValue("source_department")
 
       return <div className="text-center">{Sender}</div>
+    },
+  },
+  {
+    accessorKey: "id",
+    header: () => (
+      <div className="text-center font-bold text-foreground/80">Details</div>
+    ),
+    cell: ({ row }) => {
+      const id: string = row.getValue("id")
+      return (
+        <div className="grid place-items-center text-background/90">
+          <Link
+            href={`/details/${id}`}
+            className="rounded-full bg-primary px-[8px] py-[2px]"
+          >
+            Details
+          </Link>
+        </div>
+      )
     },
   },
 ]

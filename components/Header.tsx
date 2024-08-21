@@ -32,7 +32,14 @@ export const Header = ({ className }: ClassProps) => {
 
       <div className="hidden sm:block">
         <SignedIn>
-          <UserButton showName />
+          <UserButton
+            showName
+            appearance={{
+              elements: {
+                userButtonOuterIdentifier: "text-foreground",
+              },
+            }}
+          />
         </SignedIn>
       </div>
       <Sheetwrap open={isOpen} setIsOpen={setIsOpen} className="sm:hidden" />

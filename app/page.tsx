@@ -11,10 +11,10 @@ import { tickets } from "@/utils/dummyData"
 
 const Home = () => {
   const [data, setData] = useState<TicketType[]>(tickets.slice(0, 30))
-  const modifiedData = modifyDescription(data, 20)
+  const modifiedData = modifyDescription(data, 15)
   return (
     <>
-      <div className="mt-10 grid px-1 sm:grid-cols-[15fr_1fr_4fr] sm:px-3 lg:px-6 xl:grid-cols-[15fr_2fr_3fr]">
+      <div className="mt-10 grid xsm:px-1 sm:grid-cols-[15fr_1fr_4fr] sm:px-3 lg:px-6 xl:grid-cols-[15fr_2fr_3fr]">
         <div className="col-span-full col-start-1 col-end-[2]">
           <h1 className="mb-2 text-center font-semibold">
             Tickets to your department
