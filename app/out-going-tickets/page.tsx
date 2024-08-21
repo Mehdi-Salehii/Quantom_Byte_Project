@@ -11,7 +11,7 @@ import { tickets } from "@/utils/dummyData"
 
 const OutGoingTicketsPage = () => {
   const [data, setData] = useState<TicketType[]>(
-    modifyDescription(tickets.slice(30), 25),
+    modifyDescription(tickets.slice(30), 15),
   )
 
   return (

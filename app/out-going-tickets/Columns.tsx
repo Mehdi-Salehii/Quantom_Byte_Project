@@ -16,19 +16,7 @@ export const columns: ColumnDef<TicketType>[] = [
       return <div className="text-center">{title}</div>
     },
   },
-  {
-    accessorKey: "description",
-    header: () => (
-      <div className="text-center font-bold text-foreground/80">
-        Description
-      </div>
-    ),
-    cell: ({ row }) => {
-      const description: string = row.getValue("description")
 
-      return <div className="text-center">{description}</div>
-    },
-  },
   {
     accessorKey: "target_department",
 
