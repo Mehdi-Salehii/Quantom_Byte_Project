@@ -6,7 +6,14 @@ import { Logo } from "./Logo"
 import { NewTicketPopover } from "./NewTicketPopover"
 import { Sheetwrap } from "./Sheetwrap"
 import { twMerge } from "tailwind-merge"
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignOutButton,
+  UserButton,
+} from "@clerk/nextjs"
+import { Button } from "./ui/button"
 
 export const Header = ({ className }: ClassProps) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -17,20 +24,15 @@ export const Header = ({ className }: ClassProps) => {
       )}
     >
       <Logo className="mr-auto" />
-
       <Nav className="hidden font-semibold sm:flex" />
       <div className="hidden sm:hidden">
         <NewTicketPopover />
       </div>
       <ModeToggle className="hidden sm:block" />
-      <div>
-        <SignedOut>
-          <SignInButton />
-        </SignedOut>
-      </div>
+
       <div className="hidden sm:block">
         <SignedIn>
-          <UserButton />
+          <UserButton showName />
         </SignedIn>
       </div>
       <Sheetwrap open={isOpen} setIsOpen={setIsOpen} className="sm:hidden" />

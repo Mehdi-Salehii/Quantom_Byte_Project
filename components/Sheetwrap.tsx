@@ -13,7 +13,8 @@ import {
   SheetClose,
 } from "./ui/sheet"
 import React from "react"
-import { SignedIn, UserButton } from "@clerk/nextjs"
+import { SignedIn, SignOutButton, UserButton } from "@clerk/nextjs"
+import { Button } from "./ui/button"
 type SheetWrapType = {
   className?: string
   open: boolean
@@ -48,9 +49,14 @@ export const Sheetwrap = ({
           </div>
           <div className="flex w-full">
             <div className="mx-auto">
-              <SignedIn>
-                <UserButton />
-              </SignedIn>
+              <UserButton
+                showName
+                appearance={{
+                  elements: {
+                    userButtonPopoverCard: { pointerEvents: "initial" },
+                  },
+                }}
+              />
             </div>
           </div>
           <div className="mt-10 flex flex-col justify-end gap-5">
@@ -65,6 +71,11 @@ export const Sheetwrap = ({
               setIsOpen={setIsOpen}
               className="mx-auto flex flex-col items-end gap-5 font-semibold"
             />
+            <div className="mx-auto mt-16">
+              <SignOutButton>
+                <Button variant={"destructive"}>Sign Out</Button>
+              </SignOutButton>
+            </div>
           </div>
         </SheetContent>
       </Sheet>

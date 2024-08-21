@@ -2,6 +2,7 @@ import {
   ClerkProvider,
   SignIn,
   SignInButton,
+  SignUpButton,
   SignedIn,
   SignedOut,
   UserButton,
@@ -10,6 +11,7 @@ import { ThemeProvider } from "@/components/ThemeProvider"
 import "./globals.css"
 import { Header } from "@/components/Header"
 import { Toaster } from "@/components/ui/toaster"
+import { Button } from "@/components/ui/button"
 
 export default function RootLayout({
   children,
@@ -29,7 +31,12 @@ export default function RootLayout({
           <ThemeProvider attribute="class" defaultTheme="system">
             <SignedOut>
               <div className="grid h-screen w-screen place-items-center">
-                <div>
+                <div className="mr-3 mt-3 self-start justify-self-end">
+                  <SignUpButton mode="modal">
+                    <Button>Sign Up</Button>
+                  </SignUpButton>
+                </div>
+                <div className="self-start">
                   <SignIn routing="hash" />
                 </div>
               </div>
