@@ -22,7 +22,7 @@ export const Footer = ({ className }: ClassProps) => {
     <footer
       className={twMerge(
         className +
-          " mt-5 grid grid-cols-2 place-items-center gap-y-4 border-t-[1px] border-t-slate-100 max-sm:p-4 max-sm:pb-0 sm:mt-auto sm:px-6 sm:pb-0 sm:pt-4 md:grid-cols-4",
+          " mt-5 grid grid-cols-2 place-items-center border-t-[1px] border-t-slate-100 max-sm:p-4 max-sm:pb-0 sm:mt-auto sm:px-6 sm:pb-0 sm:pt-4 md:grid-cols-4",
       )}
     >
       <div className="text-center md:col-span-1 md:col-start-2">
@@ -56,7 +56,7 @@ export const Footer = ({ className }: ClassProps) => {
           </Link>
         </div>
       </div>
-      <div className="col-span-full text-sm text-foreground/50 sm:mt-3">
+      <div className="col-span-full text-sm text-foreground/50">
         All rights reserved Quantom Bytes &#169;
       </div>
     </footer>

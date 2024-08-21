@@ -3,35 +3,35 @@ import { v4 as uuidv4 } from "uuid"
 
 export const users: UserType[] = [
   {
-    id: uuidv4(),
+    id: "",
     clerk_id: "clerk_01",
     name: "Alice Johnson",
     user_department: "engineering",
     avatar: ["https://example.com/avatar1.png"],
   },
   {
-    id: uuidv4(),
+    id: "",
     clerk_id: "clerk_02",
     name: "Bob Smith",
     user_department: "design",
     avatar: ["https://example.com/avatar2.png"],
   },
   {
-    id: uuidv4(),
+    id: "",
     clerk_id: "clerk_03",
     name: "Charlie Brown",
     user_department: "marketing",
     avatar: ["https://example.com/avatar3.png"],
   },
   {
-    id: uuidv4(),
+    id: "",
     clerk_id: "clerk_04",
     name: "Dana White",
     user_department: "financial",
     avatar: ["https://example.com/avatar4.png"],
   },
   {
-    id: uuidv4(),
+    id: "",
     clerk_id: "clerk_05",
     name: "Eve Davis",
     user_department: "main office",
@@ -41,7 +41,7 @@ export const users: UserType[] = [
 
 export const tickets: TicketType[] = [
   {
-    id: uuidv4(),
+    id: "1",
     user_id: "user-1",
     title: "Update Network Security",
     description: "Enhance the security of the office network.",
@@ -52,7 +52,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "2",
     user_id: "user-2",
     title: "Design New Product Packaging",
     description: "Create packaging design for the new product line.",
@@ -63,7 +63,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "3",
     user_id: "user-3",
     title: "Prepare Budget Proposal",
     description: "Draft a budget proposal for the upcoming year.",
@@ -74,7 +74,7 @@ export const tickets: TicketType[] = [
     reject_message: "Proposal lacks sufficient detail.",
   },
   {
-    id: uuidv4(),
+    id: "4",
     user_id: "user-4",
     title: "Organize Annual Meeting",
     description: "Plan and organize the company's annual meeting.",
@@ -85,7 +85,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "5",
     user_id: "user-5",
     title: "Launch Digital Campaign",
     description: "Start a digital marketing campaign for the new product.",
@@ -96,7 +96,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "6",
     user_id: "user-6",
     title: "Upgrade Office Equipment",
     description: "Replace outdated office equipment.",
@@ -107,7 +107,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "7",
     user_id: "user-7",
     title: "Review Financial Statements",
     description: "Conduct a review of the quarterly financial statements.",
@@ -118,7 +118,7 @@ export const tickets: TicketType[] = [
     reject_message: "Statements are incomplete.",
   },
   {
-    id: uuidv4(),
+    id: "8",
     user_id: "user-8",
     title: "Redesign Website",
     description: "Redesign the company website for better user experience.",
@@ -129,7 +129,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "9",
     user_id: "user-9",
     title: "Implement New HR Policies",
     description: "Update and implement new HR policies.",
@@ -140,7 +140,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "10",
     user_id: "user-10",
     title: "Optimize Marketing Budget",
     description: "Review and optimize the marketing budget.",
@@ -151,7 +151,7 @@ export const tickets: TicketType[] = [
     reject_message: "Budget is already optimized.",
   },
   {
-    id: uuidv4(),
+    id: "11",
     user_id: "user-11",
     title: "Plan Product Launch Event",
     description: "Organize the product launch event.",
@@ -162,7 +162,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "12",
     user_id: "user-12",
     title: "Engineering Tools Maintenance",
     description: "Schedule maintenance for engineering tools.",
@@ -173,7 +173,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "13",
     user_id: "user-13",
     title: "Develop Training Program",
     description: "Create a training program for new employees.",
@@ -184,7 +184,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "14",
     user_id: "user-14",
     title: "Prepare Year-End Financial Report",
     description: "Compile the financial report for the year-end review.",
@@ -195,7 +195,7 @@ export const tickets: TicketType[] = [
     reject_message: "Data is missing.",
   },
   {
-    id: uuidv4(),
+    id: "15",
     user_id: "user-15",
     title: "Launch Social Media Campaign",
     description: "Promote the new product on social media.",
@@ -206,7 +206,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "16",
     user_id: "user-16",
     title: "Create Company Newsletter",
     description: "Design and distribute the company newsletter.",
@@ -217,7 +217,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "17",
     user_id: "user-17",
     title: "Revise Budget Allocation",
     description: "Adjust the budget allocation for the next quarter.",
@@ -228,7 +228,7 @@ export const tickets: TicketType[] = [
     reject_message: "Budget adjustment not needed.",
   },
   {
-    id: uuidv4(),
+    id: "18",
     user_id: "user-18",
     title: "Engineering Team Expansion",
     description: "Hire additional engineers for new projects.",
@@ -239,7 +239,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "19",
     user_id: "user-19",
     title: "Organize Charity Event",
     description: "Plan a charity event for community outreach.",
@@ -250,7 +250,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "20",
     user_id: "user-20",
     title: "Upgrade Office Infrastructure",
     description: "Improve the IT infrastructure in the office.",
@@ -261,7 +261,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "21",
     user_id: "user-21",
     title: "Design Trade Show Booth",
     description: "Create a booth design for the upcoming trade show.",
@@ -272,7 +272,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "22",
     user_id: "user-22",
     title: "Review Marketing Strategy",
     description: "Assess the effectiveness of the current marketing strategy.",
@@ -283,7 +283,7 @@ export const tickets: TicketType[] = [
     reject_message: "Strategy needs revision.",
   },
   {
-    id: uuidv4(),
+    id: "23",
     user_id: "user-23",
     title: "Implement New Payroll System",
     description: "Install and configure a new payroll system.",
@@ -294,7 +294,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "24",
     user_id: "user-24",
     title: "Redesign Office Layout",
     description: "Improve the layout of the office space.",
@@ -305,7 +305,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "25",
     user_id: "user-25",
     title: "Financial Risk Assessment",
     description: "Conduct an assessment of financial risks.",
@@ -316,7 +316,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "26",
     user_id: "user-26",
     title: "Organize Customer Feedback Survey",
     description: "Conduct a survey to gather customer feedback.",
@@ -327,7 +327,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "27",
     user_id: "user-27",
     title: "Develop New Software Feature",
     description: "Create a new feature for the company's software.",
@@ -338,7 +338,7 @@ export const tickets: TicketType[] = [
     reject_message: "Feature is not needed.",
   },
   {
-    id: uuidv4(),
+    id: "28",
     user_id: "user-28",
     title: "Update Financial Forecast",
     description: "Recalculate the financial forecast based on new data.",
@@ -349,7 +349,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "29",
     user_id: "user-29",
     title: "Design New Product Logo",
     description: "Create a logo for the new product line.",
@@ -360,7 +360,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "30",
     user_id: "user-30",
     title: "Manage Vendor Relations",
     description: "Improve relationships with key vendors.",
@@ -371,7 +371,7 @@ export const tickets: TicketType[] = [
     reject_message: "Vendors declined changes.",
   },
   {
-    id: uuidv4(),
+    id: "31",
     user_id: "user-31",
     title: "Host Online Webinar",
     description: "Plan and conduct an online webinar for customers.",
@@ -382,7 +382,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "32",
     user_id: "user-32",
     title: "Upgrade Accounting Software",
     description: "Install and configure new accounting software.",
@@ -393,7 +393,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "33",
     user_id: "user-33",
     title: "Create Employee Handbook",
     description: "Develop a handbook for all employees.",
@@ -404,7 +404,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "34",
     user_id: "user-34",
     title: "Conduct Market Research",
     description: "Analyze the market for new opportunities.",
@@ -415,7 +415,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "35",
     user_id: "user-35",
     title: "Design New Office Furniture",
     description: "Create designs for the new office furniture.",
@@ -426,7 +426,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "36",
     user_id: "user-36",
     title: "Revise Financial Policies",
     description: "Update the financial policies for the company.",
@@ -437,7 +437,7 @@ export const tickets: TicketType[] = [
     reject_message: "Policies are up to date.",
   },
   {
-    id: uuidv4(),
+    id: "37",
     user_id: "user-37",
     title: "Implement New Security Protocol",
     description: "Enhance security measures for the office.",
@@ -448,7 +448,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "38",
     user_id: "user-38",
     title: "Design Marketing Collateral",
     description: "Create brochures and flyers for marketing.",
@@ -459,7 +459,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "39",
     user_id: "user-39",
     title: "Perform IT Audit",
     description: "Conduct an audit of the company's IT systems.",
@@ -470,7 +470,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "40",
     user_id: "user-40",
     title: "Develop New Pricing Strategy",
     description: "Create a pricing strategy for new products.",
@@ -481,7 +481,7 @@ export const tickets: TicketType[] = [
     reject_message: "Strategy was not approved.",
   },
   {
-    id: uuidv4(),
+    id: "41",
     user_id: "user-41",
     title: "Organize Team Building Event",
     description: "Plan a team-building activity for the company.",
@@ -492,7 +492,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "42",
     user_id: "user-42",
     title: "Design Product Catalog",
     description: "Create a catalog showcasing all products.",
@@ -503,7 +503,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "43",
     user_id: "user-43",
     title: "Analyze Marketing ROI",
     description: "Evaluate the return on investment for marketing efforts.",
@@ -514,7 +514,7 @@ export const tickets: TicketType[] = [
     reject_message: "ROI data is insufficient.",
   },
   {
-    id: uuidv4(),
+    id: "44",
     user_id: "user-44",
     title: "Upgrade Office Wi-Fi",
     description: "Improve the Wi-Fi coverage in the office.",
@@ -525,7 +525,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "45",
     user_id: "user-45",
     title: "Create New Employee Onboarding",
     description: "Develop a comprehensive onboarding process for new hires.",
@@ -536,7 +536,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "46",
     user_id: "user-46",
     title: "Prepare Quarterly Financial Report",
     description: "Compile and review the quarterly financial report.",
@@ -547,7 +547,7 @@ export const tickets: TicketType[] = [
     reject_message: "Report is incomplete.",
   },
   {
-    id: uuidv4(),
+    id: "47",
     user_id: "user-47",
     title: "Design Trade Show Materials",
     description: "Create all necessary materials for the trade show.",
@@ -558,7 +558,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "48",
     user_id: "user-48",
     title: "Implement CRM Software",
     description: "Install and configure new CRM software.",
@@ -569,7 +569,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "49",
     user_id: "user-49",
     title: "Organize Press Conference",
     description: "Plan and execute a press conference for product launch.",
@@ -580,7 +580,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "50",
     user_id: "user-50",
     title: "Evaluate Vendor Contracts",
     description: "Review and renegotiate contracts with key vendors.",
@@ -591,7 +591,7 @@ export const tickets: TicketType[] = [
     reject_message: "Vendors declined new terms.",
   },
   {
-    id: uuidv4(),
+    id: "51",
     user_id: "user-51",
     title: "Develop Mobile App",
     description: "Create a mobile app for customer engagement.",
@@ -602,7 +602,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "52",
     user_id: "user-52",
     title: "Design New Office Layout",
     description: "Plan and implement a new office layout.",
@@ -613,7 +613,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "53",
     user_id: "user-53",
     title: "Optimize Sales Strategy",
     description: "Revise and optimize the sales strategy.",
@@ -624,7 +624,7 @@ export const tickets: TicketType[] = [
     reject_message: "Strategy does not align with goals.",
   },
   {
-    id: uuidv4(),
+    id: "54",
     user_id: "user-54",
     title: "Conduct Employee Survey",
     description: "Gather feedback from employees on workplace satisfaction.",
@@ -635,7 +635,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "55",
     user_id: "user-55",
     title: "Review Customer Support Processes",
     description: "Improve customer support procedures.",
@@ -646,7 +646,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "56",
     user_id: "user-56",
     title: "Design Employee Recognition Program",
     description: "Create a program to recognize outstanding employees.",
@@ -657,7 +657,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "57",
     user_id: "user-57",
     title: "Analyze Competitor Pricing",
     description: "Review and compare competitor pricing models.",
@@ -668,7 +668,7 @@ export const tickets: TicketType[] = [
     reject_message: "Insufficient data for analysis.",
   },
   {
-    id: uuidv4(),
+    id: "58",
     user_id: "user-58",
     title: "Upgrade Data Backup Systems",
     description: "Enhance the data backup infrastructure.",
@@ -679,7 +679,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "59",
     user_id: "user-59",
     title: "Create New Marketing Collateral",
     description: "Design and produce new marketing materials.",
@@ -690,7 +690,7 @@ export const tickets: TicketType[] = [
     reject_message: null,
   },
   {
-    id: uuidv4(),
+    id: "60",
     user_id: "user-60",
     title: "Conduct Environmental Impact Assessment",
     description: "Evaluate the environmental impact of company operations.",
