@@ -6,21 +6,20 @@ import {
 import { db } from "@/utils/db"
 import { eq, sql } from "drizzle-orm"
 
-export const getAllTickets = async (): Promise<TicketType[]> => {
-  const data = await db.select().from(ticketTable)
+export const getAllTickets = async (userid: string): Promise<TicketType[]> => {
+  const data = await db
+    .select()
+    .from(ticketTable)
+    .where(eq(ticketTable.user_id, userid))
 
   return data
 }
 export const getOneTicket = async (ticketId: string) => {
-  try {
-    const data = await db
-      .select()
-      .from(ticketTable)
-      .where(eq(ticketTable.id, ticketId))
-    return data
-  } catch (err) {
-    console.log(err)
-  }
+  const data = await db
+    .select()
+    .from(ticketTable)
+    .where(eq(ticketTable.id, ticketId))
+  return data
 }
 export const getFilteredTicket = async (
   title: string,

@@ -19,7 +19,7 @@ export default async function TicketDetails({
   })
 
   return (
-    <div className="container relative mx-auto my-10 flex justify-center px-4">
+    <div className="container mx-auto my-10 flex justify-center px-4">
       <Card
         className={`${(ticket.status === "fulfilled" && "bg-green-200/30") || (ticket.status === "rejected" && "bg-red-200/30") || (ticket.status === "processing" && "bg-purple-200/30")}`}
       >
