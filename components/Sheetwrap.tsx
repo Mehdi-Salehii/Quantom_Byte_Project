@@ -63,9 +63,11 @@ export const Sheetwrap = ({
           <div className="mt-10 flex flex-col justify-end gap-5">
             <div className="mx-auto flex w-1/2 items-center justify-between">
               <ModeToggle className="" />
-              <div className="sm:hidden">
-                <NewTicketPopover />
-              </div>
+              <SignedIn>
+                <div className="sm:hidden">
+                  <NewTicketPopover />
+                </div>
+              </SignedIn>
             </div>
             <Nav
               open={open}
@@ -73,9 +75,11 @@ export const Sheetwrap = ({
               className="mx-auto flex flex-col items-end gap-5 font-semibold"
             />
             <div className="mx-auto mt-16">
-              <SignOutButton>
-                <Button variant={"destructive"}>Sign Out</Button>
-              </SignOutButton>
+              <SignedIn>
+                <SignOutButton>
+                  <Button variant={"destructive"}>Sign Out</Button>
+                </SignOutButton>
+              </SignedIn>
             </div>
           </div>
         </SheetContent>

@@ -31,16 +31,21 @@ export default function RootLayout({
         <body className="flex min-h-svh flex-col overflow-x-hidden transition-colors duration-200">
           <ThemeProvider attribute="class" defaultTheme="system">
             <SignedOut>
+              <Header className="flex items-center justify-end gap-10 border-b-[1px] border-b-slate-100 p-2" />
               <div className="grid h-full w-full place-items-center">
                 <div className="mr-3 mt-3 self-start justify-self-end">
                   <SignUpButton mode="modal">
                     <Button>Sign Up</Button>
                   </SignUpButton>
                 </div>
-                <div className="self-start">
+                <div className="my-5 self-start md:my-10">
+                  <h1 className="mb-2 text-center font-bold xsm:mb-5">
+                    Sign in to view your tickets
+                  </h1>
                   <SignIn routing="hash" />
                 </div>
               </div>
+              <Footer />
             </SignedOut>
             <SignedIn>
               <Header className="flex items-center justify-end gap-10 border-b-[1px] border-b-slate-100 p-2" />
