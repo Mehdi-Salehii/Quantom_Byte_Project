@@ -57,7 +57,7 @@ export const columns: ColumnDef<TicketType>[] = [
       return (
         <div className="grid place-items-center text-background/90">
           <Link
-            href={`/details/${id}`}
+            href={`details/${id}`}
             className="rounded-full bg-primary px-[8px] py-[2px]"
           >
             Details

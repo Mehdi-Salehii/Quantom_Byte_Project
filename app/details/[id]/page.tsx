@@ -2,16 +2,27 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { tickets } from "@/utils/dummyData"
 
-export default function TicketDetails({ params }: { params: { id: string } }) {
+export default async function TicketDetails({
+  params,
+}: {
+  params: { id: string }
+}) {
   const ticket = tickets.find((t) => t.id === params.id)
 
   if (!ticket) {
     return <p className="text-center text-red-500">Ticket not found!</p>
   }
+  await new Promise((res) => {
+    setTimeout(() => {
+      res("")
+    }, 3000)
+  })
 
   return (
     <div className="container relative mx-auto my-10 flex justify-center px-4">
-      <Card className="">
+      <Card
+        className={`${(ticket.status === "fulfilled" && "bg-green-200/30") || (ticket.status === "rejected" && "bg-red-200/30") || (ticket.status === "processing" && "bg-purple-200/30")}`}
+      >
         <CardHeader className="space-y-4">
           <div className="self-center">
             <Badge
@@ -22,7 +33,7 @@ export default function TicketDetails({ params }: { params: { id: string } }) {
                   : ticket.status === "rejected"
                     ? "bg-red-500 text-white"
                     : "bg-purple-500 text-white"
-              }`}
+              } grid place-items-center px-2 py-[5px]`}
             >
               {ticket.status}
             </Badge>
@@ -40,16 +51,20 @@ export default function TicketDetails({ params }: { params: { id: string } }) {
           </div>
           {ticket.fulfill_message && (
             <div className="mt-6">
-              <h3 className="text-xl font-semibold">Fulfillment Message</h3>
-              <p className="mt-2 text-sm text-muted-foreground">
+              <h3 className="text-xl font-semibold">
+                Your Ticket Was Fulfilled
+              </h3>
+              <p className="mt-2 text-sm text-green-600">
                 {ticket.fulfill_message}
               </p>
             </div>
           )}
           {ticket.reject_message && (
             <div className="mt-6">
-              <h3 className="text-xl font-semibold">Rejection Message</h3>
-              <p className="mt-2 text-sm text-muted-foreground">
+              <h3 className="text-xl font-semibold">
+                Your Ticket Was Rejected
+              </h3>
+              <p className="mt-2 text-sm text-red-600">
                 {ticket.reject_message}
               </p>
             </div>
