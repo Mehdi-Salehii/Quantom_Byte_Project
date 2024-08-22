@@ -9,7 +9,7 @@ export const GET = async (
   try {
     const user = await currentUser()
     const data = await getOneTicket(id)
-    return Response.json("stands for all")
+    return Response.json("ticket works")
 
     if (!user)
       return Response.json(`Unauthorized Request! login to view your tickets`, {
