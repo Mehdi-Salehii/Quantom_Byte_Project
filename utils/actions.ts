@@ -9,8 +9,8 @@ import {
   insertTicket,
 } from "./db_functions"
 
-export const getRecords = async (): Promise<TicketType[]> => {
-  const data = await getAllTickets()
+export const getRecords = async (id: string): Promise<TicketType[]> => {
+  const data = await getAllTickets(id)
   console.log("from getRecords", data)
   return data
 }
