@@ -21,7 +21,8 @@ export const Header = ({ className }: ClassProps) => {
   return (
     <header
       className={twMerge(
-        className + " justify-around max-sm:p-4 sm:px-6 sm:py-4",
+        "border-b-border-100 flex items-center justify-end gap-10 border-b-[1px] p-2" +
+          " justify-around max-sm:p-4 sm:px-6 sm:py-4",
       )}
     >
       <Logo className="mr-auto" />

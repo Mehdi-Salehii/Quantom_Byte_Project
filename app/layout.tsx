@@ -30,7 +30,7 @@ export default function RootLayout({
       <html lang="en" className="overflow-x-hidden">
         <body className="flex min-h-svh flex-col overflow-x-hidden transition-colors duration-200">
           <ThemeProvider attribute="class" defaultTheme="system">
-            <Header className="flex items-center justify-end gap-10 border-b-[1px] border-b-slate-100 p-2" />
+            <Header />
 
             {/* <div className="grid h-full w-full place-items-center">
               <div className="my-5 self-start md:my-10">
