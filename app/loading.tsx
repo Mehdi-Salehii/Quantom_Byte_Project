@@ -8,8 +8,8 @@ export default function loading() {
           <div className="mb-2 text-center">
             <Skeleton className="mx-auto h-6 w-64" />{" "}
           </div>
-          <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white">
-            <table className="min-w-full bg-white">
+          <div className="overflow-x-auto rounded-lg border">
+            <table className="min-w-full">
               <thead>
                 <tr>
                   <th className="border-b px-4 py-3">

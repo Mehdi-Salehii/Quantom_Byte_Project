@@ -9,13 +9,13 @@ export const GET = async (
   try {
     const user = await currentUser()
     const data = await getOneTicket(id)
-    return Response.json("ticket works")
 
     if (!user)
       return Response.json(`Unauthorized Request! login to view your tickets`, {
         status: 401,
       })
     if (!data) return Response.json(`something went wrong  `, { status: 500 })
+    if (data.length === 0) return Response.json(data)
     if (data.length !== 0) {
       const ownsTicket = data[0].user_id === user?.id
       if (!ownsTicket)

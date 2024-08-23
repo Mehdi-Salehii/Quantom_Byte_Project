@@ -1,35 +1,31 @@
 "use client"
 import React, { useState } from "react"
 import { ClassProps, Nav } from "./Nav"
-import { ModeToggle } from "./ModeToggle"
-import { Logo } from "./Logo"
-import { NewTicketPopover } from "./NewTicketPopover"
-import { Sheetwrap } from "./Sheetwrap"
+
 import { twMerge } from "tailwind-merge"
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignOutButton,
-  UserButton,
-} from "@clerk/nextjs"
-import { Button } from "./ui/button"
+
 import { Facebook, Github, Instagram } from "lucide-react"
 import Link from "next/link"
+import { SignedIn, useUser } from "@clerk/nextjs"
 
 export const Footer = ({ className }: ClassProps) => {
+  const { isSignedIn } = useUser()
+  const SignedInFooterStyle = isSignedIn ? "" : "grid-cols-1 md:grid-cols-1"
   return (
     <footer
-      className={twMerge(
-        className +
-          "mt-5 grid grid-cols-2 place-items-center border-t-[1px] border-t-slate-100 max-sm:p-4 max-sm:pb-0 sm:mt-auto sm:gap-5 sm:px-6 sm:pb-0 sm:pt-4 md:grid-cols-4",
-      )}
+      className={twMerge([
+        className,
+        "mt-5 grid grid-cols-2 place-items-center border-t-[1px] border-t-slate-100 max-sm:p-4 max-sm:pb-0 sm:mt-auto sm:gap-5 sm:px-6 sm:pb-0 sm:pt-4 md:grid-cols-4",
+        SignedInFooterStyle,
+      ])}
     >
       <div className="text-center md:col-span-1 md:col-start-2">
-        <div className="relative mb-5 text-center font-semibold after:absolute after:-bottom-[4px] after:left-1/4 after:h-[1px] after:w-1/2 after:bg-slate-100/80 after:text-center after:content-['']">
-          Useful Links
-        </div>
-        <Nav />
+        <SignedIn>
+          <div className="relative mb-5 text-center font-semibold after:absolute after:-bottom-[4px] after:left-1/4 after:h-[1px] after:w-1/2 after:bg-slate-100/80 after:text-center after:content-['']">
+            Useful Links
+          </div>
+          <Nav />
+        </SignedIn>
       </div>
       <div className="self-start">
         <div className="relative mb-10 text-center font-semibold after:absolute after:-bottom-[4px] after:left-1/4 after:h-[1px] after:w-1/2 after:bg-slate-100/80 after:text-center after:content-['']">

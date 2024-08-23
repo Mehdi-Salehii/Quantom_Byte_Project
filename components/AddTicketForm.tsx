@@ -65,7 +65,12 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
   const { toast } = useToast()
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      console.log(values)
+      const res = await fetch("http://localhost:3000/api/maketicket", {
+        method: "POST",
+        body: JSON.stringify(values),
+      }).then((res) => res.json())
+
+      console.log(res)
       await new Promise((resolve) => setTimeout(resolve, 2000))
 
       form.reset()
@@ -74,7 +79,9 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
         description: "Your ticket successfully submitted!",
         className: "bg-green-600 text-lg font-semibold text-foreground",
       })
-    } catch (err) {}
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   return (

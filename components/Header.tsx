@@ -11,6 +11,7 @@ import {
   SignedOut,
   SignInButton,
   SignOutButton,
+  SignUpButton,
   UserButton,
 } from "@clerk/nextjs"
 import { Button } from "./ui/button"
@@ -24,10 +25,20 @@ export const Header = ({ className }: ClassProps) => {
       )}
     >
       <Logo className="mr-auto" />
-      <Nav className="hidden font-semibold sm:flex" />
+      <SignedIn>
+        <Nav className="hidden font-semibold sm:flex" />
+      </SignedIn>
       <div className="hidden sm:hidden">
         <NewTicketPopover />
       </div>
+      <SignedOut>
+        <SignUpButton mode="modal">
+          <Button>Sign Up</Button>
+        </SignUpButton>
+        <SignInButton>
+          <Button>Sign In</Button>
+        </SignInButton>
+      </SignedOut>
       <ModeToggle className="hidden sm:block" />
 
       <div className="hidden sm:block">

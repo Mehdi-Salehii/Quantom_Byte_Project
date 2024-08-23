@@ -30,17 +30,16 @@ export const ticketTable = pgTable("ticket_table", {
   status: statusEnum("status").notNull().default("processing"),
   fulfill_message: text("fulfill_message"),
   reject_message: text("reject_message"),
+  pitcures: text("avatar")
+    .array()
+    .notNull()
+    .default(sql`'{}'::text[]`),
 })
 export const userTable = pgTable("user_table", {
   id: uuid("id").defaultRandom().primaryKey(),
   clerk_id: text("sender_id").notNull(),
-  name: text("name").notNull(),
-
-  user_department: departmentEnum("user_department").notNull(),
-  avatar: text("avatar")
-    .array()
-    .notNull()
-    .default(sql`'{}'::text[]`),
+  name: text("name"),
+  user_department: departmentEnum("user_department").default("main office"),
 })
 export const schema = {
   ticketTable,

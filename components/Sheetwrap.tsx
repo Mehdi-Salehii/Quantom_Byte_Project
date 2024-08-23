@@ -64,16 +64,18 @@ export const Sheetwrap = ({
             <div className="mx-auto flex w-1/2 items-center justify-between">
               <ModeToggle className="" />
               <SignedIn>
-                <div className="sm:hidden">
+                <div>
                   <NewTicketPopover />
                 </div>
               </SignedIn>
             </div>
-            <Nav
-              open={open}
-              setIsOpen={setIsOpen}
-              className="mx-auto flex flex-col items-end gap-5 font-semibold"
-            />
+            <SignedIn>
+              <Nav
+                open={open}
+                setIsOpen={setIsOpen}
+                className="mx-auto flex flex-col items-end gap-5 font-semibold"
+              />
+            </SignedIn>
             <div className="mx-auto mt-16">
               <SignedIn>
                 <SignOutButton>
