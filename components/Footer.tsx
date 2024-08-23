@@ -9,8 +9,9 @@ import Link from "next/link"
 import { SignedIn, useUser } from "@clerk/nextjs"
 
 export const Footer = ({ className }: ClassProps) => {
-  const { isSignedIn } = useUser()
-  const SignedInFooterStyle = isSignedIn ? "" : "grid-cols-1 md:grid-cols-1"
+  const { isSignedIn, isLoaded } = useUser()
+  const SignedInFooterStyle =
+    isLoaded && isSignedIn ? "" : "grid-cols-1 md:grid-cols-1"
   return (
     <footer
       className={twMerge([
