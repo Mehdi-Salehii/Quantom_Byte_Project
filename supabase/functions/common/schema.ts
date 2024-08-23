@@ -15,7 +15,9 @@ export const statusEnum = pgEnum("status", [
 ])
 export const ticketTable = pgTable("ticket_table", {
   id: uuid("id").defaultRandom().primaryKey(),
-  user_id: text("user_id").notNull(),
+  user_id: text("user_id")
+    .notNull()
+    .references(() => userTable.clerk_id),
   title: text("title").notNull(),
   description: text("description").notNull(),
   target_department: departmentEnum("target_department").notNull(),
@@ -31,7 +33,7 @@ export const ticketTable = pgTable("ticket_table", {
 export const userTable = pgTable("user_table", {
   id: uuid("id").defaultRandom().primaryKey(),
   clerk_id: text("sender_id").notNull(),
-  name: text("name"),
+  name: text("name").default("User"),
   user_department: departmentEnum("user_department").default("main office"),
 })
 export const schema = {

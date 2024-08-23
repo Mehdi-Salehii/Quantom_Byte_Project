@@ -9,8 +9,6 @@ export const GET = async (req: NextRequest) => {
 
     const user = await currentUser()
     const userInMyDb = await getUser(id)
-    console.log("id :", id)
-    console.log("userInMyDb :", userInMyDb)
 
     if (!user)
       return Response.json(`Unauthorized Request! login to view your tickets`, {
@@ -18,7 +16,7 @@ export const GET = async (req: NextRequest) => {
       })
     if (!userInMyDb)
       return Response.json(`something went wrong  `, { status: 500 })
-    if (userInMyDb.length === 0) return Response.json({ data: userInMyDb })
+    if (userInMyDb.length === 0) return Response.json(userInMyDb)
     if (userInMyDb.length !== 0) {
       const ownsTicket = userInMyDb[0].clerk_id === user?.id
       if (!ownsTicket)
@@ -28,7 +26,7 @@ export const GET = async (req: NextRequest) => {
         )
     }
 
-    return Response.json({ data: userInMyDb })
+    return Response.json(userInMyDb)
   } catch (error) {
     return Response.json(`something went wrong  ${error}`)
   }
