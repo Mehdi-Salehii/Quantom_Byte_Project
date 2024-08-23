@@ -1,12 +1,5 @@
 import { sql } from "drizzle-orm"
-import {
-  pgTable,
-  serial,
-  text,
-  integer,
-  pgEnum,
-  uuid,
-} from "drizzle-orm/pg-core"
+import { pgTable, text, pgEnum, uuid } from "drizzle-orm/pg-core"
 
 export const departmentEnum = pgEnum("department", [
   "main office",
@@ -30,7 +23,7 @@ export const ticketTable = pgTable("ticket_table", {
   status: statusEnum("status").notNull().default("processing"),
   fulfill_message: text("fulfill_message"),
   reject_message: text("reject_message"),
-  pitcures: text("avatar")
+  pitcures: text("pictures")
     .array()
     .notNull()
     .default(sql`'{}'::text[]`),

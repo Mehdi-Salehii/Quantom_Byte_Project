@@ -10,7 +10,7 @@ import { modifyDescription } from "@/utils/helpers"
 import { tickets } from "@/utils/dummyData"
 
 const Home = async () => {
-  const [data, setData] = useState<TicketType[]>(tickets.slice(0, 30))
+  const [data, setData] = useState<TicketType[]>(tickets.slice(0, 15))
   const modifiedData = modifyDescription(data, 15)
   await new Promise((res) => setTimeout(res, 2000))
   return (

@@ -552,7 +552,7 @@ VALUES
   );
 
 INSERT INTO
-  user_table (clerk_id, name, user_department)
+  user_table (sender_id, name, user_department)
 VALUES
   ('clerk_001', 'Alice Johnson', 'main office'),
   ('clerk_002', 'Bob Smith', 'main office'),

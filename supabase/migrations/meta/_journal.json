@@ -127,6 +127,20 @@
       "when": 1724079531655,
       "tag": "0017_furry_komodo",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1724414933578,
+      "tag": "0018_ancient_mercury",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1724416526835,
+      "tag": "0019_cold_vanisher",
+      "breakpoints": true
     }
   ]
 }

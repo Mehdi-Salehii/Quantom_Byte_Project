@@ -11,7 +11,7 @@ import { tickets } from "@/utils/dummyData"
 
 const OutGoingTicketsPage = async () => {
   const [data, setData] = useState<TicketType[]>(
-    modifyDescription(tickets.slice(30), 15),
+    modifyDescription(tickets.slice(15), 15),
   )
   await new Promise((res) => setTimeout(res, 2000))
 
