@@ -1,5 +1,5 @@
 "use client"
-
+import axios from "axios"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -26,6 +26,8 @@ import { useToast } from "@/components/ui/use-toast"
 
 import Link from "next/link"
 import { useRef, useState } from "react"
+import { TicketTypeInsert } from "@/supabase/functions/common/schema"
+// import { auth } from "@clerk/nextjs/server"
 const departments = [
   "main office",
   "engineering",
@@ -65,12 +67,11 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
   const { toast } = useToast()
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const res = await fetch("http://localhost:3000/api/maketicket", {
-        method: "POST",
-        body: JSON.stringify(values),
-      }).then((res) => res.json())
-
-      console.log(res)
+      // const { userId: user_id } = auth()
+      // const UserInMyDb=await axios.
+      const data = formSchema.parse(values)
+      // const res = await axios.post("/api/maketicket", { ...data, user_id })
+      // console.log(res)
       await new Promise((resolve) => setTimeout(resolve, 2000))
 
       form.reset()
@@ -80,7 +81,10 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
         className: "bg-green-600 text-lg font-semibold text-foreground",
       })
     } catch (err) {
-      console.error(err)
+      toast({
+        description: "Your ticket didn't submitted try again!",
+        className: "bg-red-600 text-lg font-semibold text-foreground",
+      })
     }
   }
 
@@ -110,7 +114,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
           name="department"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Department</FormLabel>
+              <FormLabel>Target Department</FormLabel>
               <Select
                 onValueChange={field.onChange}
                 defaultValue={field.value}
@@ -154,11 +158,11 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
         />
         <div className="flex w-full">
           <Button
-            className="mx-auto block"
+            className={`mx-auto block disabled:cursor-not-allowed`}
             type="submit"
             disabled={isSubmitting}
           >
-            Submit
+            {isSubmitting ? "Submitting..." : "Submit"}
           </Button>
         </div>
       </form>

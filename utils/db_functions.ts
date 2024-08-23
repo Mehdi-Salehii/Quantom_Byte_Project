@@ -2,6 +2,9 @@ import {
   ticketTable,
   TicketType,
   TicketTypeInsert,
+  userTable,
+  UserType,
+  UserTypeInsert,
 } from "@/supabase/functions/common/schema"
 import { db } from "@/utils/db"
 import { eq, sql } from "drizzle-orm"
@@ -26,36 +29,28 @@ export const getFilteredTicket = async (
   userId: string,
   description: string,
 ) => {
-  try {
-    const data = await db
-      .select()
-      .from(ticketTable)
-      .where(
-        sql`${ticketTable.title} = ${title} and ${ticketTable.description} = ${description} and ${ticketTable.user_id} = ${userId}`,
-      )
-    return data
-  } catch (err) {
-    console.log(err)
-  }
+  const data = await db
+    .select()
+    .from(ticketTable)
+    .where(
+      sql`${ticketTable.title} = ${title} and ${ticketTable.description} = ${description} and ${ticketTable.user_id} = ${userId}`,
+    )
+  return data
 }
 
 export const insertTicket = async (ticket: TicketTypeInsert) => {
-  try {
-    const data = await db
-      .insert(ticketTable)
-      .values({
-        user_id: "user-60",
-        title: "test",
-        description: "test",
-        target_department: "engineering",
-        source_department: "main office",
+  const data = await db.insert(ticketTable).values(ticket).returning()
+  return data
+}
+export const getUser = async (user_id: string) => {
+  const data = await db
+    .select()
+    .from(userTable)
+    .where(eq(userTable.clerk_id, user_id))
 
-        fulfill_message: null,
-        reject_message: null,
-      })
-      .returning()
-    return data
-  } catch (err) {
-    console.log(err)
-  }
+  return data
+}
+export const insertUser = async (user: UserTypeInsert) => {
+  const data = await db.insert(userTable).values(user).returning()
+  return data
 }

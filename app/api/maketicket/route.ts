@@ -5,9 +5,10 @@ export const POST = async (req: Request) => {
   try {
     const user = await currentUser()
     const body = await req.json()
+    console.log(user?.id)
     console.log(body)
     return Response.json(body)
-    /*
+/*
     if (!user)
       return Response.json(`Unauthorized Request! login to view your tickets`, {
         status: 401,
@@ -24,8 +25,7 @@ export const POST = async (req: Request) => {
         )
     }
 
-    return Response.json(data)
-    */
+    return Response.json(data)*/
   } catch (error) {
     return Response.json(`something went wrong  ${error}`)
   }
