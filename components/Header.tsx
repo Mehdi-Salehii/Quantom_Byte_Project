@@ -35,7 +35,7 @@ export const Header = ({ className }: ClassProps) => {
         <SignUpButton mode="modal">
           <Button>Sign Up</Button>
         </SignUpButton>
-        <SignInButton>
+        <SignInButton mode="modal" forceRedirectUrl="/dashboard">
           <Button>Sign In</Button>
         </SignInButton>
       </SignedOut>

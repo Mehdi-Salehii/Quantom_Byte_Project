@@ -11,6 +11,7 @@ export type ClassProps = {
 const routes = [
   { url: "/", name: "Home" },
   { url: "/out-going-tickets", name: "OutgoingTickets" },
+  { url: "/dashboard", name: "Dashboard " },
 ]
 export const Nav = ({ className, setIsOpen, open }: ClassProps) => {
   const curPath = usePathname()

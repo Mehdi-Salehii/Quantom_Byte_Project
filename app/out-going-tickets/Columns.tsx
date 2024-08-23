@@ -3,6 +3,7 @@
 import { TicketType } from "@/supabase/functions/common/schema"
 import { ColumnDef } from "@tanstack/react-table"
 import Link from "next/link"
+import { twMerge } from "tailwind-merge"
 
 export const columns: ColumnDef<TicketType>[] = [
   {
@@ -14,6 +15,24 @@ export const columns: ColumnDef<TicketType>[] = [
       const title: string = row.getValue("title")
 
       return <div className="text-center">{title}</div>
+    },
+  },
+  {
+    accessorKey: "status",
+
+    header: () => (
+      <div className="text-center font-bold text-foreground/80">Status</div>
+    ),
+    cell: ({ row }) => {
+      const status: "rejected" | "fulfilled" | "processing" =
+        row.getValue("status")
+      let color =
+        (status === "rejected" && "text-red-500") ||
+        (status === "fulfilled" && "text-green-500") ||
+        (status === "processing" && "text-purple-500")
+      if (typeof color === "boolean") color = "text-purple-500"
+
+      return <div className={twMerge("text-center", color)}>{status}</div>
     },
   },
 
