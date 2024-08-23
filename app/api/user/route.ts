@@ -1,10 +1,11 @@
 import { getUser } from "@/utils/db_functions"
 import { currentUser } from "@clerk/nextjs/server"
-import { NextApiRequest } from "next"
 
-export const GET = async (req: NextApiRequest) => {
+import { NextRequest } from "next/server"
+
+export const GET = async (req: NextRequest) => {
   try {
-    const id = req.query.id as string
+    const id = req.nextUrl.searchParams.get("id") as string
 
     const user = await currentUser()
     const userInMyDb = await getUser(id)
