@@ -27,10 +27,12 @@ export default function LandingPage() {
                   Get Started
                 </Button>
               </SignUpButton>
+              <SignInButton mode="modal" forceRedirectUrl={"/dashboard"}>
+                <Button variant="outline" size="lg">
+                  Open Dashboard
+                </Button>
+              </SignInButton>
             </SignedOut>
-            <Button variant="outline" size="lg">
-              Contact Us
-            </Button>
           </div>
         </div>
         <div className="mt-8 self-start md:mt-0 md:w-1/2">

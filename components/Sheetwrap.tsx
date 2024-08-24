@@ -76,14 +76,7 @@ export const Sheetwrap = ({
                 </div>
               </SignedIn>
             </div>
-            <SignedOut>
-              <SignUpButton mode="modal">
-                <Button>Sign Up</Button>
-              </SignUpButton>
-              <SignInButton mode="modal" forceRedirectUrl="/dashboard">
-                <Button>Sign In</Button>
-              </SignInButton>
-            </SignedOut>
+
             <SignedIn>
               <Nav
                 open={open}
