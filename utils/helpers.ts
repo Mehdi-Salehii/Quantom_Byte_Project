@@ -30,10 +30,8 @@ export const insertFromClerkToMyDb = (userId: string) => {
         userInDb = true
       }
 
-      const user = res.data
-
       if (!userInDb) {
-        const success = await axios.post("/api/user", { clerk_id: userId })
+        await axios.post("/api/user", { clerk_id: userId })
       }
     }
 
