@@ -13,7 +13,14 @@ import {
   SheetClose,
 } from "./ui/sheet"
 import React from "react"
-import { SignedIn, SignOutButton, UserButton } from "@clerk/nextjs"
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignOutButton,
+  SignUpButton,
+  UserButton,
+} from "@clerk/nextjs"
 import { Button } from "./ui/button"
 type SheetWrapType = {
   className?: string
@@ -69,6 +76,14 @@ export const Sheetwrap = ({
                 </div>
               </SignedIn>
             </div>
+            <SignedOut>
+              <SignUpButton mode="modal">
+                <Button>Sign Up</Button>
+              </SignUpButton>
+              <SignInButton mode="modal" forceRedirectUrl="/dashboard">
+                <Button>Sign In</Button>
+              </SignInButton>
+            </SignedOut>
             <SignedIn>
               <Nav
                 open={open}

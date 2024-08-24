@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs"
-import { Code, Layout, Server, Monitor, Shield, Cloud } from "lucide-react" // Import individual icons
+import { Code, Layout, Server, Monitor, Shield, Cloud } from "lucide-react"
 import Image from "next/image"
 import computer from "@/assets/computer.jpg"
 
@@ -10,7 +10,7 @@ export default function LandingPage() {
     <main className="bg-background text-foreground">
       <section
         id="home"
-        className="container mx-auto flex flex-col items-center justify-center px-4 py-1 text-center sm:px-6 md:min-h-screen md:flex-row md:items-center md:justify-between" // Full screen minus header height
+        className="container mx-auto flex flex-col items-center justify-center px-4 py-1 text-center sm:px-6 md:min-h-screen md:flex-row md:items-center md:justify-between"
       >
         <div className="md:w-1/2">
           <h2 className="text-4xl font-bold leading-tight sm:text-5xl">

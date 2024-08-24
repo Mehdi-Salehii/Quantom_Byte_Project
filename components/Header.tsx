@@ -32,14 +32,16 @@ export const Header = ({ className }: ClassProps) => {
       <div className="hidden sm:hidden">
         <NewTicketPopover />
       </div>
-      <SignedOut>
-        <SignUpButton mode="modal">
-          <Button>Sign Up</Button>
-        </SignUpButton>
-        <SignInButton mode="modal" forceRedirectUrl="/dashboard">
-          <Button>Sign In</Button>
-        </SignInButton>
-      </SignedOut>
+      <div className="hidden gap-3 sm:flex">
+        <SignedOut>
+          <SignUpButton mode="modal">
+            <Button>Sign Up</Button>
+          </SignUpButton>
+          <SignInButton mode="modal" forceRedirectUrl="/dashboard">
+            <Button>Sign In</Button>
+          </SignInButton>
+        </SignedOut>
+      </div>
       <ModeToggle className="hidden sm:block" />
 
       <div className="hidden sm:block">
