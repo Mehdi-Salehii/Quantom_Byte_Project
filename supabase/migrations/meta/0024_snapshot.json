@@ -1,6 +1,6 @@
 {
-  "id": "80bd1449-444a-4212-8e72-473f5be8bf3f",
-  "prevId": "d7a1af9a-2d21-4ab1-bd5a-98af81829a31",
+  "id": "9a8bc3f3-8b7c-410c-b8d1-a43a1cb9ae44",
+  "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -76,7 +76,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "ticket_table_user_id_user_table_clerk_id_fk": {
+          "name": "ticket_table_user_id_user_table_clerk_id_fk",
+          "tableFrom": "ticket_table",
+          "tableTo": "user_table",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "clerk_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -91,8 +105,8 @@
           "notNull": true,
           "default": "gen_random_uuid()"
         },
-        "sender_id": {
-          "name": "sender_id",
+        "clerk_id": {
+          "name": "clerk_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -101,7 +115,8 @@
           "name": "name",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": "'User'"
         },
         "user_department": {
           "name": "user_department",
@@ -115,7 +130,15 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {
+        "user_table_clerk_id_unique": {
+          "name": "user_table_clerk_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "clerk_id"
+          ]
+        }
+      }
     }
   },
   "enums": {

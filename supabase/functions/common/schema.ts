@@ -32,7 +32,7 @@ export const ticketTable = pgTable("ticket_table", {
 })
 export const userTable = pgTable("user_table", {
   id: uuid("id").defaultRandom().primaryKey(),
-  clerk_id: text("sender_id").notNull(),
+  clerk_id: text("clerk_id").notNull().unique(),
   name: text("name").default("User"),
   user_department: departmentEnum("user_department").default("main office"),
 })

@@ -1,1 +1,0 @@
-ALTER TABLE "ticket_table" RENAME COLUMN "avatar" TO "pictures";

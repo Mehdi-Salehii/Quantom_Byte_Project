@@ -141,6 +141,41 @@
       "when": 1724416526835,
       "tag": "0019_cold_vanisher",
       "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1724512792559,
+      "tag": "0020_robust_hex",
+      "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1724513014096,
+      "tag": "0021_black_makkari",
+      "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "7",
+      "when": 1724513259584,
+      "tag": "0022_striped_blackheart",
+      "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1724514019732,
+      "tag": "0023_fair_nightmare",
+      "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1724514201619,
+      "tag": "0024_wooden_sprite",
+      "breakpoints": true
     }
   ]
 }

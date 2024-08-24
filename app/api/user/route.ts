@@ -1,4 +1,5 @@
-import { getUser } from "@/utils/db_functions"
+import { UserTypeInsert } from "@/supabase/functions/common/schema"
+import { getUser, insertUser } from "@/utils/db_functions"
 import { currentUser } from "@clerk/nextjs/server"
 
 import { NextRequest } from "next/server"
@@ -16,17 +17,26 @@ export const GET = async (req: NextRequest) => {
       })
     if (!userInMyDb)
       return Response.json(`something went wrong  `, { status: 500 })
-    if (userInMyDb.length === 0) return Response.json(userInMyDb)
-    if (userInMyDb.length !== 0) {
-      const ownsTicket = userInMyDb[0].clerk_id === user?.id
-      if (!ownsTicket)
-        return Response.json(
-          `Unauthorized Request! ticket doesn't belong to user`,
-          { status: 401 },
-        )
-    }
 
     return Response.json(userInMyDb)
+  } catch (error) {
+    return Response.json(`something went wrong  ${error}`)
+  }
+}
+export const POST = async (req: NextRequest) => {
+  try {
+    const data = (await req.json()) as UserTypeInsert
+    const user = await currentUser()
+    const insertedUser = await insertUser(data)
+
+    if (!user)
+      return Response.json(`Unauthorized Request! login to view your tickets`, {
+        status: 401,
+      })
+    if (!insertedUser)
+      return Response.json(`something went wrong  `, { status: 500 })
+
+    return Response.json(insertedUser)
   } catch (error) {
     return Response.json(`something went wrong  ${error}`)
   }
