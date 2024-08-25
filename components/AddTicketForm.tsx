@@ -25,9 +25,14 @@ import {
 import { useToast } from "@/components/ui/use-toast"
 
 import Link from "next/link"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { TicketTypeInsert } from "@/supabase/functions/common/schema"
 import { useAuth } from "@clerk/nextjs"
+import { useUserStore } from "@/utils/store"
+import {
+  insertFromClerkToMyDb,
+  checkUserModifiedDepartment,
+} from "@/utils/helpers"
 
 const departments = [
   "main office",
@@ -66,10 +71,16 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
     formState: { isSubmitting },
   } = form
   const { toast } = useToast()
-  const { userId: user_id } = useAuth()
+  const { userId } = useAuth()
+  const user = useUserStore((state) => state.User)
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      // const UserInMyDb=await axios.
+      const userIsInMyDb = user.length
+      if (!userIsInMyDb) {
+        await insertFromClerkToMyDb(userId as string)
+      }
+
       const data = formSchema.parse(values)
       // const res = await axios.post("/api/maketicket", { ...data, user_id })
       // console.log(res)

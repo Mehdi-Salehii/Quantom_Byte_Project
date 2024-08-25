@@ -22,7 +22,7 @@ export default function LandingPage() {
           </p>
           <div className="mt-6 space-x-4">
             <SignedOut>
-              <SignUpButton mode="modal">
+              <SignUpButton mode="modal" forceRedirectUrl={"/dashboard"}>
                 <Button variant="default" size="lg">
                   Get Started
                 </Button>

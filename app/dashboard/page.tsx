@@ -6,7 +6,11 @@ import { DataTable } from "./DataTable"
 import { columns } from "./Columns"
 import { useEffect, useState } from "react"
 import { AddTicketForm } from "@/components/AddTicketForm"
-import { insertFromClerkToMyDb, modifyDescription } from "@/utils/helpers"
+import {
+  checkUserModifiedDepartment,
+  insertFromClerkToMyDb,
+  modifyDescription,
+} from "@/utils/helpers"
 import { tickets } from "@/utils/dummyData"
 import { useUserStore } from "@/utils/store"
 import { useAuth, useUser } from "@clerk/nextjs"
@@ -19,11 +23,11 @@ const Dashboard = () => {
 
   const { userId } = useAuth()
   useEffect(() => {
-    insertFromClerkToMyDb(userId as string)
-      .then((data) => alert(JSON.stringify(data)))
-      .catch((error) => {
-        console.error("Error inserting or fetching user:", error)
-      })
+    const init = async () => {
+      await insertFromClerkToMyDb(userId as string)
+      await checkUserModifiedDepartment(userId as string)
+    }
+    init()
   }, [userId])
 
   const [data, setData] = useState<TicketType[]>(tickets.slice(0, 15))
@@ -32,6 +36,13 @@ const Dashboard = () => {
   return (
     <>
       <div className="mt-10 grid xsm:px-1 sm:grid-cols-[15fr_1fr_4fr] sm:px-3 lg:px-6 xl:grid-cols-[15fr_2fr_3fr]">
+        <button
+          onClick={() => {
+            alert(useUserStore.getState().UserModifiedDepartment)
+          }}
+        >
+          data
+        </button>
         <div className="col-span-full col-start-1 col-end-[2]">
           <h1 className="mb-2 text-center font-semibold">
             Tickets to your department

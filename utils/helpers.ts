@@ -25,7 +25,7 @@ export const insertFromClerkToMyDb = async (
 ): Promise<UserType[]> => {
   return new Promise(async (resolve, reject) => {
     let userInDb = false
-    let countIntervalRun = 0
+
     const interval = setIntervalAsync(async () => {
       try {
         const res = await axios.get(`/api/user?id=${userId}`)
@@ -48,6 +48,28 @@ export const insertFromClerkToMyDb = async (
 
     if (!interval) {
       reject(new Error("Interval failed to start"))
+    }
+  })
+}
+export const checkUserModifiedDepartment = async (
+  userId: string,
+): Promise<boolean> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const user = useUserStore.getState().User
+      const hasModifiedDepartment =
+        Math.abs(
+          new Date(user[0].createdAt).getTime() -
+            new Date(user[0].updatedAt).getTime(),
+        ) > 100
+      if (hasModifiedDepartment) {
+        useUserStore.setState({ UserModifiedDepartment: true })
+        resolve(true)
+      }
+      useUserStore.setState({ UserModifiedDepartment: false })
+      resolve(false)
+    } catch (error) {
+      reject(new Error("Failed to checkUserModifiedDepartment"))
     }
   })
 }
