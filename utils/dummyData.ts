@@ -4,7 +4,7 @@ import {
   UserType,
 } from "@/supabase/functions/common/schema"
 
-export const tickets: TicketTypeInsert[] = [
+export const tickets: TicketType[] = [
   {
     id: "1",
     user_id: "user_01",
