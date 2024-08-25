@@ -48,7 +48,13 @@ const formSchema = z.object({
   title: z.string().min(2, {
     message: "Title must be at least 2 characters.",
   }),
-  department: z.enum(
+  source_department: z.enum(
+    ["main office", "engineering", "design", "marketing", "financial"],
+    {
+      message: "invalid department.",
+    },
+  ),
+  target_department: z.enum(
     ["main office", "engineering", "design", "marketing", "financial"],
     {
       message: "invalid department.",
@@ -62,7 +68,8 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      department: "main office",
+      source_department: "main office",
+      target_department: "main office",
       description: "",
       title: "",
     },
@@ -73,6 +80,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
   const { toast } = useToast()
   const { userId } = useAuth()
   const user = useUserStore((state) => state.User)
+  const didUserModified = useUserStore((state) => state.UserModifiedDepartment)
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
@@ -121,9 +129,40 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
             </FormItem>
           )}
         />
+        {!didUserModified && (
+          <FormField
+            control={form.control}
+            name="source_department"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Your Department</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  value={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select your department" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {departments.map((dep, i) => (
+                      <SelectItem key={i} value={dep}>
+                        {dep}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
         <FormField
           control={form.control}
-          name="department"
+          name="target_department"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Target Department</FormLabel>
