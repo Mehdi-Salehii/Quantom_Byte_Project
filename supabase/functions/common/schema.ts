@@ -1,5 +1,12 @@
 import { sql } from "drizzle-orm"
-import { pgTable, text, pgEnum, uuid } from "drizzle-orm/pg-core"
+import {
+  pgTable,
+  text,
+  pgEnum,
+  uuid,
+  timestamp,
+  date,
+} from "drizzle-orm/pg-core"
 
 export const departmentEnum = pgEnum("department", [
   "main office",
@@ -15,6 +22,8 @@ export const statusEnum = pgEnum("status", [
 ])
 export const ticketTable = pgTable("ticket_table", {
   id: uuid("id").defaultRandom().primaryKey(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
   user_id: text("user_id")
     .notNull()
     .references(() => userTable.clerk_id),
@@ -31,8 +40,10 @@ export const ticketTable = pgTable("ticket_table", {
     .default(sql`'{}'::text[]`),
 })
 export const userTable = pgTable("user_table", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  clerk_id: text("clerk_id").notNull().unique(),
+  clerk_id: text("clerk_id").notNull().primaryKey(),
+  id: uuid("id").defaultRandom(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
   name: text("name").default("User"),
   user_department: departmentEnum("user_department").default("main office"),
 })
