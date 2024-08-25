@@ -6,16 +6,13 @@ import { DataTable } from "./DataTable"
 import { columns } from "./Columns"
 import { useEffect, useState } from "react"
 import { AddTicketForm } from "@/components/AddTicketForm"
-import {
-  checkUserModifiedDepartment,
-  insertFromClerkToMyDb,
-  modifyDescription,
-} from "@/utils/helpers"
+import { insertFromClerkToMyDb, modifyDescription } from "@/utils/helpers"
 import { tickets } from "@/utils/dummyData"
 import { useUserStore } from "@/utils/store"
 import { useAuth, useUser } from "@clerk/nextjs"
 import { getUser } from "@/utils/db_functions"
 import axios from "axios"
+import UpdateUserForm from "@/components/UpdateUserForm"
 
 const Dashboard = () => {
   const setUser = useUserStore((state) => state.setUser)
@@ -25,20 +22,18 @@ const Dashboard = () => {
   useEffect(() => {
     const init = async () => {
       await insertFromClerkToMyDb(userId as string)
-      await checkUserModifiedDepartment(userId as string)
     }
     init()
   }, [userId])
-
   const [data, setData] = useState<TicketType[]>(tickets.slice(0, 15))
   const modifiedData = modifyDescription(data, 15)
-  // await new Promise((res) => setTimeout(res, 2000))
+
   return (
     <>
       <div className="mt-10 grid xsm:px-1 sm:grid-cols-[15fr_1fr_4fr] sm:px-3 lg:px-6 xl:grid-cols-[15fr_2fr_3fr]">
         <button
           onClick={() => {
-            alert(useUserStore.getState().UserModifiedDepartment)
+            alert(JSON.stringify(useUserStore.getState().UserModified))
           }}
         >
           data
@@ -51,6 +46,7 @@ const Dashboard = () => {
         </div>
         <div className="col-start-3 col-end-[-1] hidden text-center sm:mt-0 sm:block">
           <AddTicketForm />
+          <UpdateUserForm />
         </div>
       </div>
     </>

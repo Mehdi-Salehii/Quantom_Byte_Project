@@ -12,11 +12,6 @@ export default async function TicketDetails({
   if (!ticket) {
     return <p className="text-center text-red-500">Ticket not found!</p>
   }
-  await new Promise((res) => {
-    setTimeout(() => {
-      res("")
-    }, 3000)
-  })
 
   return (
     <div className="container mx-auto my-10 flex justify-center px-4">

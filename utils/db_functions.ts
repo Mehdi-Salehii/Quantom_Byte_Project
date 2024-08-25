@@ -8,6 +8,7 @@ import {
 } from "@/supabase/functions/common/schema"
 import { db } from "@/utils/db"
 import { eq, sql } from "drizzle-orm"
+import { revalidatePath } from "next/cache"
 
 export const getAllTickets = async (userid: string): Promise<TicketType[]> => {
   const data = await db
@@ -57,8 +58,9 @@ export const insertUser = async (user: UserTypeInsert) => {
 export const updateUser = async (user: Partial<UserType>, clerkId: string) => {
   const data = await db
     .update(userTable)
-    .set(user)
+    .set({ ...user, updatedAt: new Date() })
     .where(eq(userTable.clerk_id, clerkId))
     .returning({ updatedId: userTable.id })
+
   return data
 }

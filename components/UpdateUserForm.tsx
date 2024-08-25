@@ -47,7 +47,7 @@ type UpdateUserFormProps = {
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export function UpdateUserForm({ setOpen }: UpdateUserFormProps) {
+export default function UpdateUserForm({ setOpen }: UpdateUserFormProps) {
   const { userId } = useAuth()
   const user = useUserStore((state) => state.User)
   const { toast } = useToast()

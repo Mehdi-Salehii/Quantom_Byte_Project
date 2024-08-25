@@ -9,11 +9,11 @@ import { AddTicketForm } from "@/components/AddTicketForm"
 import { modifyDescription } from "@/utils/helpers"
 import { tickets } from "@/utils/dummyData"
 
-const OutGoingTicketsPage = async () => {
+const OutGoingTicketsPage =  () => {
   const [data, setData] = useState<TicketType[]>(
     modifyDescription(tickets.slice(15), 15),
   )
-  await new Promise((res) => setTimeout(res, 2000))
+ 
 
   return (
     <>

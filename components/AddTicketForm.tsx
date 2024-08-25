@@ -29,10 +29,7 @@ import { useEffect, useRef, useState } from "react"
 import { TicketTypeInsert } from "@/supabase/functions/common/schema"
 import { useAuth } from "@clerk/nextjs"
 import { useUserStore } from "@/utils/store"
-import {
-  insertFromClerkToMyDb,
-  checkUserModifiedDepartment,
-} from "@/utils/helpers"
+import { insertFromClerkToMyDb } from "@/utils/helpers"
 
 const departments = [
   "main office",
@@ -80,7 +77,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
   const { toast } = useToast()
   const { userId } = useAuth()
   const user = useUserStore((state) => state.User)
-  const didUserModified = useUserStore((state) => state.UserModifiedDepartment)
+  const didUserModified = useUserStore((state) => state.UserModified)
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
@@ -92,7 +89,6 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
       const data = formSchema.parse(values)
       // const res = await axios.post("/api/maketicket", { ...data, user_id })
       // console.log(res)
-      await new Promise((resolve) => setTimeout(resolve, 2000))
 
       form.reset()
       if (setOpen) setOpen(false)
