@@ -1,6 +1,10 @@
-import { TicketType, UserType } from "@/supabase/functions/common/schema"
+import {
+  TicketType,
+  TicketTypeInsert,
+  UserType,
+} from "@/supabase/functions/common/schema"
 
-export const tickets: TicketType[] = [
+export const tickets: TicketTypeInsert[] = [
   {
     id: "1",
     user_id: "user_01",
@@ -11,7 +15,9 @@ export const tickets: TicketType[] = [
     status: "fulfilled",
     fulfill_message: "All statements are accurate and complete.",
     reject_message: null,
-    pitcures: [],
+    pictures: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: "2",
@@ -24,7 +30,9 @@ export const tickets: TicketType[] = [
     status: "processing",
     fulfill_message: null,
     reject_message: null,
-    pitcures: [],
+    pictures: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: "3",
@@ -37,7 +45,9 @@ export const tickets: TicketType[] = [
     status: "rejected",
     fulfill_message: null,
     reject_message: "Budget constraints prevent the upgrade.",
-    pitcures: [],
+    pictures: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: "4",
@@ -49,7 +59,9 @@ export const tickets: TicketType[] = [
     status: "processing",
     fulfill_message: null,
     reject_message: null,
-    pitcures: [],
+    pictures: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: "5",
@@ -62,7 +74,9 @@ export const tickets: TicketType[] = [
     status: "fulfilled",
     fulfill_message: "Prototypes successfully developed and tested.",
     reject_message: null,
-    pitcures: [],
+    pictures: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: "6",
@@ -75,7 +89,9 @@ export const tickets: TicketType[] = [
     status: "rejected",
     fulfill_message: null,
     reject_message: "Incomplete data provided by departments.",
-    pitcures: [],
+    pictures: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: "7",
@@ -87,7 +103,9 @@ export const tickets: TicketType[] = [
     status: "processing",
     fulfill_message: null,
     reject_message: null,
-    pitcures: [],
+    pictures: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: "8",
@@ -99,7 +117,9 @@ export const tickets: TicketType[] = [
     status: "fulfilled",
     fulfill_message: "Process optimized with a 15% efficiency gain.",
     reject_message: null,
-    pitcures: [],
+    pictures: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: "9",
@@ -112,7 +132,9 @@ export const tickets: TicketType[] = [
     status: "rejected",
     fulfill_message: null,
     reject_message: "The strategy lacks clear KPIs.",
-    pitcures: [],
+    pictures: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: "10",
@@ -124,7 +146,9 @@ export const tickets: TicketType[] = [
     status: "processing",
     fulfill_message: null,
     reject_message: null,
-    pitcures: [],
+    pictures: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: "11",
@@ -137,7 +161,9 @@ export const tickets: TicketType[] = [
     status: "fulfilled",
     fulfill_message: "Relocation completed successfully.",
     reject_message: null,
-    pitcures: [],
+    pictures: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: "12",
@@ -149,7 +175,9 @@ export const tickets: TicketType[] = [
     status: "processing",
     fulfill_message: null,
     reject_message: null,
-    pitcures: [],
+    pictures: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: "13",
@@ -162,7 +190,9 @@ export const tickets: TicketType[] = [
     status: "fulfilled",
     fulfill_message: "Audit completed with no discrepancies found.",
     reject_message: null,
-    pitcures: [],
+    pictures: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: "14",
@@ -174,7 +204,9 @@ export const tickets: TicketType[] = [
     status: "rejected",
     fulfill_message: null,
     reject_message: "The logo did not meet the branding requirements.",
-    pitcures: [],
+    pictures: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: "15",
@@ -186,7 +218,9 @@ export const tickets: TicketType[] = [
     status: "processing",
     fulfill_message: null,
     reject_message: null,
-    pitcures: [],
+    pictures: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: "16",
@@ -199,7 +233,9 @@ export const tickets: TicketType[] = [
     status: "fulfilled",
     fulfill_message: "Partnership agreement successfully finalized.",
     reject_message: null,
-    pitcures: [],
+    pictures: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: "17",
@@ -211,7 +247,9 @@ export const tickets: TicketType[] = [
     status: "processing",
     fulfill_message: null,
     reject_message: null,
-    pitcures: [],
+    pictures: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: "18",
@@ -224,7 +262,9 @@ export const tickets: TicketType[] = [
     status: "rejected",
     fulfill_message: null,
     reject_message: "Projections based on outdated data.",
-    pitcures: [],
+    pictures: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: "19",
@@ -236,7 +276,9 @@ export const tickets: TicketType[] = [
     status: "fulfilled",
     fulfill_message: "Training program launched successfully.",
     reject_message: null,
-    pitcures: [],
+    pictures: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: "20",
@@ -248,6 +290,8 @@ export const tickets: TicketType[] = [
     status: "processing",
     fulfill_message: null,
     reject_message: null,
-    pitcures: [],
+    pictures: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
 ]

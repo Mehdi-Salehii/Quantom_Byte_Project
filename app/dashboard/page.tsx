@@ -1,5 +1,5 @@
 "use client"
-import { TicketType } from "@/supabase/functions/common/schema"
+import { TicketType, UserType } from "@/supabase/functions/common/schema"
 import { getRecords, insertRecord } from "@/utils/actions"
 import { Table } from "@/components/ui/table"
 import { DataTable } from "./DataTable"
@@ -20,6 +20,10 @@ const Dashboard = () => {
   const { userId } = useAuth()
   useEffect(() => {
     insertFromClerkToMyDb(userId as string)
+      .then((data) => alert(JSON.stringify(data)))
+      .catch((error) => {
+        console.error("Error inserting or fetching user:", error)
+      })
   }, [userId])
 
   const [data, setData] = useState<TicketType[]>(tickets.slice(0, 15))

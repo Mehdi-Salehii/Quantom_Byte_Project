@@ -197,6 +197,13 @@
       "when": 1724574542791,
       "tag": "0027_dashing_black_queen",
       "breakpoints": true
+    },
+    {
+      "idx": 28,
+      "version": "7",
+      "when": 1724592820403,
+      "tag": "0028_mixed_blue_shield",
+      "breakpoints": true
     }
   ]
 }

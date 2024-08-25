@@ -34,7 +34,7 @@ export const ticketTable = pgTable("ticket_table", {
   status: statusEnum("status").notNull().default("processing"),
   fulfill_message: text("fulfill_message"),
   reject_message: text("reject_message"),
-  pitcures: text("pictures")
+  pictures: text("pictures")
     .array()
     .notNull()
     .default(sql`'{}'::text[]`),
