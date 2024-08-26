@@ -18,7 +18,7 @@ export default function ProfilePage() {
           <CardHeader className="space-y-2 text-center">
             <Badge
               variant="default"
-              className="flex items-center gap-2 px-2 py-1"
+              className="flex items-center justify-center gap-2 px-2 py-1"
             >
               <Building2 className="h-4 w-4" />
               {user[0]?.user_department}
