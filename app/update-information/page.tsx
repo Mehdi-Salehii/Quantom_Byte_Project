@@ -5,13 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, User, Building2 } from "lucide-react"
 import UpdateUserForm from "@/components/UpdateUserForm"
+import { useUserStore } from "@/utils/store"
+import { makeLastModifiedMessage } from "@/utils/helpers"
 
 export default function ProfilePage() {
-  const [user, setUser] = useState({
-    name: "John Doe",
-    department: "Engineering",
-    lastModified: "5 minutes ago",
-  })
+  const [user] = useUserStore((state) => state.User)
 
   return (
     <div className="container mx-auto my-10 px-4">
@@ -23,7 +21,7 @@ export default function ProfilePage() {
               className="flex items-center gap-2 px-2 py-1"
             >
               <Building2 className="h-4 w-4" />
-              {user.department}
+              {user.user_department}
             </Badge>
             <CardTitle className="flex items-center justify-center gap-2 text-2xl">
               <User className="h-6 w-6" />
@@ -33,7 +31,7 @@ export default function ProfilePage() {
           <CardContent>
             <p className="flex items-center justify-center gap-2 text-center text-sm text-muted-foreground">
               <Calendar className="h-4 w-4" />
-              Last modified: {user.lastModified}
+              Last modified: {makeLastModifiedMessage(user.updated_at)}
             </p>
           </CardContent>
         </Card>
