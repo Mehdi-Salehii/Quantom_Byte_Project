@@ -1,6 +1,6 @@
 import { UserType, UserTypeInsert } from "@/supabase/functions/common/schema"
 import { getUser, insertUser, updateUser } from "@/utils/db_functions"
-import { useUserStore } from "@/utils/store"
+
 import { currentUser } from "@clerk/nextjs/server"
 
 import { NextRequest } from "next/server"
