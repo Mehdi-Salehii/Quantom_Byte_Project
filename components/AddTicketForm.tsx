@@ -24,9 +24,6 @@ import {
 } from "@/components/ui/select"
 import { useToast } from "@/components/ui/use-toast"
 
-import Link from "next/link"
-import { useEffect, useRef, useState } from "react"
-import { TicketTypeInsert } from "@/supabase/functions/common/schema"
 import { useAuth } from "@clerk/nextjs"
 import { useUserStore } from "@/utils/store"
 import { insertFromClerkToMyDb } from "@/utils/helpers"
@@ -77,7 +74,6 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
   const { toast } = useToast()
   const { userId } = useAuth()
   const user = useUserStore((state) => state.User)
-  const didUserModified = useUserStore((state) => state.UserModified)
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
@@ -125,7 +121,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
             </FormItem>
           )}
         />
-        {!didUserModified && (
+        {!user[0]?.user_updated_profile && (
           <FormField
             control={form.control}
             name="source_department"

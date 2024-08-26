@@ -21,7 +21,9 @@ const Dashboard = () => {
   const { userId } = useAuth()
   useEffect(() => {
     const init = async () => {
-      await insertFromClerkToMyDb(userId as string)
+      await insertFromClerkToMyDb(userId as string).then(() =>
+        console.log(user),
+      )
     }
     init()
   }, [userId])
@@ -31,13 +33,20 @@ const Dashboard = () => {
   return (
     <>
       <div className="mt-10 grid xsm:px-1 sm:grid-cols-[15fr_1fr_4fr] sm:px-3 lg:px-6 xl:grid-cols-[15fr_2fr_3fr]">
-        <button
-          onClick={() => {
-            alert(JSON.stringify(useUserStore.getState().UserModified))
-          }}
-        >
-          data
-        </button>
+        {/* <div>
+         
+          <div>{useUserStore?.getState()?.User[0]?.clerk_id}</div>
+          <div>{useUserStore?.getState()?.User[0]?.user_department}</div>
+          <div>{`${useUserStore?.getState()?.User[0]?.user_updated_profile}`}</div>
+          <button
+            onClick={() => {
+              alert(JSON.stringify(user))
+            }}
+          >
+            get zustand
+          </button>
+         
+        </div> */}
         <div className="col-span-full col-start-1 col-end-[2]">
           <h1 className="mb-2 text-center font-semibold">
             Tickets to your department

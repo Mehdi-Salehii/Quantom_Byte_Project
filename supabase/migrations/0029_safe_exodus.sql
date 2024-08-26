@@ -1,0 +1,1 @@
+ALTER TABLE "user_table" ADD COLUMN "user_updated_profile" boolean DEFAULT false;

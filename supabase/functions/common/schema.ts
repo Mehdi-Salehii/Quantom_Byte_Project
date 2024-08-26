@@ -6,6 +6,7 @@ import {
   uuid,
   timestamp,
   date,
+  boolean,
 } from "drizzle-orm/pg-core"
 
 export const departmentEnum = pgEnum("department", [
@@ -22,8 +23,8 @@ export const statusEnum = pgEnum("status", [
 ])
 export const ticketTable = pgTable("ticket_table", {
   id: uuid("id").defaultRandom().primaryKey(),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  created_at: timestamp("created_at").notNull().defaultNow(),
+  updated_at: timestamp("updated_at").notNull().defaultNow(),
   user_id: text("user_id")
     .notNull()
     .references(() => userTable.clerk_id),
@@ -42,10 +43,11 @@ export const ticketTable = pgTable("ticket_table", {
 export const userTable = pgTable("user_table", {
   clerk_id: text("clerk_id").notNull().primaryKey(),
   id: uuid("id").defaultRandom(),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  created_at: timestamp("created_at").notNull().defaultNow(),
+  updated_at: timestamp("updated_at").notNull().defaultNow(),
   name: text("name").default("User"),
   user_department: departmentEnum("user_department").default("main office"),
+  user_updated_profile: boolean("user_updated_profile").default(false),
 })
 export const schema = {
   ticketTable,

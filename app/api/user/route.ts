@@ -1,5 +1,6 @@
 import { UserType, UserTypeInsert } from "@/supabase/functions/common/schema"
 import { getUser, insertUser, updateUser } from "@/utils/db_functions"
+import { useUserStore } from "@/utils/store"
 import { currentUser } from "@clerk/nextjs/server"
 
 import { NextRequest } from "next/server"
@@ -51,13 +52,10 @@ export const PUT = async (req: NextRequest) => {
       return Response.json(`Unauthorized Request! login to view your tickets`, {
         status: 401,
       })
-    const insertedUser = await updateUser(data, id)
-    if (!insertedUser[0].updatedId)
-      return Response.json(`something went wrong user wasn't updated `, {
-        status: 500,
-      })
 
-    return Response.json(insertedUser)
+    const updatedtedUser = await updateUser(data, id)
+
+    return Response.json(updatedtedUser)
   } catch (error) {
     return Response.json(`something went wrong  ${error}`)
   }

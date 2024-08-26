@@ -56,11 +56,17 @@ export const insertUser = async (user: UserTypeInsert) => {
   return data
 }
 export const updateUser = async (user: Partial<UserType>, clerkId: string) => {
-  const data = await db
-    .update(userTable)
-    .set({ ...user, updatedAt: new Date() })
-    .where(eq(userTable.clerk_id, clerkId))
-    .returning({ updatedId: userTable.id })
+  const data = await db.transaction(async (tx) => {
+    await tx
+      .update(userTable)
+      .set({ ...user, updated_at: new Date(), user_updated_profile: true })
+      .where(eq(userTable.clerk_id, clerkId))
 
+    const updatedUser = await tx
+      .select()
+      .from(userTable)
+      .where(eq(userTable.clerk_id, clerkId))
+    return updatedUser
+  })
   return data
 }

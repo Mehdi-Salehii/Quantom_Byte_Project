@@ -32,17 +32,6 @@ export const insertFromClerkToMyDb = async (
         const res = await axios.get(`/api/user?id=${userId}`)
 
         if (res.data.length) {
-          //check user has modifed self data
-          const hasModifiedDepartment =
-            Math.abs(
-              new Date(res.data[0].createdAt).getTime() -
-                new Date(res.data[0].updatedAt).getTime(),
-            ) > 100
-          if (hasModifiedDepartment) {
-            useUserStore.setState({
-              UserModified: true,
-            })
-          }
           //put user data in zustand
           useUserStore.setState({ User: res.data })
           userInDb = true

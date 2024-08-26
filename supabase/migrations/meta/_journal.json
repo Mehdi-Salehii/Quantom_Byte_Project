@@ -204,6 +204,13 @@
       "when": 1724592820403,
       "tag": "0028_mixed_blue_shield",
       "breakpoints": true
+    },
+    {
+      "idx": 29,
+      "version": "7",
+      "when": 1724659960890,
+      "tag": "0029_safe_exodus",
+      "breakpoints": true
     }
   ]
 }
