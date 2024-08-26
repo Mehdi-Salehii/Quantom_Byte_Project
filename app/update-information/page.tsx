@@ -9,7 +9,7 @@ import { useUserStore } from "@/utils/store"
 import { makeLastModifiedMessage } from "@/utils/helpers"
 
 export default function ProfilePage() {
-  const [user] = useUserStore((state) => state.User)
+  const user = useUserStore((state) => state.User)
 
   return (
     <div className="container mx-auto my-10 px-4">
@@ -21,17 +21,18 @@ export default function ProfilePage() {
               className="flex items-center gap-2 px-2 py-1"
             >
               <Building2 className="h-4 w-4" />
-              {user?.user_department}
+              {user[0]?.user_department}
             </Badge>
             <CardTitle className="flex items-center justify-center gap-2 text-2xl">
               <User className="h-6 w-6" />
-              {user?.name}
+              {user[0]?.name}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <p className="flex items-center justify-center gap-2 text-center text-sm text-muted-foreground">
               <Calendar className="h-4 w-4" />
-              Last modified: {user && makeLastModifiedMessage(user?.updated_at)}
+              Last modified:{" "}
+              {user.length && makeLastModifiedMessage(user[0]?.updated_at)}
             </p>
           </CardContent>
         </Card>
