@@ -76,18 +76,38 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
   const { toast } = useToast()
   const { userId } = useAuth()
   const user = useUserStore((state) => state.User)
+  const setUser = useUserStore((state) => state.setUser)
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      const data = formSchema.parse(values)
+      const { source_department, ...ticketData } = data
       const userIsInMyDb = user.length
       if (!userIsInMyDb) {
+        console.log("insertFromClerkToMyDb ran")
         await insertFromClerkToMyDb(userId as string)
       }
 
-      const data = formSchema.parse(values)
-      // const res = await axios.post("/api/maketicket", { ...data, user_id })
-      // console.log(res)
+      if (typeof userId !== "string") throw new Error("userId invalid type")
 
+      if (!user[0]?.user_updated_profile) {
+        const updatedUser = await axios
+          .put(`/api/user?id=${userId}`, {
+            user_department: source_department,
+          })
+          .then((res) => {
+            if (typeof res.data === "string") throw new Error("unsuccessful!")
+
+            setUser(res.data)
+          })
+      }
+
+      console.log(user)
+      console.log(ticketData)
+      const res = await axios
+        .post("/api/maketicket", { ...ticketData, user_id: userId })
+        .then((res) => console.log("maketicket res:", res))
+      console.log("this is the res returned by axios", res)
       form.reset()
       if (setOpen) setOpen(false)
       toast({
@@ -96,7 +116,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
       })
     } catch (err) {
       toast({
-        description: "Your ticket didn't submitted try again!",
+        description: `Your ticket didn't submitted try again! ${err}`,
         className: "bg-red-600 text-lg font-semibold text-foreground",
       })
     }

@@ -62,7 +62,7 @@ export const Sheetwrap = ({
             <div className="mx-auto">
               <SignedIn>
                 <div className="flex items-center justify-center gap-2">
-                  {Boolean(user.length) &&
+                  {Boolean(user.length && user[0]?.name) &&
                     `Welcome ${user[0]?.name?.split(" ")?.[0]}`}
                   <UserButton
                     appearance={{
