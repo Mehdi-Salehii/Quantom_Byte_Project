@@ -41,7 +41,8 @@ export const Header = ({ className }: ClassProps) => {
       <div className="hidden sm:block">
         <SignedIn>
           <div className="flex items-center gap-1">
-            {user.length && `Welcome ${user[0]?.name?.split(" ")?.[0]}`}
+            {Boolean(user.length) &&
+              `Welcome ${user[0]?.name?.split(" ")?.[0]}`}
             <UserButton
               appearance={{
                 elements: {
