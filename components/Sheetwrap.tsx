@@ -23,6 +23,7 @@ import {
 } from "@clerk/nextjs"
 import { Button } from "./ui/button"
 import Link from "next/link"
+import { useUserStore } from "@/utils/store"
 type SheetWrapType = {
   className?: string
   open: boolean
@@ -34,6 +35,8 @@ export const Sheetwrap = ({
   open,
   setIsOpen,
 }: React.PropsWithChildren<SheetWrapType>) => {
+  const user = useUserStore((state) => state.User)
+
   return (
     <div className={className}>
       <Sheet open={open}>
@@ -57,15 +60,20 @@ export const Sheetwrap = ({
           </div>
           <div className="flex w-full">
             <div className="mx-auto">
-              <UserButton
-                showName
-                appearance={{
-                  elements: {
-                    userButtonPopoverCard: { pointerEvents: "initial" },
-                    userButtonOuterIdentifier: "text-foreground",
-                  },
-                }}
-              />
+              <SignedIn>
+                <div className="flex items-center justify-center gap-2">
+                  {Boolean(user.length) &&
+                    `Welcome ${user[0]?.name?.split(" ")?.[0]}`}
+                  <UserButton
+                    appearance={{
+                      elements: {
+                        userButtonPopoverCard: { pointerEvents: "initial" },
+                        userButtonOuterIdentifier: "text-foreground",
+                      },
+                    }}
+                  />
+                </div>
+              </SignedIn>
             </div>
           </div>
           <div className="mt-10 flex flex-col justify-end gap-5">
@@ -89,14 +97,12 @@ export const Sheetwrap = ({
                 setIsOpen={setIsOpen}
                 className="mx-auto flex flex-col items-end gap-5 font-semibold"
               />
-            </SignedIn>
-            <div className="mx-auto mt-16">
-              <SignedIn>
+              <div className="mx-auto mt-16">
                 <SignOutButton>
                   <Button variant={"destructive"}>Sign Out</Button>
                 </SignOutButton>
-              </SignedIn>
-            </div>
+              </div>
+            </SignedIn>
           </div>
         </SheetContent>
       </Sheet>

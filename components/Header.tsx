@@ -17,9 +17,11 @@ import {
 import { Button } from "./ui/button"
 import { UserRoundPen } from "lucide-react"
 import Link from "next/link"
+import { useUserStore } from "@/utils/store"
 
 export const Header = ({ className }: ClassProps) => {
   const [isOpen, setIsOpen] = useState(false)
+  const user = useUserStore((state) => state.User)
   return (
     <header
       className={twMerge(
@@ -38,14 +40,16 @@ export const Header = ({ className }: ClassProps) => {
 
       <div className="hidden sm:block">
         <SignedIn>
-          <UserButton
-            showName
-            appearance={{
-              elements: {
-                userButtonOuterIdentifier: "text-foreground",
-              },
-            }}
-          />
+          <div className="flex items-center gap-1">
+            {user.length && `Welcome ${user[0]?.name?.split(" ")?.[0]}`}
+            <UserButton
+              appearance={{
+                elements: {
+                  userButtonOuterIdentifier: "text-foreground",
+                },
+              }}
+            />
+          </div>
         </SignedIn>
       </div>
       <Sheetwrap open={isOpen} setIsOpen={setIsOpen} className="sm:hidden" />
