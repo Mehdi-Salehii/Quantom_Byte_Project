@@ -33,20 +33,6 @@ const Dashboard = () => {
   return (
     <>
       <div className="mt-10 grid xsm:px-1 sm:grid-cols-[15fr_1fr_4fr] sm:px-3 lg:px-6 xl:grid-cols-[15fr_2fr_3fr]">
-        {/* <div>
-         
-          <div>{useUserStore?.getState()?.User[0]?.clerk_id}</div>
-          <div>{useUserStore?.getState()?.User[0]?.user_department}</div>
-          <div>{`${useUserStore?.getState()?.User[0]?.user_updated_profile}`}</div>
-          <button
-            onClick={() => {
-              alert(JSON.stringify(user))
-            }}
-          >
-            get zustand
-          </button>
-         
-        </div> */}
         <div className="col-span-full col-start-1 col-end-[2]">
           <h1 className="mb-2 text-center font-semibold">
             Tickets to your department
@@ -55,7 +41,6 @@ const Dashboard = () => {
         </div>
         <div className="col-start-3 col-end-[-1] hidden text-center sm:mt-0 sm:block">
           <AddTicketForm />
-          <UpdateUserForm />
         </div>
       </div>
     </>
