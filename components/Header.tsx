@@ -15,6 +15,8 @@ import {
   UserButton,
 } from "@clerk/nextjs"
 import { Button } from "./ui/button"
+import { UserRoundPen } from "lucide-react"
+import Link from "next/link"
 
 export const Header = ({ className }: ClassProps) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -28,11 +30,10 @@ export const Header = ({ className }: ClassProps) => {
       <Logo className="mr-auto" />
       <SignedIn>
         <Nav className="hidden font-semibold sm:flex" />
+        <Link href={"/update-information"} className="hidden sm:block">
+          <UserRoundPen className="inline" width={50} height={20} />
+        </Link>
       </SignedIn>
-      <div className="hidden sm:hidden">
-        <NewTicketPopover />
-      </div>
-
       <ModeToggle className="hidden sm:block" />
 
       <div className="hidden sm:block">

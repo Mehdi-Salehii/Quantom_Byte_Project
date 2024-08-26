@@ -1,4 +1,4 @@
-import { X } from "lucide-react"
+import { UserRoundPen, X } from "lucide-react"
 import HamburgerIcon from "./Icons/HamburgerIcon"
 import { ModeToggle } from "./ModeToggle"
 import { ClassProps, Nav } from "./Nav"
@@ -22,6 +22,7 @@ import {
   UserButton,
 } from "@clerk/nextjs"
 import { Button } from "./ui/button"
+import Link from "next/link"
 type SheetWrapType = {
   className?: string
   open: boolean
@@ -69,11 +70,16 @@ export const Sheetwrap = ({
           </div>
           <div className="mt-10 flex flex-col justify-end gap-5">
             <div className="mx-auto flex w-1/2 items-center justify-between">
-              <ModeToggle className="" />
+              <ModeToggle />
               <SignedIn>
-                <div>
-                  <NewTicketPopover />
-                </div>
+                <Link
+                  href={"/update-information"}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <UserRoundPen className="inline" width={25} height={25} />
+                </Link>
+
+                <NewTicketPopover />
               </SignedIn>
             </div>
 

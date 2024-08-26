@@ -27,6 +27,8 @@ import { useToast } from "@/components/ui/use-toast"
 import { useAuth } from "@clerk/nextjs"
 import { useUserStore } from "@/utils/store"
 import { insertFromClerkToMyDb } from "@/utils/helpers"
+import { UserRoundPen } from "lucide-react"
+import Link from "next/link"
 
 const departments = [
   "main office",
@@ -138,6 +140,12 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
                       <SelectValue placeholder="Select your department" />
                     </SelectTrigger>
                   </FormControl>
+                  <FormDescription className="text-left">
+                    &#9888; This department will be used for your next tickets
+                    you can change it any time from
+                    <UserRoundPen className="inline" width={50} height={20} />
+                    in navigation
+                  </FormDescription>
                   <SelectContent>
                     {departments.map((dep, i) => (
                       <SelectItem key={i} value={dep}>
