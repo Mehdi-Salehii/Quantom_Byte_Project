@@ -31,7 +31,7 @@ export const ticketTable = pgTable("ticket_table", {
   title: text("title").notNull(),
   description: text("description").notNull(),
   target_department: departmentEnum("target_department").notNull(),
-  source_department: departmentEnum("source_department").notNull(),
+
   status: statusEnum("status").notNull().default("processing"),
   fulfill_message: text("fulfill_message"),
   reject_message: text("reject_message"),

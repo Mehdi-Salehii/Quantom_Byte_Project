@@ -1,0 +1,193 @@
+{
+  "id": "46959254-1c03-4889-ba90-5ccf21d35caf",
+  "prevId": "7106da56-93b7-4a33-8d3f-bb5c16165323",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.ticket_table": {
+      "name": "ticket_table",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "target_department": {
+          "name": "target_department",
+          "type": "department",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'processing'"
+        },
+        "fulfill_message": {
+          "name": "fulfill_message",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "reject_message": {
+          "name": "reject_message",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pictures": {
+          "name": "pictures",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::text[]"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ticket_table_user_id_user_table_clerk_id_fk": {
+          "name": "ticket_table_user_id_user_table_clerk_id_fk",
+          "tableFrom": "ticket_table",
+          "tableTo": "user_table",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "clerk_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.user_table": {
+      "name": "user_table",
+      "schema": "",
+      "columns": {
+        "clerk_id": {
+          "name": "clerk_id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'User'"
+        },
+        "user_department": {
+          "name": "user_department",
+          "type": "department",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'main office'"
+        },
+        "user_updated_profile": {
+          "name": "user_updated_profile",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {
+    "public.department": {
+      "name": "department",
+      "schema": "public",
+      "values": [
+        "main office",
+        "engineering",
+        "design",
+        "marketing",
+        "financial"
+      ]
+    },
+    "public.status": {
+      "name": "status",
+      "schema": "public",
+      "values": [
+        "fulfilled",
+        "processing",
+        "rejected"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

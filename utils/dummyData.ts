@@ -11,7 +11,7 @@ export const tickets: TicketType[] = [
     title: "Review Financial Statements",
     description: "Conduct a review of the quarterly financial statements.",
     target_department: "financial",
-    source_department: "main office",
+
     status: "fulfilled",
     fulfill_message: "All statements are accurate and complete.",
     reject_message: null,
@@ -26,7 +26,7 @@ export const tickets: TicketType[] = [
     description:
       "Create new brochures and flyers for the upcoming product launch.",
     target_department: "design",
-    source_department: "marketing",
+
     status: "processing",
     fulfill_message: null,
     reject_message: null,
@@ -41,7 +41,7 @@ export const tickets: TicketType[] = [
     description:
       "Propose and implement new software tools for the engineering team.",
     target_department: "engineering",
-    source_department: "main office",
+
     status: "rejected",
     fulfill_message: null,
     reject_message: "Budget constraints prevent the upgrade.",
@@ -55,7 +55,7 @@ export const tickets: TicketType[] = [
     title: "Conduct Market Research",
     description: "Analyze customer feedback and market trends.",
     target_department: "marketing",
-    source_department: "financial",
+
     status: "processing",
     fulfill_message: null,
     reject_message: null,
@@ -70,7 +70,7 @@ export const tickets: TicketType[] = [
     description:
       "Create prototypes for the next generation of our product line.",
     target_department: "engineering",
-    source_department: "design",
+
     status: "fulfilled",
     fulfill_message: "Prototypes successfully developed and tested.",
     reject_message: null,
@@ -85,7 +85,7 @@ export const tickets: TicketType[] = [
     description:
       "Compile and present the budget report for the next fiscal year.",
     target_department: "financial",
-    source_department: "main office",
+
     status: "rejected",
     fulfill_message: null,
     reject_message: "Incomplete data provided by departments.",
@@ -99,7 +99,7 @@ export const tickets: TicketType[] = [
     title: "Redesign Company Website",
     description: "Implement a new design for the company website.",
     target_department: "design",
-    source_department: "marketing",
+
     status: "processing",
     fulfill_message: null,
     reject_message: null,
@@ -113,7 +113,7 @@ export const tickets: TicketType[] = [
     title: "Optimize Manufacturing Process",
     description: "Analyze and improve the current manufacturing process.",
     target_department: "engineering",
-    source_department: "main office",
+
     status: "fulfilled",
     fulfill_message: "Process optimized with a 15% efficiency gain.",
     reject_message: null,
@@ -128,7 +128,7 @@ export const tickets: TicketType[] = [
     description:
       "Develop a comprehensive social media strategy for the next quarter.",
     target_department: "marketing",
-    source_department: "main office",
+
     status: "rejected",
     fulfill_message: null,
     reject_message: "The strategy lacks clear KPIs.",
@@ -142,7 +142,7 @@ export const tickets: TicketType[] = [
     title: "Evaluate New Software Vendors",
     description: "Assess potential software vendors for the IT department.",
     target_department: "engineering",
-    source_department: "financial",
+
     status: "processing",
     fulfill_message: null,
     reject_message: null,
@@ -157,7 +157,7 @@ export const tickets: TicketType[] = [
     description:
       "Coordinate the relocation of the main office to a new building.",
     target_department: "main office",
-    source_department: "financial",
+
     status: "fulfilled",
     fulfill_message: "Relocation completed successfully.",
     reject_message: null,
@@ -171,7 +171,7 @@ export const tickets: TicketType[] = [
     title: "Launch New Advertising Campaign",
     description: "Roll out a new advertising campaign for the latest product.",
     target_department: "marketing",
-    source_department: "design",
+
     status: "processing",
     fulfill_message: null,
     reject_message: null,
@@ -186,7 +186,7 @@ export const tickets: TicketType[] = [
     description:
       "Perform a detailed audit of departmental expenses for the past year.",
     target_department: "financial",
-    source_department: "main office",
+
     status: "fulfilled",
     fulfill_message: "Audit completed with no discrepancies found.",
     reject_message: null,
@@ -200,7 +200,7 @@ export const tickets: TicketType[] = [
     title: "Design New Company Logo",
     description: "Create a modern and versatile logo for the company.",
     target_department: "design",
-    source_department: "marketing",
+
     status: "rejected",
     fulfill_message: null,
     reject_message: "The logo did not meet the branding requirements.",
@@ -214,7 +214,7 @@ export const tickets: TicketType[] = [
     title: "Enhance IT Security Protocols",
     description: "Update and strengthen the company's IT security protocols.",
     target_department: "engineering",
-    source_department: "main office",
+
     status: "processing",
     fulfill_message: null,
     reject_message: null,
@@ -229,7 +229,7 @@ export const tickets: TicketType[] = [
     description:
       "Negotiate and finalize the partnership agreement with a key vendor.",
     target_department: "financial",
-    source_department: "main office",
+
     status: "fulfilled",
     fulfill_message: "Partnership agreement successfully finalized.",
     reject_message: null,
@@ -243,7 +243,7 @@ export const tickets: TicketType[] = [
     title: "Improve Customer Support Process",
     description: "Analyze and improve the customer support workflow.",
     target_department: "main office",
-    source_department: "engineering",
+
     status: "processing",
     fulfill_message: null,
     reject_message: null,
@@ -258,7 +258,7 @@ export const tickets: TicketType[] = [
     description:
       "Reassess and update the financial projections for the next quarter.",
     target_department: "financial",
-    source_department: "main office",
+
     status: "rejected",
     fulfill_message: null,
     reject_message: "Projections based on outdated data.",
@@ -272,7 +272,7 @@ export const tickets: TicketType[] = [
     title: "Launch Employee Training Program",
     description: "Develop and launch a training program for new employees.",
     target_department: "main office",
-    source_department: "engineering",
+
     status: "fulfilled",
     fulfill_message: "Training program launched successfully.",
     reject_message: null,
@@ -286,7 +286,7 @@ export const tickets: TicketType[] = [
     title: "Redesign Office Layout",
     description: "Plan and execute the redesign of the office layout.",
     target_department: "design",
-    source_department: "main office",
+
     status: "processing",
     fulfill_message: null,
     reject_message: null,

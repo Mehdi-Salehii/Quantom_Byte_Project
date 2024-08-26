@@ -211,6 +211,13 @@
       "when": 1724659960890,
       "tag": "0029_safe_exodus",
       "breakpoints": true
+    },
+    {
+      "idx": 30,
+      "version": "7",
+      "when": 1724702021775,
+      "tag": "0030_brown_anita_blake",
+      "breakpoints": true
     }
   ]
 }
