@@ -22,6 +22,7 @@ export default function RootLayout({
   return (
     <ClerkProvider
       afterSignOutUrl={"/"}
+      afterMultiSessionSingleSignOutUrl={"/"}
       appearance={{
         layout: {
           unsafe_disableDevelopmentModeWarnings: true,
