@@ -27,6 +27,8 @@ import axios from "axios"
 import { useAuth } from "@clerk/nextjs"
 import { useUserStore } from "@/utils/store"
 import { UserType } from "@/supabase/functions/common/schema"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { revalidatePath } from "next/cache"
 
 const departments = [
   "main office",
@@ -50,8 +52,7 @@ type UpdateUserFormProps = {
 
 export default function UpdateUserForm({ setOpen }: UpdateUserFormProps) {
   const { userId } = useAuth()
-  const user = useUserStore((state) => state.User)
-  const setUser = useUserStore((state) => state.setUser)
+
   const { toast } = useToast()
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -63,32 +64,61 @@ export default function UpdateUserForm({ setOpen }: UpdateUserFormProps) {
   })
   const { isSubmitting } = form.formState
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    try {
-      const updatedUser = await axios
-        .put(`/api/user?id=${userId}`, {
-          ...values,
-          clerk_id: userId,
-        })
-        .then((res) => {
-          if (typeof res.data === "string") throw new Error("unsuccessful!")
+  const queryClient = useQueryClient()
 
-          setUser(res.data)
-        })
+  const { mutateAsync } = useMutation({
+    mutationFn: async (values: z.infer<typeof formSchema>) => {
+      const { data } = await axios.put(`/api/user?id=${userId}`, {
+        ...values,
+        clerk_id: userId,
+      })
+      return data
+    },
+    onSuccess: (data) => {
+      // setUser(data)
 
+      queryClient.invalidateQueries({ queryKey: ["user"] })
+      queryClient.refetchQueries({ queryKey: ["user"] })
       toast({
         description: "Your profile has been successfully updated!",
         className: "bg-green-600 text-lg font-semibold text-foreground",
       })
-
       if (setOpen) setOpen(false)
-    } catch (err) {
-      console.error(err)
+    },
+    onError: (error) => {
+      console.error(error)
       toast({
-        description: `Failed to update profile. Please try again! ${err}`,
+        description: `Failed to update profile. Please try again!`,
         className: "bg-red-600 text-lg font-semibold text-foreground",
       })
-    }
+    },
+  })
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    await mutateAsync(values)
+    // try {
+    //   await mutateAsync(values)
+    //   const updatedUser = await axios
+    //     .put(`/api/user?id=${userId}`, {
+    //       ...values,
+    //       clerk_id: userId,
+    //     })
+    //     .then((res) => {
+    //       if (typeof res.data === "string") throw new Error("unsuccessful!")
+    //       setUser(res.data)
+    //     })
+    //   toast({
+    //     description: "Your profile has been successfully updated!",
+    //     className: "bg-green-600 text-lg font-semibold text-foreground",
+    //   })
+    //   if (setOpen) setOpen(false)
+    // } catch (err) {
+    //   console.error(err)
+    //   toast({
+    //     description: `Failed to update profile. Please try again! ${err}`,
+    //     className: "bg-red-600 text-lg font-semibold text-foreground",
+    //   })
+    // }
   }
 
   return (

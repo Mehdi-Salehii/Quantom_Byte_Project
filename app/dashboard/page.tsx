@@ -13,25 +13,46 @@ import { useAuth, useUser } from "@clerk/nextjs"
 import { getUser } from "@/utils/db_functions"
 import axios from "axios"
 import UpdateUserForm from "@/components/UpdateUserForm"
+import { useQuery } from "@tanstack/react-query"
 
 const Dashboard = () => {
-  const setUser = useUserStore((state) => state.setUser)
-  const user = useUserStore((state) => state.User)
-
   const { userId } = useAuth()
-  useEffect(() => {
-    const init = async () => {
-      await insertFromClerkToMyDb(userId as string).then(() =>
-        console.log(user),
-      )
-    }
-    init()
-  }, [userId])
+
+  const {
+    isPending,
+    error,
+    data: user,
+    isFetching,
+  } = useQuery({
+    queryKey: ["user"],
+    staleTime: 0,
+    queryFn: async () => {
+      try {
+        const { data } = await axios.get(`/api/user?id=${userId}`)
+
+        return data
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    enabled: !!userId,
+  })
+  // useEffect(() => {
+  //   const init = async () => {
+  //     await insertFromClerkToMyDb(userId as string).then(() =>
+  //       console.log(user),
+  //     )
+  //   }
+  //   init()
+  // }, [userId])
   const [data, setData] = useState<TicketType[]>(tickets.slice(0, 15))
   const modifiedData = modifyDescription(data, 15)
 
   return (
     <>
+      <div>
+        <div>{JSON.stringify(user && user[0]?.user_department)}</div>
+      </div>
       <div className="mt-10 grid xsm:px-1 sm:grid-cols-[15fr_1fr_4fr] sm:px-3 lg:px-6 xl:grid-cols-[15fr_2fr_3fr]">
         <div className="col-span-full col-start-1 col-end-[2]">
           <h1 className="mb-2 text-center font-semibold">

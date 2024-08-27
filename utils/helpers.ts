@@ -25,15 +25,15 @@ export const insertFromClerkToMyDb = async (
 ): Promise<UserType[]> => {
   return new Promise(async (resolve, reject) => {
     let userInDb = false
-    let intervalCount = 0
+    // let intervalCount = 0
     const interval = setIntervalAsync(async () => {
-      console.log(`interval ran ${++intervalCount} times`)
+      // console.log(`interval ran ${++intervalCount} times`)
       try {
         const res = await axios.get(`/api/user?id=${userId}`)
 
         if (res.data.length) {
           //put user data in zustand
-          useUserStore.setState({ User: res.data })
+          // useUserStore.setState({ User: res.data })
           userInDb = true
           await clearIntervalAsync(interval)
           resolve(res.data)
