@@ -59,7 +59,7 @@ export const makeLastModifiedMessage = (updatedAt: string | Date): string => {
     miliUpdated = updatedAt.getTime()
   }
   const miliNow = Date.now()
-  const elapsedTimeSeconds = (miliNow - miliUpdated) / 1000
+  const elapsedTimeSeconds = Math.floor(Math.abs(miliNow - miliUpdated)) / 1000
 
   const elapsedMinutes = Math.floor(elapsedTimeSeconds / 60)
   const elapsedHours = Math.floor(elapsedMinutes / 60)
