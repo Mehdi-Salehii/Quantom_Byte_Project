@@ -11,6 +11,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useAuth } from "@clerk/nextjs"
 import axios from "axios"
 import { toast } from "@/components/ui/use-toast"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 const Dashboard = () => {
   const [data, setData] = useState<TicketType[]>([])
@@ -89,6 +91,10 @@ const Dashboard = () => {
             <DataTable columns={columns} data={modifiedData} />
           )}
           {loadingTickets && <div>Loading...</div>}
+          <Link href={"/update-information"}>
+            <Button>Update Information</Button>
+          </Link>
+          {!userInMyDb && <div></div>}
         </div>
         <div className="col-start-3 col-end-[-1] hidden text-center sm:mt-0 sm:block">
           <AddTicketForm />
