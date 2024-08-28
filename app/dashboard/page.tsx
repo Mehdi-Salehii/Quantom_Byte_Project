@@ -1,6 +1,6 @@
 "use client"
 import { TicketType, UserType } from "@/supabase/functions/common/schema"
-import { getRecords, insertRecord } from "@/utils/actions"
+
 import { Table } from "@/components/ui/table"
 import { DataTable } from "./DataTable"
 import { columns } from "./Columns"
@@ -32,19 +32,17 @@ const Dashboard = () => {
         setUser(data)
         return data
       } catch (err) {
-        console.log(err)
+        console.error(err)
       }
     },
     enabled: !!userId,
   })
-  useEffect(() => {
-    const init = async () => {
-      await insertFromClerkToMyDb(userId as string).then(() =>
-        console.log(user),
-      )
-    }
-    init()
-  }, [userId])
+  // useEffect(() => {
+  //   const init = async () => {
+  //     await insertFromClerkToMyDb(userId as string)
+  //   }
+  //   init()
+  // }, [userId])
   const [data, setData] = useState<TicketType[]>(tickets.slice(0, 15))
   const modifiedData = modifyDescription(data, 15)
 

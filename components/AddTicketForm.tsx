@@ -24,12 +24,13 @@ import {
 } from "@/components/ui/select"
 import { useToast } from "@/components/ui/use-toast"
 
-import { useAuth } from "@clerk/nextjs"
+import { useAuth, useUser } from "@clerk/nextjs"
 import { useUserStore } from "@/utils/store"
 import { insertFromClerkToMyDb } from "@/utils/helpers"
 import { UserRoundPen } from "lucide-react"
 import Link from "next/link"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
+import { useState } from "react"
 
 const departments = [
   "main office",
@@ -76,7 +77,8 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
   } = form
   const { toast } = useToast()
   const { userId } = useAuth()
-
+  const { user: clerktest } = useUser()
+  const firstName = clerktest?.firstName
   const {
     isPending,
     error,
@@ -91,40 +93,35 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
 
         return data
       } catch (err) {
-        console.log(err)
+        console.error(err)
       }
     },
+
     enabled: !!userId,
   })
-
+  const queryClient = useQueryClient()
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       const data = formSchema.parse(values)
       const { source_department, ...ticketData } = data
       const userIsInMyDb = user?.length
+
       if (!userIsInMyDb) {
-        console.log("insertFromClerkToMyDb ran")
-        await insertFromClerkToMyDb(userId as string)
+        await axios.post("/api/user", {
+          clerk_id: userId,
+          user_updated_profile: true,
+          name: firstName,
+        })
+        queryClient.invalidateQueries({ queryKey: ["user"] })
       }
 
       if (typeof userId !== "string") throw new Error("userId invalid type")
 
-      if (!user[0]?.user_updated_profile) {
-        const updatedUser = await axios
-          .put(`/api/user?id=${userId}`, {
-            user_department: source_department,
-          })
-          .then((res) => {
-            if (typeof res.data === "string") throw new Error("unsuccessful!")
-          })
-      }
+      const res = await axios.post("/api/maketicket", {
+        ...ticketData,
+        user_id: userId,
+      })
 
-      console.log(user)
-      console.log(ticketData)
-      const res = await axios
-        .post("/api/maketicket", { ...ticketData, user_id: userId })
-        .then((res) => console.log("maketicket res:", res))
-      console.log("this is the res returned by axios", res)
       form.reset()
       if (setOpen) setOpen(false)
       toast({

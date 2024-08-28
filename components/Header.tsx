@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import { ClassProps, Nav } from "./Nav"
 import { ModeToggle } from "./ModeToggle"
 import { Logo } from "./Logo"
-import { NewTicketPopover } from "./NewTicketPopover"
+
 import { Sheetwrap } from "./Sheetwrap"
 import { twMerge } from "tailwind-merge"
 import {
@@ -14,45 +14,23 @@ import {
   SignUpButton,
   useAuth,
   UserButton,
+  useUser,
 } from "@clerk/nextjs"
-import { Button } from "./ui/button"
+
 import { UserRoundPen } from "lucide-react"
 import Link from "next/link"
-import { useUserStore } from "@/utils/store"
-import { useQuery } from "@tanstack/react-query"
-import axios from "axios"
 
 export const Header = ({ className }: ClassProps) => {
   const { userId } = useAuth()
-  const {
-    isPending,
-    error,
-    data: user,
-    isFetching,
-  } = useQuery({
-    queryKey: ["user"],
-    queryFn: async () => {
-      try {
-        const { data } = await axios.get(`/api/user?id=${userId}`)
-
-        return data
-      } catch (err) {
-        console.error(err)
-      }
-    },
-    enabled: !!userId,
-  })
   const [isOpen, setIsOpen] = useState(false)
+  const { user } = useUser()
 
-  let modifiedName
-  if (user?.[0]?.name) {
-    modifiedName =
-      "Welcome " +
-      user?.[0]?.name?.split(" ")?.[0]?.slice(0, 1)?.toUpperCase() +
-      user?.[0]?.name?.split(" ")?.[0]?.slice(1)
-  } else {
-    modifiedName = ""
-  }
+  const modifiedName = user?.firstName
+    ? `Welcome ${
+        user?.firstName.split(" ")?.[0]?.slice(0, 1)?.toUpperCase() +
+        user?.firstName.split(" ")?.[0]?.slice(1)
+      }`
+    : ""
 
   return (
     <header
@@ -73,7 +51,7 @@ export const Header = ({ className }: ClassProps) => {
       <div className="hidden sm:block">
         <SignedIn>
           <div className="flex items-center gap-1">
-            {`${modifiedName}`}
+            {modifiedName}
             <UserButton
               appearance={{
                 elements: {

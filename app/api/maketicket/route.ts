@@ -5,8 +5,7 @@ export const POST = async (req: Request) => {
   try {
     const user = await currentUser()
     const body = await req.json()
-    console.log(user?.id)
-    console.log(body)
+   
     return Response.json(body)
 /*
     if (!user)

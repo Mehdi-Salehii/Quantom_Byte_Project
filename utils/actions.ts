@@ -11,11 +11,9 @@ import {
 
 export const getRecords = async (id: string): Promise<TicketType[]> => {
   const data = await getAllTickets(id)
-  console.log("from getRecords", data)
+
   return data
 }
 export const insertRecord = async (ticket: TicketType) => {
   const data = await db.insert(ticketTable).values(ticket).returning()
-
-  console.log("from insertRecord", data)
 }

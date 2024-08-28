@@ -1,6 +1,6 @@
 "use client"
 import { TicketType } from "@/supabase/functions/common/schema"
-import { getRecords, insertRecord } from "@/utils/actions"
+
 import { Table } from "@/components/ui/table"
 import { DataTable } from "./DataTable"
 import { columns } from "./Columns"
@@ -9,11 +9,10 @@ import { AddTicketForm } from "@/components/AddTicketForm"
 import { modifyDescription } from "@/utils/helpers"
 import { tickets } from "@/utils/dummyData"
 
-const OutGoingTicketsPage =  () => {
+const OutGoingTicketsPage = () => {
   const [data, setData] = useState<TicketType[]>(
     modifyDescription(tickets.slice(15), 15),
   )
- 
 
   return (
     <>

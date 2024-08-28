@@ -6,7 +6,7 @@
 /*
 import "jsr:@supabase/functions-js/edge-runtime.d.ts"
 
-console.log("Hello from Functions!")
+
 
 Deno.serve(async (req) => {
   const { name } = await req.json()

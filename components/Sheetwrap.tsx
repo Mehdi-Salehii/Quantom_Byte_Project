@@ -20,10 +20,11 @@ import {
   SignOutButton,
   SignUpButton,
   UserButton,
+  useUser,
 } from "@clerk/nextjs"
 import { Button } from "./ui/button"
 import Link from "next/link"
-import { useUserStore } from "@/utils/store"
+
 type SheetWrapType = {
   className?: string
   open: boolean
@@ -35,16 +36,14 @@ export const Sheetwrap = ({
   open,
   setIsOpen,
 }: React.PropsWithChildren<SheetWrapType>) => {
-  const user = useUserStore((state) => state.User)
-  let modifiedName
-  if (user?.[0]?.name) {
-    modifiedName =
-      "Welcome " +
-      user?.[0]?.name?.split(" ")?.[0]?.slice(0, 1)?.toUpperCase() +
-      user?.[0]?.name?.split(" ")?.[0]?.slice(1)
-  } else {
-    modifiedName = ""
-  }
+  const { user } = useUser()
+  const modifiedName = user?.firstName
+    ? `Welcome ${
+        user?.firstName.split(" ")?.[0]?.slice(0, 1)?.toUpperCase() +
+        user?.firstName.split(" ")?.[0]?.slice(1)
+      }`
+    : ""
+
   return (
     <div className={className}>
       <Sheet open={open}>
@@ -70,7 +69,7 @@ export const Sheetwrap = ({
             <div className="mx-auto">
               <SignedIn>
                 <div className="flex items-center justify-center gap-2">
-                  {`${modifiedName}`}
+                  {modifiedName}
                   <UserButton
                     appearance={{
                       elements: {
