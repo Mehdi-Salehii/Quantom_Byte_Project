@@ -1,50 +1,82 @@
 "use client"
-import { TicketType, UserType } from "@/supabase/functions/common/schema"
+import { TicketType } from "@/supabase/functions/common/schema"
 
-import { Table } from "@/components/ui/table"
 import { DataTable } from "./DataTable"
 import { columns } from "./Columns"
 import { useEffect, useState } from "react"
 import { AddTicketForm } from "@/components/AddTicketForm"
-import { insertFromClerkToMyDb, modifyDescription } from "@/utils/helpers"
+import { modifyDescription } from "@/utils/helpers"
 import { tickets } from "@/utils/dummyData"
-import { useUserStore } from "@/utils/store"
-import { useAuth, useUser } from "@clerk/nextjs"
-import { getUser } from "@/utils/db_functions"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { useAuth } from "@clerk/nextjs"
 import axios from "axios"
-import UpdateUserForm from "@/components/UpdateUserForm"
-import { useQuery } from "@tanstack/react-query"
+import { toast } from "@/components/ui/use-toast"
 
 const Dashboard = () => {
-  const setUser = useUserStore((state) => state.setUser)
+  const [data, setData] = useState<TicketType[]>([])
+  const modifiedData = data?.length ? modifyDescription(data, 15) : []
+  // const [data, setData] = useState<TicketType[]>(tickets.slice(0, 15))
+  // const modifiedData = modifyDescription(data, 15)
+
   const { userId } = useAuth()
-  const {
-    isPending,
-    error,
-    data: user,
-    isFetching,
-  } = useQuery({
+  const queryClient = useQueryClient()
+  const [userInMyDb, setUserInMyDb] = useState(true)
+  const [errorInDb, setErrorInDb] = useState(false)
+  const [loadingTickets, setLoadingTickets] = useState(true)
+  const { mutateAsync } = useMutation({
+    mutationFn: async () => {
+      try {
+        const { data } = await axios.get(`/api/user?id=${userId}`)
+
+        return data
+      } catch (err) {
+        throw err
+      }
+    },
+    onSuccess: async (data) => {
+      if (!data?.length) {
+        setUserInMyDb(false)
+        return
+      }
+      if (!data) {
+        setErrorInDb(true)
+        return
+      }
+      const department = data[0].user_department
+
+      const { data: recievedTickets } = await axios.get(
+        `/api/tickets-recieved?department=${department}`,
+      )
+      setLoadingTickets(false)
+    },
+    onError: (error) => {
+      console.error(error)
+      toast({
+        description: `Something went wrong on server. Please try again! ${error}`,
+        className: "bg-red-600 text-lg font-semibold text-foreground",
+      })
+    },
+  })
+  useEffect(() => {
+    const init = async () => {
+      await mutateAsync()
+    }
+    init()
+  }, [userId])
+  const { data: user } = useQuery({
     queryKey: ["user"],
-    staleTime: 0,
     queryFn: async () => {
       try {
         const { data } = await axios.get(`/api/user?id=${userId}`)
-        setUser(data)
+
         return data
       } catch (err) {
         console.error(err)
       }
     },
+
     enabled: !!userId,
   })
-  // useEffect(() => {
-  //   const init = async () => {
-  //     await insertFromClerkToMyDb(userId as string)
-  //   }
-  //   init()
-  // }, [userId])
-  const [data, setData] = useState<TicketType[]>(tickets.slice(0, 15))
-  const modifiedData = modifyDescription(data, 15)
 
   return (
     <>
@@ -53,7 +85,10 @@ const Dashboard = () => {
           <h1 className="mb-2 text-center font-semibold">
             Tickets to your department
           </h1>
-          <DataTable columns={columns} data={modifiedData} />
+          {!loadingTickets && (
+            <DataTable columns={columns} data={modifiedData} />
+          )}
+          {loadingTickets && <div>Loading...</div>}
         </div>
         <div className="col-start-3 col-end-[-1] hidden text-center sm:mt-0 sm:block">
           <AddTicketForm />

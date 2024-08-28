@@ -76,8 +76,6 @@ export default function UpdateUserForm({ setOpen }: UpdateUserFormProps) {
       return data
     },
     onSuccess: (data) => {
-      setUser(data)
-
       queryClient.invalidateQueries({ queryKey: ["user"] })
       // queryClient.refetchQueries({ queryKey: ["user"] })
       toast({

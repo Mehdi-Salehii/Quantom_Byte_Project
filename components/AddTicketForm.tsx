@@ -79,12 +79,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
   const { userId } = useAuth()
   const { user: clerktest } = useUser()
   const firstName = clerktest?.firstName
-  const {
-    isPending,
-    error,
-    data: user,
-    isFetching,
-  } = useQuery({
+  const { data: user } = useQuery({
     queryKey: ["user"],
     staleTime: 0,
     queryFn: async () => {

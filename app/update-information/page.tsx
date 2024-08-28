@@ -14,12 +14,7 @@ import { useAuth } from "@clerk/nextjs"
 export default function ProfilePage() {
   const { userId } = useAuth()
 
-  const {
-    isPending,
-    error,
-    data: user,
-    isFetching,
-  } = useQuery({
+  const { data: user } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
       try {

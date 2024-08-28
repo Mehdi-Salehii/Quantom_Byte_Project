@@ -1,4 +1,5 @@
 import {
+  DepartmentType,
   ticketTable,
   TicketType,
   TicketTypeInsert,
@@ -10,11 +11,23 @@ import { db } from "@/utils/db"
 import { eq, sql } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
 
-export const getAllTickets = async (userid: string): Promise<TicketType[]> => {
+export const getAllTicketsSent = async (
+  userid: string,
+): Promise<TicketType[]> => {
   const data = await db
     .select()
     .from(ticketTable)
     .where(eq(ticketTable.user_id, userid))
+
+  return data
+}
+export const getAllTicketsRecieved = async (
+  userDepartment: DepartmentType,
+): Promise<TicketType[]> => {
+  const data = await db
+    .select()
+    .from(ticketTable)
+    .where(eq(ticketTable.target_department, userDepartment))
 
   return data
 }

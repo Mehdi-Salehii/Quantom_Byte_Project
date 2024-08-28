@@ -57,3 +57,9 @@ export type TicketTypeInsert = typeof ticketTable.$inferInsert
 export type TicketType = typeof ticketTable.$inferSelect
 export type UserTypeInsert = typeof userTable.$inferInsert
 export type UserType = typeof userTable.$inferSelect
+export type DepartmentType =
+  | "main office"
+  | "engineering"
+  | "design"
+  | "marketing"
+  | "financial"
