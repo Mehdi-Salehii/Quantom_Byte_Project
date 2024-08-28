@@ -29,6 +29,7 @@ import { useUserStore } from "@/utils/store"
 import { insertFromClerkToMyDb } from "@/utils/helpers"
 import { UserRoundPen } from "lucide-react"
 import Link from "next/link"
+import { useQuery } from "@tanstack/react-query"
 
 const departments = [
   "main office",
@@ -75,14 +76,32 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
   } = form
   const { toast } = useToast()
   const { userId } = useAuth()
-  const user = useUserStore((state) => state.User)
-  const setUser = useUserStore((state) => state.setUser)
+
+  const {
+    isPending,
+    error,
+    data: user,
+    isFetching,
+  } = useQuery({
+    queryKey: ["user"],
+    staleTime: 0,
+    queryFn: async () => {
+      try {
+        const { data } = await axios.get(`/api/user?id=${userId}`)
+
+        return data
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    enabled: !!userId,
+  })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       const data = formSchema.parse(values)
       const { source_department, ...ticketData } = data
-      const userIsInMyDb = user.length
+      const userIsInMyDb = user?.length
       if (!userIsInMyDb) {
         console.log("insertFromClerkToMyDb ran")
         await insertFromClerkToMyDb(userId as string)
@@ -97,8 +116,6 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
           })
           .then((res) => {
             if (typeof res.data === "string") throw new Error("unsuccessful!")
-
-            setUser(res.data)
           })
       }
 
@@ -143,7 +160,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
             </FormItem>
           )}
         />
-        {!user[0]?.user_updated_profile && (
+        {!user?.[0]?.user_updated_profile && (
           <FormField
             control={form.control}
             name="source_department"

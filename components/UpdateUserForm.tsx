@@ -51,6 +51,7 @@ type UpdateUserFormProps = {
 }
 
 export default function UpdateUserForm({ setOpen }: UpdateUserFormProps) {
+  const setUser = useUserStore((state) => state.setUser)
   const { userId } = useAuth()
 
   const { toast } = useToast()
@@ -75,10 +76,10 @@ export default function UpdateUserForm({ setOpen }: UpdateUserFormProps) {
       return data
     },
     onSuccess: (data) => {
-      // setUser(data)
+      setUser(data)
 
       queryClient.invalidateQueries({ queryKey: ["user"] })
-      queryClient.refetchQueries({ queryKey: ["user"] })
+      // queryClient.refetchQueries({ queryKey: ["user"] })
       toast({
         description: "Your profile has been successfully updated!",
         className: "bg-green-600 text-lg font-semibold text-foreground",

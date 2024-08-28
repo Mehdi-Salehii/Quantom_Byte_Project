@@ -21,14 +21,13 @@ export default function ProfilePage() {
     isFetching,
   } = useQuery({
     queryKey: ["user"],
-    staleTime: 0,
     queryFn: async () => {
       try {
         const { data } = await axios.get(`/api/user?id=${userId}`)
 
         return data
       } catch (err) {
-        console.log(err)
+        console.error(err)
       }
     },
     enabled: !!userId,
@@ -43,19 +42,19 @@ export default function ProfilePage() {
               className="flex items-center justify-center gap-2 px-2 py-1"
             >
               <Building2 className="h-4 w-4" />
-              {user && user[0]?.user_department}
+              {user?.[0]?.user_department}
             </Badge>
             <CardTitle className="flex items-center justify-center gap-2 text-2xl">
               <User className="h-6 w-6" />
-              {user && user[0]?.name}
+              {user?.[0]?.name}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <p className="flex items-center justify-center gap-2 text-center text-sm text-muted-foreground">
               <Calendar className="h-4 w-4" />
               Last modified:{" "}
-              {user?.length &&
-                makeLastModifiedMessage(user && user[0]?.updated_at)}
+              {user?.[0]?.updated_at &&
+                makeLastModifiedMessage(user?.[0]?.updated_at)}
             </p>
           </CardContent>
         </Card>

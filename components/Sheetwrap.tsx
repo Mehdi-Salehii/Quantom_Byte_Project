@@ -36,7 +36,15 @@ export const Sheetwrap = ({
   setIsOpen,
 }: React.PropsWithChildren<SheetWrapType>) => {
   const user = useUserStore((state) => state.User)
-
+  let modifiedName
+  if (user?.[0]?.name) {
+    modifiedName =
+      "Welcome " +
+      user?.[0]?.name?.split(" ")?.[0]?.slice(0, 1)?.toUpperCase() +
+      user?.[0]?.name?.split(" ")?.[0]?.slice(1)
+  } else {
+    modifiedName = ""
+  }
   return (
     <div className={className}>
       <Sheet open={open}>
@@ -62,8 +70,7 @@ export const Sheetwrap = ({
             <div className="mx-auto">
               <SignedIn>
                 <div className="flex items-center justify-center gap-2">
-                  {Boolean(user.length && user[0]?.name) &&
-                    `Welcome ${user[0]?.name?.split(" ")?.[0]}`}
+                  {`${modifiedName}`}
                   <UserButton
                     appearance={{
                       elements: {

@@ -32,8 +32,6 @@ export const insertFromClerkToMyDb = async (
         const res = await axios.get(`/api/user?id=${userId}`)
 
         if (res.data.length) {
-          //put user data in zustand
-          // useUserStore.setState({ User: res.data })
           userInDb = true
           await clearIntervalAsync(interval)
           resolve(res.data)

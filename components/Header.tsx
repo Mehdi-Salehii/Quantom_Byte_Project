@@ -12,16 +12,48 @@ import {
   SignInButton,
   SignOutButton,
   SignUpButton,
+  useAuth,
   UserButton,
 } from "@clerk/nextjs"
 import { Button } from "./ui/button"
 import { UserRoundPen } from "lucide-react"
 import Link from "next/link"
 import { useUserStore } from "@/utils/store"
+import { useQuery } from "@tanstack/react-query"
+import axios from "axios"
 
 export const Header = ({ className }: ClassProps) => {
+  const { userId } = useAuth()
+  const {
+    isPending,
+    error,
+    data: user,
+    isFetching,
+  } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      try {
+        const { data } = await axios.get(`/api/user?id=${userId}`)
+
+        return data
+      } catch (err) {
+        console.error(err)
+      }
+    },
+    enabled: !!userId,
+  })
   const [isOpen, setIsOpen] = useState(false)
-  const user = useUserStore((state) => state.User)
+
+  let modifiedName
+  if (user?.[0]?.name) {
+    modifiedName =
+      "Welcome " +
+      user?.[0]?.name?.split(" ")?.[0]?.slice(0, 1)?.toUpperCase() +
+      user?.[0]?.name?.split(" ")?.[0]?.slice(1)
+  } else {
+    modifiedName = ""
+  }
+
   return (
     <header
       className={twMerge(
@@ -41,9 +73,7 @@ export const Header = ({ className }: ClassProps) => {
       <div className="hidden sm:block">
         <SignedIn>
           <div className="flex items-center gap-1">
-            {Boolean(user.length && user[0]?.name) &&
-             
-              `Welcome ${user[0]?.name?.split(" ")?.[0]}`}
+            {`${modifiedName}`}
             <UserButton
               appearance={{
                 elements: {
