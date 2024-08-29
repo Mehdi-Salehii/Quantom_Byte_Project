@@ -12,13 +12,14 @@ import {
 } from "@/components/ui/popover"
 import { ClassProps } from "./Nav"
 
-export function ModeToggle({ className }: ClassProps) {
+export function ModeToggle({ className, setIsOpen }: ClassProps) {
   const { setTheme } = useTheme()
   const [open, setOpen] = React.useState(false)
 
   const handleThemeChange = (theme: string) => {
     setTheme(theme)
     setOpen(false)
+    if (setIsOpen) setIsOpen(false)
   }
 
   return (

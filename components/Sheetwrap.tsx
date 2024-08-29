@@ -84,7 +84,7 @@ export const Sheetwrap = ({
           </div>
           <div className="mt-10 flex flex-col justify-end gap-5">
             <div className="mx-auto flex w-1/2 items-center justify-between">
-              <ModeToggle />
+              <ModeToggle setIsOpen={setIsOpen} />
               <SignedIn>
                 <Link
                   href={"/update-information"}

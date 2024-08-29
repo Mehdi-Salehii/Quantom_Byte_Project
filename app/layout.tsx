@@ -32,7 +32,7 @@ export default function RootLayout({
     >
       <QueryProvider>
         <html lang="en" className="overflow-x-hidden">
-          <body className="flex min-h-svh flex-col overflow-x-hidden transition-colors duration-200">
+          <body className="flex min-h-svh flex-col overflow-x-hidden transition-colors duration-300">
             <ThemeProvider attribute="class" defaultTheme="system">
               <Header />
               <main className="flex-grow">{children}</main>

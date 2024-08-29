@@ -7,7 +7,7 @@ import computer from "@/assets/computer.jpg"
 
 export default function LandingPage() {
   return (
-    <main className="bg-background text-foreground">
+    <main>
       <section
         id="home"
         className="container mx-auto flex flex-col items-center justify-center px-4 py-1 text-center sm:px-6 md:min-h-screen md:flex-row md:items-center md:justify-between"
