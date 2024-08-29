@@ -1,14 +1,22 @@
-import { getOneTicket } from "@/utils/db_functions"
+import { insertTicket } from "@/utils/db_functions"
 import { currentUser } from "@clerk/nextjs/server"
 
 export const POST = async (req: Request) => {
   try {
     const user = await currentUser()
     const body = await req.json()
-   
+
+    const res = await insertTicket(body)
+    console.log(res)
     return Response.json(body)
-/*
-    if (!user)
+    // {
+    //   description: 'jskfjskdfjskldfjsklfjskfjl',
+    //   title: 'fix my windows',
+    //   target_department: 'engineering',
+    //   user_id: 'user_2kvuP8wUn0v8bXfWHcFeoqSHu4u'
+    // }
+    /*
+        if (!user)
       return Response.json(`Unauthorized Request! login to view your tickets`, {
         status: 401,
       })

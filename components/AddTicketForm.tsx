@@ -28,6 +28,7 @@ import { useAuth, useUser } from "@clerk/nextjs"
 
 import { UserRoundPen } from "lucide-react"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
+import { useMemo, useState } from "react"
 
 const departments = [
   "main office",
@@ -75,13 +76,19 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
   const { toast } = useToast()
   const { userId } = useAuth()
   const { user: clerktest } = useUser()
-  const fullName = clerktest?.fullName
-  const { data: user } = useQuery({
+  const [filteredDepartments, setFilteredDepartments] = useState(departments)
+  const firstName = clerktest?.fullName
+  const { data: user, isFetching } = useQuery({
     queryKey: ["user"],
 
     queryFn: async () => {
       try {
         const { data } = await axios.get(`/api/user?id=${userId}`)
+        const filtered = departments.filter(
+          (dep) => dep !== data[0]?.user_department,
+        )
+        console.log(data?.[0])
+        setFilteredDepartments(filtered)
 
         return data
       } catch (err) {
@@ -91,6 +98,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
 
     enabled: !!userId,
   })
+
   const queryClient = useQueryClient()
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
@@ -102,7 +110,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
         await axios.post("/api/user", {
           clerk_id: userId,
           user_updated_profile: true,
-          name: fullName,
+          name: firstName,
           user_department: source_department,
         })
         queryClient.invalidateQueries({ queryKey: ["user"] })
@@ -203,13 +211,15 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
                     <SelectValue placeholder="Select target department" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
-                  {departments.map((dep, i) => (
-                    <SelectItem key={i} value={dep}>
-                      {dep}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
+                {
+                  <SelectContent>
+                    {filteredDepartments.map((dep, i) => (
+                      <SelectItem key={i} value={dep}>
+                        {dep}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                }
               </Select>
 
               <FormMessage />
@@ -238,7 +248,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
           <Button
             className={`mx-auto block disabled:cursor-not-allowed`}
             type="submit"
-            disabled={isSubmitting}
+            disabled={isSubmitting || isFetching}
           >
             {isSubmitting ? "Submitting..." : "Submit"}
           </Button>
