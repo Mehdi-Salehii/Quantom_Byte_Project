@@ -87,7 +87,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
         const filtered = departments.filter(
           (dep) => dep !== data[0]?.user_department,
         )
-        console.log(data?.[0])
+       
         setFilteredDepartments(filtered)
 
         return data

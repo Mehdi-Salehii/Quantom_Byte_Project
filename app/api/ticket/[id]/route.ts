@@ -5,7 +5,6 @@ export const GET = async (
   _: Request,
   { params: { id } }: { params: { id: string } },
 ) => {
-  // if (process.env.NODE_ENV === "production") return Response.json("data")
   try {
     const user = await currentUser()
     const data = await getOneTicket(id)

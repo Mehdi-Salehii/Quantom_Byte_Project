@@ -37,17 +37,6 @@ export const columns: ColumnDef<TicketType>[] = [
   },
 
   {
-    accessorKey: "source_department",
-    header: () => (
-      <div className="text-center font-bold text-foreground/80">Sender</div>
-    ),
-    cell: ({ row }) => {
-      const Sender: string = row.getValue("source_department")
-
-      return <div className="text-center">{Sender}</div>
-    },
-  },
-  {
     accessorKey: "id",
     header: () => (
       <div className="text-center font-bold text-foreground/80">Details</div>

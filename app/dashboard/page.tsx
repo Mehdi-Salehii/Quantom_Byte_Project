@@ -18,8 +18,6 @@ import DashboardLoader from "@/components/DashboardLoader"
 import ServerErrorRetry from "@/components/ServerErrorRetry"
 
 const Dashboard = () => {
-  // const [data, setData] = useState<TicketType[]>([])
-  // const modifiedData = data?.length ? modifyDescription(data, 15) : []
   const [data, setData] = useState<TicketType[]>(tickets.slice(0, 15))
   const modifiedData = modifyDescription(data, 15)
 

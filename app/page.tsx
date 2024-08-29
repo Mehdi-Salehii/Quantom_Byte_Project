@@ -10,7 +10,7 @@ export default function LandingPage() {
     <main>
       <section
         id="home"
-        className="container mx-auto flex flex-col items-center justify-center px-4 py-1 text-center sm:px-6 md:min-h-screen md:flex-row md:items-center md:justify-between"
+        className="md:vsh container mx-auto flex flex-col items-center justify-center px-4 py-1 text-center sm:px-6 md:flex-row md:items-center md:justify-between 2xl:py-7"
       >
         <div className="md:w-1/2">
           <h2 className="text-4xl font-bold leading-tight sm:text-5xl">
@@ -35,13 +35,13 @@ export default function LandingPage() {
             </SignedOut>
           </div>
         </div>
-        <div className="mt-8 self-start md:mt-0 md:w-1/2">
+        <div className="w-full justify-self-center sm:w-10/12 md:mt-0 md:w-1/2">
           <Image
             src={computer}
             alt="Hero Image"
             width={500}
             height={500}
-            className="mt-3 w-full"
+            className="w-full"
           />
         </div>
       </section>

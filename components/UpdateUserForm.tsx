@@ -71,31 +71,7 @@ export default function UpdateUserForm({
   })
   const { isSubmitting } = form.formState
 
-  // const { mutateAsync } = useMutation({
-  //   mutationFn: async (values: z.infer<typeof formSchema>) => {
-  //     const { data } = await axios.put(`/api/user?id=${userId}`, {
-  //       ...values,
-  //       clerk_id: userId,
-  //     })
-  //     return data
-  //   },
-  //   onSuccess: (data) => {
-  //     queryClient.invalidateQueries({ queryKey: ["user"] })
-  //     // queryClient.refetchQueries({ queryKey: ["user"] })
-  //     toast({
-  //       description: "Your profile has been successfully updated!",
-  //       className: "bg-green-600 text-lg font-semibold text-foreground",
-  //     })
-  //     if (setOpen) setOpen(false)
-  //   },
-  //   onError: (error) => {
-  //     console.error(error)
-  //     toast({
-  //       description: `Failed to update profile. Please try again!`,
-  //       className: "bg-red-600 text-lg font-semibold text-foreground",
-  //     })
-  //   },
-  // })
+ 
 
   const queryClient = useQueryClient()
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -108,9 +84,9 @@ export default function UpdateUserForm({
           clerk_id: userId,
           user_updated_profile: true,
         })
-        console.log(insertedUser)
+       
         queryClient.invalidateQueries({ queryKey: ["user"] })
-        // queryClient.refetchQueries({ queryKey: ["user"] })
+        
         isToast = 1
       } else {
         const updatedUser = await axios
