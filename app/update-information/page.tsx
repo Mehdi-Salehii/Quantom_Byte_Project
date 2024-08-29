@@ -14,7 +14,7 @@ import { useAuth } from "@clerk/nextjs"
 export default function ProfilePage() {
   const { userId } = useAuth()
 
-  const { data: user } = useQuery({
+  const { data: user, isFetching } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
       try {
@@ -29,6 +29,7 @@ export default function ProfilePage() {
   })
   return (
     <div className="container mx-auto my-10 px-4">
+      {/* <div>{JSON.stringify(user)}</div> */}
       <div className="mx-auto flex flex-col items-center gap-6 xsm:w-10/12 sm:flex-row sm:justify-between md:w-8/12 lg:w-7/12">
         <Card className="w-full bg-primary/10 dark:bg-primary/20 md:w-1/2">
           <CardHeader className="space-y-2 text-center">
@@ -55,7 +56,7 @@ export default function ProfilePage() {
         </Card>
 
         <div className="w-full md:w-1/2">
-          <UpdateUserForm />
+          <UpdateUserForm isFetching={isFetching} user={user} />
         </div>
       </div>
     </div>

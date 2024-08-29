@@ -25,12 +25,9 @@ import {
 import { useToast } from "@/components/ui/use-toast"
 
 import { useAuth, useUser } from "@clerk/nextjs"
-import { useUserStore } from "@/utils/store"
-import { insertFromClerkToMyDb } from "@/utils/helpers"
+
 import { UserRoundPen } from "lucide-react"
-import Link from "next/link"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
-import { useState } from "react"
 
 const departments = [
   "main office",
@@ -78,10 +75,10 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
   const { toast } = useToast()
   const { userId } = useAuth()
   const { user: clerktest } = useUser()
-  const firstName = clerktest?.firstName
+  const fullName = clerktest?.fullName
   const { data: user } = useQuery({
     queryKey: ["user"],
-   
+
     queryFn: async () => {
       try {
         const { data } = await axios.get(`/api/user?id=${userId}`)
@@ -105,7 +102,8 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
         await axios.post("/api/user", {
           clerk_id: userId,
           user_updated_profile: true,
-          name: firstName,
+          name: fullName,
+          user_department: source_department,
         })
         queryClient.invalidateQueries({ queryKey: ["user"] })
       }

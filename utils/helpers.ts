@@ -20,37 +20,37 @@ export function modifyDescription(data: TicketType[], descLength: number) {
   return modifiedData
 }
 
-export const insertFromClerkToMyDb = async (
-  userId: string,
-): Promise<UserType[]> => {
-  return new Promise(async (resolve, reject) => {
-    let userInDb = false
-    // let intervalCount = 0
-    const interval = setIntervalAsync(async () => {
-      // console.log(`interval ran ${++intervalCount} times`)
-      try {
-        const res = await axios.get(`/api/user?id=${userId}`)
+// export const insertFromClerkToMyDb = async (
+//   userId: string,
+// ): Promise<UserType[]> => {
+//   return new Promise(async (resolve, reject) => {
+//     let userInDb = false
+//     // let intervalCount = 0
+//     const interval = setIntervalAsync(async () => {
+//       // console.log(`interval ran ${++intervalCount} times`)
+//       try {
+//         const res = await axios.get(`/api/user?id=${userId}`)
 
-        if (res.data.length) {
-          userInDb = true
-          await clearIntervalAsync(interval)
-          resolve(res.data)
-        }
+//         if (res.data.length) {
+//           userInDb = true
+//           await clearIntervalAsync(interval)
+//           resolve(res.data)
+//         }
 
-        if (!userInDb) {
-          await axios.post("/api/user", { clerk_id: userId })
-        }
-      } catch (error) {
-        await clearIntervalAsync(interval)
-        reject(new Error("Failed to fetch or insert user"))
-      }
-    }, 10)
+//         if (!userInDb) {
+//           await axios.post("/api/user", { clerk_id: userId })
+//         }
+//       } catch (error) {
+//         await clearIntervalAsync(interval)
+//         reject(new Error("Failed to fetch or insert user"))
+//       }
+//     }, 10)
 
-    if (!interval) {
-      reject(new Error("Interval failed to start"))
-    }
-  })
-}
+//     if (!interval) {
+//       reject(new Error("Interval failed to start"))
+//     }
+//   })
+// }
 export const makeLastModifiedMessage = (updatedAt: string | Date): string => {
   let miliUpdated
   if (typeof updatedAt === "string") {
