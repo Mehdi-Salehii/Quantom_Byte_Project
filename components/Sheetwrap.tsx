@@ -103,7 +103,7 @@ export const Sheetwrap = ({
                 setIsOpen={setIsOpen}
                 className="mx-auto flex flex-col items-end gap-5 font-semibold"
               />
-              <div className="mx-auto mt-16">
+              <div className="mx-auto">
                 <SignOutButton>
                   <Button variant={"destructive"}>Sign Out</Button>
                 </SignOutButton>

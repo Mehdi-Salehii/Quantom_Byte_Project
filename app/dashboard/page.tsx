@@ -41,14 +41,14 @@ const Dashboard = () => {
     },
     onSuccess: async (data) => {
       try {
-        if (!data?.length) {
-          setUserInMyDb(false)
-          return
         }
         if (!data) {
           setErrorInDb(true)
           return
         }
+        if (!data?.length) {
+          setUserInMyDb(false)
+          return
         const department = data[0].user_department
 
         const { data: recievedTickets } = await axios.get(

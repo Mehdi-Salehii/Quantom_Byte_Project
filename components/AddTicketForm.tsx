@@ -81,7 +81,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
   const firstName = clerktest?.firstName
   const { data: user } = useQuery({
     queryKey: ["user"],
-    staleTime: 0,
+   
     queryFn: async () => {
       try {
         const { data } = await axios.get(`/api/user?id=${userId}`)
