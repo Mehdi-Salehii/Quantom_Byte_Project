@@ -28,7 +28,7 @@ import { useAuth, useUser } from "@clerk/nextjs"
 
 import { UserRoundPen } from "lucide-react"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
-import { useMemo, useState } from "react"
+import { useRef, useState } from "react"
 
 const departments = [
   "main office",
@@ -38,6 +38,23 @@ const departments = [
   "financial",
 ]
 const formSchema = z.object({
+  file: z
+    .instanceof(File)
+    .optional()
+    .refine((file) => {
+      if (file) {
+        return ["image/jpeg", "image/png"].includes(file.type)
+      } else {
+        return true
+      }
+    }, "Only JPEG or PNG files are allowed")
+    .refine((file) => {
+      if (file) {
+        return file.size <= 5 * 1024 * 1024
+      } else {
+        return true
+      }
+    }, "File size should be less than 5MB"),
   description: z.string().min(10, {
     message: "Description must be at least 10 characters.",
   }),
@@ -60,6 +77,7 @@ const formSchema = z.object({
 type AddTicketFormProps = {
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>
 }
+
 export function AddTicketForm({ setOpen }: AddTicketFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -68,11 +86,13 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
       target_department: "main office",
       description: "",
       title: "",
+      file: undefined,
     },
   })
   const {
     formState: { isSubmitting },
   } = form
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
   const { toast } = useToast()
   const { userId } = useAuth()
   const { user: clerktest } = useUser()
@@ -87,7 +107,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
         const filtered = departments.filter(
           (dep) => dep !== data[0]?.user_department,
         )
-       
+
         setFilteredDepartments(filtered)
 
         return data
@@ -103,7 +123,8 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       const data = formSchema.parse(values)
-      const { source_department, ...ticketData } = data
+      const { source_department, file, ...ticketData } = data
+
       const userIsInMyDb = user?.length
 
       if (!userIsInMyDb) {
@@ -124,6 +145,9 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
       })
 
       form.reset()
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ""
+      }
       if (setOpen) setOpen(false)
       toast({
         description: "Your ticket successfully submitted!",
@@ -240,6 +264,31 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
                 />
               </FormControl>
 
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="file"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input
+                  ref={(e) => {
+                    field.ref(e)
+                    fileInputRef.current = e
+                  }}
+                  onChange={(event) => {
+                    const file = (event.target as HTMLInputElement).files?.[0]
+                    console.log(event?.target?.files?.[0])
+                    field.onChange(file)
+                  }}
+                  type="file"
+                  className="cursor-pointer"
+                />
+              </FormControl>
+              <FormDescription>only JPEG,PNG up to 5MB</FormDescription>
               <FormMessage />
             </FormItem>
           )}
