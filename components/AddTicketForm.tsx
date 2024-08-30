@@ -86,7 +86,6 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
       target_department: "main office",
       description: "",
       title: "",
-      file: undefined,
     },
   })
   const {
