@@ -54,7 +54,7 @@ export const Footer = ({ className }: ClassProps) => {
         </div>
       </div>
       <div className="col-span-full text-sm text-foreground/50">
-        All rights reserved Quantom Byte &#169;
+        All rights reserved Quantom Byte {new Date().getFullYear()} &#169;
       </div>
     </footer>
   )
