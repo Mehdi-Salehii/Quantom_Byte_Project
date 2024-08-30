@@ -43,7 +43,7 @@ const formSchema = z.object({
     .optional()
     .refine((file) => {
       if (file) {
-        return ["image/jpeg", "image/png"].includes(file.type)
+        return ["image/jpeg", "image/png", "image/jpg"].includes(file.type)
       } else {
         return true
       }
@@ -288,7 +288,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
                   className="cursor-pointer"
                 />
               </FormControl>
-              <FormDescription>only JPEG,PNG up to 5MB</FormDescription>
+              <FormDescription>only JPEG,PNG,JPG up to 5MB</FormDescription>
               <FormMessage />
             </FormItem>
           )}
