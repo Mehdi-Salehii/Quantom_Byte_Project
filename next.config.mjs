@@ -8,6 +8,12 @@ const nextConfig = {
         port: "54321",
         pathname: "/storage/v1/object/public/quantom-byte/**",
       },
+      {
+        protocol: "https",
+        hostname: "knyyzaplbbklblrmwfim.supabase.co",
+
+        pathname: "/storage/v1/object/public/quantom-byte/**",
+      },
     ],
   },
 }
