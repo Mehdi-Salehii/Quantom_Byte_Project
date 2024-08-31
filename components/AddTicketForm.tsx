@@ -29,6 +29,7 @@ import { useAuth, useUser } from "@clerk/nextjs"
 import { UserRoundPen } from "lucide-react"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { useRef, useState } from "react"
+import { uploadFile } from "@/utils/storage"
 
 const departments = [
   "main office",
@@ -125,7 +126,17 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
       const { source_department, file, ...ticketData } = data
 
       const userIsInMyDb = user?.length
+      let fileUrl = ""
+      if (file) {
+        const filePath = await uploadFile(file)
+        fileUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/quantom-byte/${filePath}`
+      }
 
+      const ticketWithFile = {
+        ...ticketData,
+        pictures: fileUrl ? [fileUrl] : [],
+        user_id: userId,
+      }
       if (!userIsInMyDb) {
         await axios.post("/api/user", {
           clerk_id: userId,
@@ -138,10 +149,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
 
       if (typeof userId !== "string") throw new Error("userId invalid type")
 
-      const res = await axios.post("/api/maketicket", {
-        ...ticketData,
-        user_id: userId,
-      })
+      const res = await axios.post("/api/maketicket", ticketWithFile)
 
       form.reset()
       if (fileInputRef.current) {
@@ -153,6 +161,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
         className: "bg-green-600 text-lg font-semibold text-foreground",
       })
     } catch (err) {
+      console.error(err)
       toast({
         description: `Your ticket didn't submitted try again! ${err}`,
         className: "bg-red-600 text-lg font-semibold text-foreground",
