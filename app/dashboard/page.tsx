@@ -1,21 +1,12 @@
 "use client"
 import { TicketType } from "@/supabase/functions/common/schema"
-
 import { DataTable } from "./DataTable"
 import { columns } from "./Columns"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { AddTicketForm } from "@/components/AddTicketForm"
 import { modifyDescription } from "@/utils/helpers"
 import { tickets } from "@/utils/dummyData"
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useAuth } from "@clerk/nextjs"
-import axios from "axios"
-import { toast } from "@/components/ui/use-toast"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import CompleteProfile from "@/components/CompleteProfile"
-import DashboardLoader from "@/components/DashboardLoader"
-import ServerErrorRetry from "@/components/ServerErrorRetry"
 
 const Dashboard = () => {
   const [data, setData] = useState<TicketType[]>(tickets.slice(0, 15))

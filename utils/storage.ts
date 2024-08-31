@@ -5,10 +5,10 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
 )
-export async function uploadFile(file: File) {
+export async function uploadFile(file: File, userId: string) {
   const fileExt = file.name.split(".").pop()
   const fileName = `${Date.now()}.${fileExt}`
-  const filePath = `${fileName}`
+  const filePath = `${userId}/${fileName}`
 
   const { data, error } = await supabase.storage
     .from("quantom-byte")

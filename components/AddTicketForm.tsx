@@ -128,7 +128,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
       const userIsInMyDb = user?.length
       let fileUrl = ""
       if (file) {
-        const filePath = await uploadFile(file)
+        const filePath = await uploadFile(file, userId as string)
         fileUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/quantom-byte/${filePath}`
       }
 

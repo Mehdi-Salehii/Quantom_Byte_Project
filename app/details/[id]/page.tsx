@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { tickets } from "@/utils/dummyData"
+import Image from "next/image"
 
 export default async function TicketDetails({
   params,
@@ -62,6 +63,17 @@ export default async function TicketDetails({
               <p className="mt-2 text-sm text-red-600">
                 {ticket.reject_message}
               </p>
+            </div>
+          )}
+
+          {!!ticket?.pictures?.length && (
+            <div className="mt-5 flex w-full items-center justify-center">
+              <Image
+                src={ticket?.pictures?.[0]}
+                width={600}
+                height={600}
+                alt="ticket picture"
+              />
             </div>
           )}
         </CardContent>
