@@ -4,7 +4,7 @@ export default function loading() {
   return (
     <div className="h-screen overflow-hidden">
       <div className="mt-10 grid px-1 sm:grid-cols-[15fr_1fr_4fr] sm:px-3 lg:px-6 xl:grid-cols-[15fr_2fr_3fr]">
-        <div className="col-span-full col-start-1 col-end-[2]">
+        <div className="col-start-1 col-end-[2] flex w-full flex-col justify-start justify-self-start">
           <div className="mb-2 text-center">
             <Skeleton className="mx-auto h-6 w-64" />{" "}
           </div>

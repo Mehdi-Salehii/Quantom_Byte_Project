@@ -3,7 +3,7 @@ import { Skeleton } from "./ui/skeleton"
 
 export default function DashboardLoader() {
   return (
-    <div className="col-span-full col-start-1 col-end-[2]">
+    <div className="col-start-1 col-end-[2] flex w-full flex-col justify-start">
       <div className="mb-2 text-center">
         <Skeleton className="mx-auto h-6 w-64" />{" "}
       </div>
@@ -46,7 +46,7 @@ export default function DashboardLoader() {
         </table>
       </div>
 
-      <div className="flex items-center justify-end space-x-2 py-4">
+      <div className="flex items-center justify-around space-x-2 py-4">
         <Skeleton className="h-8 w-24" />
 
         <Skeleton className="h-8 w-24" />
