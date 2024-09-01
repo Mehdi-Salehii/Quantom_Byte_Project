@@ -97,6 +97,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
   const { userId } = useAuth()
   const { user: clerktest } = useUser()
   const [filteredDepartments, setFilteredDepartments] = useState(departments)
+  const [uploading, setUploading] = useState(false)
   const firstName = clerktest?.fullName
   const { data: user, isFetching } = useQuery({
     queryKey: ["user"],
@@ -128,7 +129,9 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
       const userIsInMyDb = user?.length
       let fileUrl = ""
       if (file) {
+        setUploading(true)
         const filePath = await uploadFile(file, userId as string)
+        setUploading(false)
         fileUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/quantom-byte/${filePath}`
       }
 
@@ -295,7 +298,15 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
                   className="cursor-pointer"
                 />
               </FormControl>
-              <FormDescription>only JPEG,PNG,JPG up to 5MB</FormDescription>
+              <FormDescription>
+                {uploading ? (
+                  <div className="text-center text-green-500">
+                    Uploading Picture...
+                  </div>
+                ) : (
+                  <div>only JPEG,PNG,JPG up to 5MB</div>
+                )}
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -304,9 +315,9 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
           <Button
             className={`mx-auto block disabled:cursor-not-allowed`}
             type="submit"
-            disabled={isSubmitting || isFetching}
+            disabled={isSubmitting}
           >
-            {isSubmitting ? "Submitting..." : "Submit"}
+            {isSubmitting && !uploading ? "Submitting..." : "Submit"}
           </Button>
         </div>
       </form>
