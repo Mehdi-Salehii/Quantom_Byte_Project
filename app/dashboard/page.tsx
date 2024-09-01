@@ -15,7 +15,7 @@ import CompleteProfile from "@/components/CompleteProfile"
 import ServerErrorRetry from "@/components/ServerErrorRetry"
 
 const Dashboard = () => {
-  const [data, setData] = useState<TicketType[]>(tickets.slice(0, 3))
+  const [data, setData] = useState<TicketType[]>([])
   const modifiedData = modifyDescription(data, 30)
 
   const { userId } = useAuth()
@@ -52,7 +52,10 @@ const Dashboard = () => {
         const usersTickets = recievedTickets?.length
           ? modifyDescription(recievedTickets, 15)
           : []
-        setData((data) => [...usersTickets, ...data])
+        setData([
+          ...usersTickets,
+          ...tickets.filter((t) => t.target_department === department),
+        ])
         setLoadingTickets(false)
       } catch (error) {
         toast({

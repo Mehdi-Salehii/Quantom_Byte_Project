@@ -3,6 +3,7 @@ import axios from "axios"
 import { setIntervalAsync, clearIntervalAsync } from "set-interval-async/fixed"
 import { useUserStore } from "./store"
 export function modifyDescription(data: TicketType[], descLength: number) {
+  if (data.length === 0) return []
   const howLong = descLength
   const modifiedData = data.map((d) => {
     const { description, title, ...rest } = d

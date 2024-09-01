@@ -4,7 +4,7 @@ import { TicketType } from "@/supabase/functions/common/schema"
 import { Table } from "@/components/ui/table"
 import { DataTable } from "./DataTable"
 import { columns } from "./Columns"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { AddTicketForm } from "@/components/AddTicketForm"
 import { modifyDescription } from "@/utils/helpers"
 import { tickets } from "@/utils/dummyData"
@@ -17,7 +17,7 @@ import ServerErrorRetry from "@/components/ServerErrorRetry"
 import ServerErrorOutgoing from "@/components/ServerErrorOutgoing"
 
 const OutGoingTicketsPage = () => {
-  const [data, setData] = useState<TicketType[]>(tickets.slice(3, 6))
+  const [data, setData] = useState<TicketType[]>([])
   const modifiedData = modifyDescription(data, 30)
   const { userId } = useAuth()
   const [errorInDb, setErrorInDb] = useState(false)
@@ -30,15 +30,13 @@ const OutGoingTicketsPage = () => {
     queryKey: ["tickets-sent"],
     queryFn: async () => {
       try {
-        const { data: userTickets } = await axios.get(
-          `/api/tickets-sent?id=${userId}`,
-        )
+        const { data } = await axios.get(`/api/tickets-sent?id=${userId}`)
 
         if (!data) {
           setErrorInDb(true)
           return
         }
-        setData((data) => [...userTickets, ...data])
+
         return data
       } catch (err) {
         console.error(err)
@@ -46,6 +44,12 @@ const OutGoingTicketsPage = () => {
     },
     enabled: !!userId,
   })
+  const ticketsFromDb = ticketsSent?.length ? ticketsSent : []
+  const dummyTickets = tickets.slice(0, 3)
+
+  useEffect(() => {
+    setData([...ticketsFromDb, ...dummyTickets])
+  }, [ticketsSent, isFetching])
 
   return (
     <>
