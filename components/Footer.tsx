@@ -16,7 +16,7 @@ export const Footer = ({ className }: ClassProps) => {
     <footer
       className={twMerge([
         className,
-        "border-t-border-100 mt-5 grid grid-cols-2 place-items-center border-t-[1px] max-sm:p-4 max-sm:pb-0 sm:gap-5 sm:px-6 sm:pb-0 sm:pt-4 md:grid-cols-4",
+        "border-t-border-100 mt-5 grid grid-cols-2 place-items-center gap-2 border-t-[1px] max-sm:p-4 max-sm:pb-0 sm:gap-5 sm:px-6 sm:pb-0 sm:pt-4 md:grid-cols-4",
         SignedInFooterStyle,
       ])}
     >
