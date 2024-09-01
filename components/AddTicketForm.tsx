@@ -299,15 +299,15 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
                   className="cursor-pointer"
                 />
               </FormControl>
-              <FormDescription>
-                {uploading ? (
-                  <div className="text-center text-green-500">
-                    Uploading Picture...
-                  </div>
-                ) : (
-                  <div>only JPEG,PNG,JPG up to 5MB</div>
-                )}
-              </FormDescription>
+
+              <div
+                className={`text-center text-sm ${uploading ? "text-green-500" : "text-slate-700/70"}`}
+              >
+                {uploading
+                  ? "Uploading Picture..."
+                  : "only JPEG,PNG,JPG up to 5MB"}
+              </div>
+
               <FormMessage />
             </FormItem>
           )}
