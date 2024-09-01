@@ -53,7 +53,7 @@ const OutGoingTicketsPage = () => {
 
   useEffect(() => {
     setData([...ticketsFromDb, ...dummyTickets])
-  }, [ticketsSent, isFetching])
+  }, [isFetching])
 
   return (
     <>
