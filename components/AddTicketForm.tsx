@@ -152,12 +152,13 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
 
       if (typeof userId !== "string") throw new Error("userId invalid type")
 
-      const res = await axios.post("/api/maketicket", ticketWithFile)
+      await axios.post("/api/maketicket", ticketWithFile)
 
       form.reset()
       if (fileInputRef.current) {
         fileInputRef.current.value = ""
       }
+      queryClient.invalidateQueries({ queryKey: ["tickets-sent"] })
       if (setOpen) setOpen(false)
       toast({
         description: "Your ticket successfully submitted!",
