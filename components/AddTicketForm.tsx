@@ -289,7 +289,6 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
                   }}
                   onChange={(event) => {
                     const file = (event.target as HTMLInputElement).files?.[0]
-                    console.log(event?.target?.files?.[0])
                     field.onChange(file)
                   }}
                   type="file"

@@ -15,7 +15,7 @@ export default function TicketDetails({ params }: { params: { id: string } }) {
   const dummyTicket = tickets.find((t) => t.id === params.id)
   const [data, setData] = useState<TicketType>()
   const ticket = dummyTicket ? dummyTicket : data
-  console.log(ticket)
+  
   const [errorInDb, setErrorInDb] = useState(false)
   const { userId } = useAuth()
   const {
