@@ -16,7 +16,12 @@ import ServerErrorRetry from "@/components/ServerErrorRetry"
 
 const Dashboard = () => {
   const [data, setData] = useState<TicketType[]>([])
-  const modifiedData = modifyDescription(data, 30)
+
+  let modifiedData = data ?? []
+
+  if (data) {
+    modifiedData = modifyDescription(data, 30)
+  }
 
   const { userId } = useAuth()
 

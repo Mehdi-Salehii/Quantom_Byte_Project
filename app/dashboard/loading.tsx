@@ -47,7 +47,7 @@ export default function loading() {
             </table>
           </div>
 
-          <div className="flex items-center justify-end space-x-2 py-4">
+          <div className="flex items-center justify-around space-x-2 py-4">
             <Skeleton className="h-8 w-24" />
 
             <Skeleton className="h-8 w-24" />

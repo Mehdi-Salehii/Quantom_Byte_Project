@@ -18,7 +18,11 @@ import ServerErrorOutgoing from "@/components/ServerErrorOutgoing"
 
 const OutGoingTicketsPage = () => {
   const [data, setData] = useState<TicketType[]>([])
-  const modifiedData = modifyDescription(data, 30)
+  let modifiedData = data ?? []
+
+  if (data) {
+    modifiedData = modifyDescription(data, 30)
+  }
   const { userId } = useAuth()
   const [errorInDb, setErrorInDb] = useState(false)
 

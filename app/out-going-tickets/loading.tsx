@@ -46,6 +46,11 @@ export default function loading() {
               </tbody>
             </table>
           </div>
+          <div className="flex items-center justify-around space-x-2 py-4">
+            <Skeleton className="h-8 w-24" />
+
+            <Skeleton className="h-8 w-24" />
+          </div>
         </div>
       </div>
     </div>
