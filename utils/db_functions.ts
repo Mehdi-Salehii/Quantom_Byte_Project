@@ -8,7 +8,7 @@ import {
   UserTypeInsert,
 } from "@/supabase/functions/common/schema"
 import { db } from "@/utils/db"
-import { eq, sql } from "drizzle-orm"
+import { asc, desc, eq, sql } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
 
 export const getAllTicketsSent = async (
@@ -18,6 +18,7 @@ export const getAllTicketsSent = async (
     .select()
     .from(ticketTable)
     .where(eq(ticketTable.user_id, userid))
+    .orderBy(desc(ticketTable.created_at))
 
   return data
 }
@@ -28,6 +29,7 @@ export const getAllTicketsRecieved = async (
     .select()
     .from(ticketTable)
     .where(eq(ticketTable.target_department, userDepartment))
+    .orderBy(desc(ticketTable.created_at))
 
   return data
 }

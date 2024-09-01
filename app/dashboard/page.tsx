@@ -2,22 +2,28 @@
 import { TicketType } from "@/supabase/functions/common/schema"
 import { DataTable } from "./DataTable"
 import { columns } from "./Columns"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { AddTicketForm } from "@/components/AddTicketForm"
 import { modifyDescription } from "@/utils/helpers"
 import { tickets } from "@/utils/dummyData"
 import { useAuth } from "@clerk/nextjs"
+import { useMutation } from "@tanstack/react-query"
+import axios from "axios"
+import { toast } from "@/components/ui/use-toast"
+import DashboardLoader from "@/components/DashboardLoader"
+import CompleteProfile from "@/components/CompleteProfile"
+import ServerErrorRetry from "@/components/ServerErrorRetry"
 
 const Dashboard = () => {
-  const [data, setData] = useState<TicketType[]>(tickets.slice(0, 15))
-  const modifiedData = modifyDescription(data, 15)
+  const [data, setData] = useState<TicketType[]>(tickets.slice(0, 3))
+  const modifiedData = modifyDescription(data, 30)
 
   const { userId } = useAuth()
 
   const [userInMyDb, setUserInMyDb] = useState(true)
   const [errorInDb, setErrorInDb] = useState(false)
   const [loadingTickets, setLoadingTickets] = useState(true)
-  /*
+
   const { mutateAsync } = useMutation({
     mutationFn: async () => {
       try {
@@ -30,7 +36,6 @@ const Dashboard = () => {
     },
     onSuccess: async (data) => {
       try {
-        }
         if (!data) {
           setErrorInDb(true)
           return
@@ -38,15 +43,16 @@ const Dashboard = () => {
         if (!data?.length) {
           setUserInMyDb(false)
           return
+        }
         const department = data[0].user_department
 
         const { data: recievedTickets } = await axios.get(
           `/api/tickets-recieved?department=${department}`,
         )
-        const modifiedData = recievedTickets?.length
+        const usersTickets = recievedTickets?.length
           ? modifyDescription(recievedTickets, 15)
           : []
-        setData(modifiedData)
+        setData((data) => [...usersTickets, ...data])
         setLoadingTickets(false)
       } catch (error) {
         toast({
@@ -69,22 +75,21 @@ const Dashboard = () => {
     }
     init()
   }, [userId])
-*/
+
   return (
     <>
-      <div className="mt-10 grid xsm:px-1 sm:grid-cols-[15fr_1fr_4fr] sm:px-3 lg:px-6 xl:grid-cols-[15fr_2fr_3fr]">
+      <div className="mt-10 grid xsm:px-1 sm:grid-cols-[14fr_1fr_6fr] sm:px-3 lg:px-6 xl:grid-cols-[15fr_1fr_4fr]">
         <div className="col-span-full col-start-1 col-end-[2]">
-          {/* !loadingTickets && userInMyDb &&  */}
-          {
+          {!loadingTickets && userInMyDb && (
             <>
               <h1 className="mb-2 text-center font-semibold">
                 Tickets to your department
               </h1>
-              <DataTable columns={columns} data={data} />
+              <DataTable columns={columns} data={modifiedData} />
             </>
-          }
+          )}
 
-          {/* {loadingTickets && (
+          {loadingTickets && (
             <div className="grid h-full w-full place-items-center">
               <DashboardLoader />
             </div>
@@ -95,7 +100,7 @@ const Dashboard = () => {
               mutateAsync={mutateAsync}
               setLoadingTickets={setLoadingTickets}
             />
-          )} */}
+          )}
         </div>
         <div className="col-start-3 col-end-[-1] hidden text-center sm:mt-0 sm:block">
           <AddTicketForm />
