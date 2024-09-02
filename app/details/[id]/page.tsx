@@ -15,7 +15,7 @@ export default function TicketDetails({ params }: { params: { id: string } }) {
   const dummyTicket = tickets.find((t) => t.id === params.id)
   const [data, setData] = useState<TicketType>()
   const ticket = dummyTicket ? dummyTicket : data
-  
+
   const [errorInDb, setErrorInDb] = useState(false)
   const { userId } = useAuth()
   const {
@@ -26,6 +26,7 @@ export default function TicketDetails({ params }: { params: { id: string } }) {
     queryKey: ["ticket-details"],
     queryFn: async () => {
       try {
+        console.log(params.id)
         const { data: userTicket } = await axios.get(`/api/ticket/${params.id}`)
 
         if (!userTicket) {
@@ -33,7 +34,7 @@ export default function TicketDetails({ params }: { params: { id: string } }) {
           return
         }
         if (userTicket?.length) setData(userTicket[0])
-        return data
+        return userTicket
       } catch (err) {
         console.error(err)
       }
