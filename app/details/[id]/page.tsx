@@ -27,7 +27,7 @@ export default function TicketDetails({ params }: { params: { id: string } }) {
     queryKey: ["ticket-details"],
     queryFn: async () => {
       try {
-        console.log(params.id)
+        
         const { data: userTicket } = await axios.get(`/api/ticket/${params.id}`)
 
         if (!userTicket) {

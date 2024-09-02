@@ -25,7 +25,7 @@ const Dashboard = () => {
   // }
 
   const { userId } = useAuth()
-  console.log(userId)
+ 
   const [userInMyDb, setUserInMyDb] = useState(true)
   const [errorInDb, setErrorInDb] = useState(false)
   const [loadingTickets, setLoadingTickets] = useState(true)

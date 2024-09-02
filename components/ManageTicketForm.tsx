@@ -68,6 +68,8 @@ export default function ManageTicketForm({ isFetching }: UpdateUserFormProps) {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       let isToast = 0
+      console.log(values)
+      /*
       if (!user)
         throw new Error("Server Error Fetching User Unsuccessful Try Again!")
       if (!user?.length) {
@@ -99,6 +101,7 @@ export default function ManageTicketForm({ isFetching }: UpdateUserFormProps) {
           description: "Your respnse successfully has been submitted!",
           className: "bg-green-600 text-lg font-semibold text-foreground",
         })
+          */
     } catch (err) {
       console.error(err)
       toast({
