@@ -9,11 +9,17 @@ import { useUserStore } from "@/utils/store"
 import { makeLastModifiedMessage } from "@/utils/helpers"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
-import { useAuth } from "@clerk/nextjs"
+import { useAuth, useUser } from "@clerk/nextjs"
 
 export default function ProfilePage() {
   const { userId } = useAuth()
-
+  const { user: userClerk } = useUser()
+  const modifiedName = userClerk?.fullName
+    ? userClerk?.fullName
+        ?.split(" ")
+        .map((n) => n.at(0)?.toUpperCase() + n.slice(1))
+        .join(" ")
+    : "User"
   const { data: user, isFetching } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
@@ -42,7 +48,7 @@ export default function ProfilePage() {
             </Badge>
             <CardTitle className="flex items-center justify-center gap-2 text-2xl">
               <User className="h-6 w-6" />
-              {user?.[0]?.name}
+              {modifiedName}
             </CardTitle>
           </CardHeader>
           <CardContent>

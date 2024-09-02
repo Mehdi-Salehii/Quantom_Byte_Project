@@ -39,7 +39,6 @@ const departments = [
 ]
 
 const formSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   user_department: z.enum(
     ["main office", "engineering", "design", "marketing", "financial"],
     { message: "Invalid department." },
@@ -65,13 +64,10 @@ export default function UpdateUserForm({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
       user_department: "main office",
     },
   })
   const { isSubmitting } = form.formState
-
- 
 
   const queryClient = useQueryClient()
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -84,9 +80,9 @@ export default function UpdateUserForm({
           clerk_id: userId,
           user_updated_profile: true,
         })
-       
+
         queryClient.invalidateQueries({ queryKey: ["user"] })
-        
+
         isToast = 1
       } else {
         const updatedUser = await axios
@@ -120,24 +116,6 @@ export default function UpdateUserForm({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input
-                  className="placeholder:italic placeholder:text-border"
-                  placeholder="Enter your name"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
         <FormField
           control={form.control}
           name="user_department"
