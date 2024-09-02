@@ -33,7 +33,7 @@ export function ModeToggle({ className, setIsOpen }: ClassProps) {
           </Button>
         </PopoverTrigger>
         <PopoverContent align="center" className="w-24 p-0">
-          <div className="flex flex-col divide-y-[1px] divide-slate-100">
+          <div className="flex flex-col divide-y-[1px] divide-foreground/30">
             <Button
               className="rounded-none"
               variant="ghost"
