@@ -9,19 +9,30 @@ export const columns: ColumnDef<TicketType>[] = [
   {
     accessorKey: "title",
     header: () => (
-      <div className="text-center font-bold text-foreground/80">Title</div>
+      <div className="text-left font-bold text-foreground/80">Title</div>
     ),
     cell: ({ row }) => {
       const title: string = row.getValue("title")
 
-      return <div className="text-center">{title}</div>
+      return <div className="text-left">{title}</div>
+    },
+  },
+  {
+    accessorKey: "created_at",
+    header: () => (
+      <div className="text-left font-bold text-foreground/80">Date</div>
+    ),
+    cell: ({ row }) => {
+      const date: Date = new Date(row.getValue("created_at"))
+      const dateString = `${date.getDate().toString().padStart(2, "0")}/${date.getMonth().toString().padStart(2, "0")}/${date.getFullYear()}`
+      return <div className="text-left">{dateString}</div>
     },
   },
   {
     accessorKey: "status",
 
     header: () => (
-      <div className="text-center font-bold text-foreground/80">Status</div>
+      <div className="text-left font-bold text-foreground/80">Status</div>
     ),
     cell: ({ row }) => {
       const status: "rejected" | "fulfilled" | "processing" =
@@ -32,19 +43,19 @@ export const columns: ColumnDef<TicketType>[] = [
         (status === "processing" && "text-purple-500")
       if (typeof color === "boolean") color = "text-purple-500"
 
-      return <div className={twMerge("text-center", color)}>{status}</div>
+      return <div className={twMerge("text-left", color)}>{status}</div>
     },
   },
 
   {
     accessorKey: "id",
     header: () => (
-      <div className="text-center font-bold text-foreground/80">Details</div>
+      <div className="text-left font-bold text-foreground/80">Details</div>
     ),
     cell: ({ row }) => {
       const id: string = row.getValue("id")
       return (
-        <div className="grid place-items-center text-background/90">
+        <div className="grid place-items-start text-background/90">
           <Link
             href={`details/${id}`}
             className="rounded-full bg-primary px-[8px] py-[2px]"
