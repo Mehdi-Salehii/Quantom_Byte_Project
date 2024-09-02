@@ -105,6 +105,11 @@ export default function TicketDetails({ params }: { params: { id: string } }) {
                 <CardTitle>{ticketDetails.title}</CardTitle>
               </CardHeader>
               <CardContent>
+                <div className="mb-7">
+                  <time className="text-foreground/70">
+                    {`${new Date(ticketDetails.created_at).getDate().toString().padStart(2, "0")}/${new Date(ticketDetails.created_at).getMonth().toString().padStart(2, "0")}/${new Date(ticketDetails.created_at).getFullYear()}`}
+                  </time>
+                </div>
                 <div className="flex flex-col md:flex-row md:justify-between">
                   <div className="flex-1">
                     <h3 className="text-xl font-semibold">Description</h3>
