@@ -115,10 +115,9 @@ export default function TicketDetails({ params }: { params: { id: string } }) {
               <CardContent>
                 <div className="mb-7">
                   <div className="text-foreground/70">
-                    {ticketDetails?.created_at &&
-                      new Intl.DateTimeFormat(userLocale, options).format(
-                        new Date(ticketDetails?.created_at),
-                      )}
+                    {new Intl.DateTimeFormat(userLocale, options).format(
+                      new Date(ticketDetails?.created_at),
+                    )}
                   </div>
                 </div>
                 <div className="flex flex-col md:flex-row md:justify-between">
