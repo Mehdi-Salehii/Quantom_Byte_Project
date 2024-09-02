@@ -24,7 +24,16 @@ export const columns: ColumnDef<TicketType>[] = [
     ),
     cell: ({ row }) => {
       const date: Date = new Date(row.getValue("created_at"))
-      const dateString = `${date.getDate().toString().padStart(2, "0")}/${date.getMonth().toString().padStart(2, "0")}/${date.getFullYear()}`
+      const options: Intl.DateTimeFormatOptions = {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      }
+      const userLocale = "en-US"
+
+      const dateString = new Intl.DateTimeFormat(userLocale, options).format(
+        date,
+      )
       return <div className="text-left">{dateString}</div>
     },
   },

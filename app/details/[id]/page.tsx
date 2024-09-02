@@ -76,6 +76,14 @@ export default function TicketDetails({ params }: { params: { id: string } }) {
   if (!ticketDetails && !isFetchingUser && !isFetchingTicket) {
     return <p className="text-center text-red-500">Ticket not found!</p>
   }
+  const options: Intl.DateTimeFormatOptions = {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  }
+  const userLocale = "en-US"
 
   return (
     <div className="container mx-auto my-10 flex justify-center space-x-5 px-4">
@@ -106,9 +114,12 @@ export default function TicketDetails({ params }: { params: { id: string } }) {
               </CardHeader>
               <CardContent>
                 <div className="mb-7">
-                  <time className="text-foreground/70">
-                    {`${new Date(ticketDetails.created_at).getDate().toString().padStart(2, "0")}/${new Date(ticketDetails.created_at).getMonth().toString().padStart(2, "0")}/${new Date(ticketDetails.created_at).getFullYear()}`}
-                  </time>
+                  <div className="text-foreground/70">
+                    {ticketDetails?.created_at &&
+                      new Intl.DateTimeFormat(userLocale, options).format(
+                        new Date(ticketDetails?.created_at),
+                      )}
+                  </div>
                 </div>
                 <div className="flex flex-col md:flex-row md:justify-between">
                   <div className="flex-1">
