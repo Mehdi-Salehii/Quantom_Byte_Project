@@ -25,7 +25,7 @@ const Dashboard = () => {
   // }
 
   const { userId } = useAuth()
- 
+
   const [userInMyDb, setUserInMyDb] = useState(true)
   const [errorInDb, setErrorInDb] = useState(false)
   const [loadingTickets, setLoadingTickets] = useState(true)
@@ -47,7 +47,7 @@ const Dashboard = () => {
     isFetching: isFetchingRecievedTickets,
     refetch,
   } = useQuery({
-    queryKey: ["sent-tickets"],
+    queryKey: ["recieved-tickets"],
     queryFn: async () => {
       try {
         const department = user?.[0]?.user_department

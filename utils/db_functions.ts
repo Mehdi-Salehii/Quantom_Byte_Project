@@ -85,3 +85,21 @@ export const updateUser = async (user: Partial<UserType>, clerkId: string) => {
   })
   return data
 }
+export const updateTicket = async (
+  ticket: Partial<TicketType>,
+  ticketId: string,
+) => {
+  const data = await db.transaction(async (tx) => {
+    await tx
+      .update(ticketTable)
+      .set({ ...ticket, updated_at: new Date() })
+      .where(eq(ticketTable.id, ticketId))
+
+    const updatedTicket = await tx
+      .select()
+      .from(ticketTable)
+      .where(eq(ticketTable.id, ticketId))
+    return updatedTicket
+  })
+  return data
+}

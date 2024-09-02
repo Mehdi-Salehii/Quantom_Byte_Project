@@ -14,112 +14,149 @@ import ManageTicketForm from "@/components/ManageTicketForm"
 
 export default function TicketDetails({ params }: { params: { id: string } }) {
   const dummyTicket = tickets.find((t) => t.id === params.id)
-  const [data, setData] = useState<TicketType>()
-  const ticket = dummyTicket ? dummyTicket : data
 
   const [errorInDb, setErrorInDb] = useState(false)
+  const [showform, setShowform] = useState(false)
   const { userId } = useAuth()
   const {
-    data: ticketsSent,
-    isFetching,
+    data: user,
+    isFetching: isFetchingUser,
+    refetch: refetchUser,
+  } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      try {
+        const { data } = await axios.get(`/api/user?id=${userId}`)
+
+        return data
+      } catch (err) {
+        console.error(err)
+      }
+    },
+    enabled: !!userId,
+  })
+  const {
+    data: ticketDetails,
+    isFetching: isFetchingTicket,
     refetch,
   } = useQuery({
     queryKey: ["ticket-details"],
     queryFn: async () => {
       try {
-        
         const { data: userTicket } = await axios.get(`/api/ticket/${params.id}`)
 
         if (!userTicket) {
           setErrorInDb(true)
           return
         }
-        if (userTicket?.length) setData(userTicket[0])
-        return userTicket
+
+        if (!Array.isArray(userTicket) && dummyTicket) {
+          if (dummyTicket?.target_department === user?.[0]?.user_department) {
+            setShowform(true)
+          }
+          return dummyTicket
+        }
+        if (Array.isArray(userTicket) && userTicket?.length) {
+          if (
+            userTicket?.[0]?.target_department === user?.[0]?.user_department
+          ) {
+            setShowform(true)
+          }
+          return userTicket[0]
+        }
+
+        return []
       } catch (err) {
         console.error(err)
       }
     },
-    enabled: !!userId && !dummyTicket,
+    enabled: !!user,
   })
 
-  if (!ticket && !isFetching) {
+  if (!ticketDetails && !isFetchingUser && !isFetchingTicket) {
     return <p className="text-center text-red-500">Ticket not found!</p>
   }
 
   return (
     <div className="container mx-auto my-10 flex justify-center space-x-5 px-4">
-      {!isFetching && !errorInDb && !!ticket && (
-        <div className="flex flex-col gap-5 sm:flex-row">
-          <Card
-            className={`${(ticket.status === "fulfilled" && "bg-green-200/30") || (ticket.status === "rejected" && "bg-red-200/30") || (ticket.status === "processing" && "bg-purple-200/30")}`}
-          >
-            <CardHeader className="space-y-4">
-              <div className="self-center">
-                <Badge
-                  variant="secondary"
-                  className={`${
-                    ticket.status === "fulfilled"
-                      ? "bg-green-500 text-white"
-                      : ticket.status === "rejected"
-                        ? "bg-red-500 text-white"
-                        : "bg-purple-500 text-white"
-                  } grid place-items-center px-2 py-[5px]`}
-                >
-                  {ticket.status}
-                </Badge>
-              </div>
-              <CardTitle>{ticket.title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-col md:flex-row md:justify-between">
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold">Description</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">
-                    {ticket.description}
-                  </p>
+      {!isFetchingUser &&
+        !isFetchingTicket &&
+        !errorInDb &&
+        !!ticketDetails && (
+          <div className="flex flex-col gap-5 sm:flex-row">
+            <Card
+              className={`${(ticketDetails.status === "fulfilled" && "bg-green-200/30") || (ticketDetails.status === "rejected" && "bg-red-200/30") || (ticketDetails.status === "processing" && "bg-purple-200/30")}`}
+            >
+              <CardHeader className="space-y-4">
+                <div className="self-center">
+                  <Badge
+                    variant="secondary"
+                    className={`${
+                      ticketDetails.status === "fulfilled"
+                        ? "bg-green-500 text-white"
+                        : ticketDetails.status === "rejected"
+                          ? "bg-red-500 text-white"
+                          : "bg-purple-500 text-white"
+                    } grid place-items-center px-2 py-[5px]`}
+                  >
+                    {ticketDetails.status}
+                  </Badge>
                 </div>
-              </div>
-              {ticket.fulfill_message && (
-                <div className="mt-6">
-                  <h3 className="text-xl font-semibold">
-                    Your Ticket Was Fulfilled
-                  </h3>
-                  <p className="mt-2 text-sm text-green-600">
-                    {ticket.fulfill_message}
-                  </p>
+                <CardTitle>{ticketDetails.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-col md:flex-row md:justify-between">
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold">Description</h3>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      {ticketDetails.description}
+                    </p>
+                  </div>
                 </div>
-              )}
-              {ticket.reject_message && (
-                <div className="mt-6">
-                  <h3 className="text-xl font-semibold">
-                    Your Ticket Was Rejected
-                  </h3>
-                  <p className="mt-2 text-sm text-red-600">
-                    {ticket.reject_message}
-                  </p>
-                </div>
-              )}
+                {ticketDetails.fulfill_message && (
+                  <div className="mt-6">
+                    <h3 className="text-xl font-semibold">
+                      Your Ticket Was Fulfilled
+                    </h3>
+                    <p className="mt-2 text-sm text-green-600">
+                      {ticketDetails.fulfill_message}
+                    </p>
+                  </div>
+                )}
+                {ticketDetails.reject_message && (
+                  <div className="mt-6">
+                    <h3 className="text-xl font-semibold">
+                      Your Ticket Was Rejected
+                    </h3>
+                    <p className="mt-2 text-sm text-red-600">
+                      {ticketDetails.reject_message}
+                    </p>
+                  </div>
+                )}
 
-              {!!ticket?.pictures?.length && (
-                <div className="mt-5 flex w-full items-center justify-center">
-                  <Image
-                    src={ticket?.pictures?.[0]}
-                    width={600}
-                    height={600}
-                    alt="ticket picture"
-                  />
-                </div>
-              )}
-            </CardContent>
-          </Card>
-          <div className="w-56 text-center">
-            <ManageTicketForm isFetching={isFetching} />
+                {!!ticketDetails?.pictures?.length && (
+                  <div className="mt-5 flex w-full items-center justify-center">
+                    <Image
+                      src={ticketDetails?.pictures?.[0]}
+                      width={600}
+                      height={600}
+                      alt="ticket picture"
+                    />
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+            {showform && (
+              <div className="w-full text-center sm:w-80">
+                <ManageTicketForm id={params.id} />
+              </div>
+            )}
           </div>
-        </div>
+        )}
+      {!isFetchingUser && !isFetchingTicket && errorInDb && (
+        <ServerErrorOutgoing refetch={refetch} />
       )}
-      {!isFetching && errorInDb && <ServerErrorOutgoing refetch={refetch} />}
-      {isFetching && (
+      {(isFetchingTicket || isFetchingUser) && (
         <div className="grid h-full w-full place-items-center">
           <DetailsPageLoader />
         </div>

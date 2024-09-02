@@ -48,10 +48,11 @@ const formSchema = z.object({
 
 type UpdateUserFormProps = {
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>
-  isFetching: boolean
+
+  id: string
 }
 
-export default function ManageTicketForm({ isFetching }: UpdateUserFormProps) {
+export default function ManageTicketForm({ id }: UpdateUserFormProps) {
   const { userId } = useAuth()
   const [status, setStatus] = useState("")
   const { toast } = useToast()
@@ -67,41 +68,27 @@ export default function ManageTicketForm({ isFetching }: UpdateUserFormProps) {
   const queryClient = useQueryClient()
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      let isToast = 0
-      console.log(values)
-      /*
-      if (!user)
-        throw new Error("Server Error Fetching User Unsuccessful Try Again!")
-      if (!user?.length) {
-        const { data: insertedUser } = await axios.post("/api/user", {
-          ...values,
-          clerk_id: userId,
-          user_updated_profile: true,
+      const ticketStatus = await axios
+        .put(`/api/ticket/${id}`, {
+          ...(status === "fulfilled"
+            ? { fulfill_message: values.message, reject_message: null }
+            : { reject_message: values.message, fulfill_message: null }),
+          status: status,
         })
-
-        queryClient.invalidateQueries({ queryKey: ["user"] })
-
-        isToast = 1
-      } else {
-        const updatedUser = await axios
-          .put(`/api/user?id=${userId}`, {
-            ...values,
-            clerk_id: userId,
-          })
-          .then((res) => {
-            if (typeof res.data === "string") throw new Error("unsuccessful!")
-          })
-        queryClient.invalidateQueries({ queryKey: ["user"] })
-
-        isToast = 1
-      }
-
-      !!isToast &&
-        toast({
-          description: "Your respnse successfully has been submitted!",
-          className: "bg-green-600 text-lg font-semibold text-foreground",
+        .then((res) => {
+          if (typeof res.data === "string") throw new Error("unsuccessful!")
         })
-          */
+      queryClient.invalidateQueries({
+        queryKey: ["ticket-details"],
+      })
+      queryClient.invalidateQueries({
+        queryKey: ["recieved-tickets"],
+      })
+
+      toast({
+        description: "Your respnse successfully has been submitted!",
+        className: "bg-green-600 text-lg font-semibold text-foreground",
+      })
     } catch (err) {
       console.error(err)
       toast({
@@ -140,7 +127,9 @@ export default function ManageTicketForm({ isFetching }: UpdateUserFormProps) {
             className={`block rounded bg-green-500 p-0 px-2 py-1 text-sm font-normal text-background disabled:cursor-not-allowed`}
             type="submit"
           >
-            {isSubmitting ? "Submitting..." : "Fulfill"}
+            {isSubmitting && status === "fulfilled"
+              ? "Submitting..."
+              : "Fulfill"}
           </button>
           <button
             onClick={() => setStatus("rejected")}
@@ -148,7 +137,7 @@ export default function ManageTicketForm({ isFetching }: UpdateUserFormProps) {
             className={`block rounded bg-red-500 p-0 px-2 py-1 text-sm font-normal text-background disabled:cursor-not-allowed`}
             type="submit"
           >
-            {isSubmitting ? "Submitting..." : "Reject"}
+            {isSubmitting && status === "rejected" ? "Submitting..." : "Reject"}
           </button>
         </div>
       </form>
