@@ -19,7 +19,7 @@ export default function ProfilePage() {
         ?.split(" ")
         .map((n) => n.at(0)?.toUpperCase() + n.slice(1))
         .join(" ")
-    : "User"
+    : ""
   const { data: user, isFetching } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
