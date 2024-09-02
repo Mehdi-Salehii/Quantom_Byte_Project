@@ -84,6 +84,9 @@ export default function ManageTicketForm({ id }: UpdateUserFormProps) {
       queryClient.invalidateQueries({
         queryKey: ["recieved-tickets"],
       })
+      queryClient.invalidateQueries({
+        queryKey: ["sent-tickets"],
+      })
 
       toast({
         description: "Your respnse successfully has been submitted!",
