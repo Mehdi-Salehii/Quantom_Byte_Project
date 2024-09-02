@@ -155,7 +155,7 @@ export default function LandingPage() {
               personalized dashboard.
             </p>
             <div className="mt-6 space-x-4">
-              <SignUpButton mode="modal">
+              <SignUpButton mode="modal" forceRedirectUrl={"/dashboard"}>
                 <Button variant="outline" size="lg">
                   Sign Up
                 </Button>

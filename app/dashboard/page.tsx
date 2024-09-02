@@ -6,8 +6,8 @@ import { useEffect, useState } from "react"
 import { AddTicketForm } from "@/components/AddTicketForm"
 import { modifyDescription } from "@/utils/helpers"
 import { tickets } from "@/utils/dummyData"
-import { useAuth } from "@clerk/nextjs"
-import { useMutation } from "@tanstack/react-query"
+import { useAuth, useSession, useUser } from "@clerk/nextjs"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import { toast } from "@/components/ui/use-toast"
 import DashboardLoader from "@/components/DashboardLoader"
@@ -17,95 +17,83 @@ import ServerErrorRetry from "@/components/ServerErrorRetry"
 const Dashboard = () => {
   const [data, setData] = useState<TicketType[]>([])
 
-  let modifiedData = data ?? []
+  const { isSignedIn } = useSession()
+  // let modifiedData = data ?? []
 
-  if (data) {
-    modifiedData = modifyDescription(data, 30)
-  }
+  // if (data) {
+  //   modifiedData = modifyDescription(data, 30)
+  // }
 
   const { userId } = useAuth()
-
+  console.log(userId)
   const [userInMyDb, setUserInMyDb] = useState(true)
   const [errorInDb, setErrorInDb] = useState(false)
   const [loadingTickets, setLoadingTickets] = useState(true)
-
-  const { mutateAsync } = useMutation({
-    mutationFn: async () => {
+  const { data: user, isFetching: isFetchingUser } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
       try {
         const { data } = await axios.get(`/api/user?id=${userId}`)
 
         return data
       } catch (err) {
-        throw err
+        console.error(err)
       }
     },
-    onSuccess: async (data) => {
+    enabled: !!userId,
+  })
+  const {
+    data: recievedTickets,
+    isFetching: isFetchingRecievedTickets,
+    refetch,
+  } = useQuery({
+    queryKey: ["sent-tickets"],
+    queryFn: async () => {
       try {
-        if (!data) {
-          setErrorInDb(true)
-          return
-        }
-        if (!data?.length) {
-          setUserInMyDb(false)
-          return
-        }
-        const department = data[0].user_department
-
+        const department = user?.[0]?.user_department
         const { data: recievedTickets } = await axios.get(
           `/api/tickets-recieved?department=${department}`,
         )
-        const usersTickets = recievedTickets?.length
-          ? modifyDescription(recievedTickets, 15)
-          : []
-        setData([
-          ...usersTickets,
-          ...tickets.filter((t) => t.target_department === department),
-        ])
-        setLoadingTickets(false)
-      } catch (error) {
-        toast({
-          description: `Something went wrong on server. Please try again! ${error}`,
-          className: "bg-red-600 text-lg font-semibold text-foreground",
-        })
+        if (Array.isArray(recievedTickets)) {
+          setData([
+            ...recievedTickets,
+            ...tickets.filter((t) => t.target_department === department),
+          ])
+        } else {
+          setData([
+            ...tickets.filter((t) => t.target_department === department),
+          ])
+        }
+        return data
+      } catch (err) {
+        console.error(err)
       }
     },
-    onError: (error) => {
-      console.error(error)
-      toast({
-        description: `Something went wrong on server. Please try again! ${error}`,
-        className: "bg-red-600 text-lg font-semibold text-foreground",
-      })
-    },
+    enabled: !!user,
   })
-  useEffect(() => {
-    const init = async () => {
-      await mutateAsync()
-    }
-    init()
-  }, [userId])
 
   return (
     <>
       <div className="mt-10 grid xsm:px-1 sm:grid-cols-[14fr_1fr_6fr] sm:px-3 lg:px-6 xl:grid-cols-[15fr_1fr_4fr]">
         <div className="col-span-full col-start-1 col-end-[2]">
-          {!loadingTickets && userInMyDb && (
+          {!isFetchingRecievedTickets && !isFetchingUser && userInMyDb && (
             <>
               <h1 className="mb-2 text-center font-semibold">
                 Tickets to your department
               </h1>
-              <DataTable columns={columns} data={modifiedData} />
+              <DataTable columns={columns} data={data} />
             </>
           )}
 
-          {loadingTickets && (
+          {(isFetchingRecievedTickets || isFetchingUser) && (
             <div className="grid h-full w-full place-items-center">
               <DashboardLoader />
             </div>
           )}
           {!userInMyDb && <CompleteProfile />}
-          {!loadingTickets && errorInDb && (
+          {!isFetchingRecievedTickets && errorInDb && (
             <ServerErrorRetry
-              mutateAsync={mutateAsync}
+              refetch={refetch}
               setLoadingTickets={setLoadingTickets}
             />
           )}

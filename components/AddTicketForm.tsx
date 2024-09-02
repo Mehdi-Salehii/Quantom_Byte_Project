@@ -158,7 +158,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
       if (fileInputRef.current) {
         fileInputRef.current.value = ""
       }
-      queryClient.invalidateQueries({ queryKey: ["tickets-sent"] })
+      queryClient.invalidateQueries({ queryKey: ["sent-tickets"] })
       if (setOpen) setOpen(false)
       toast({
         description: "Your ticket successfully submitted!",
@@ -271,7 +271,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
               <FormControl>
                 <Textarea
                   placeholder="Describe the issue "
-                  className="fon- resize-none placeholder:italic placeholder:text-border"
+                  className="resize-none placeholder:italic placeholder:text-border"
                   {...field}
                 />
               </FormControl>

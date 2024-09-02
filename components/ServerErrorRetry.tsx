@@ -12,20 +12,22 @@ import {
 import { AlertTriangle } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Dispatch, SetStateAction } from "react"
+import { TicketType } from "@/supabase/functions/common/schema"
+import { QueryObserverResult } from "@tanstack/react-query"
 
 type ServerErrorRetryProps = {
-  mutateAsync: () => Promise<void>
+  refetch: () => Promise<QueryObserverResult<TicketType[] | undefined, Error>>
   setLoadingTickets: Dispatch<SetStateAction<boolean>>
 }
 
 export default function ServerErrorRetry({
-  mutateAsync,
+  refetch,
   setLoadingTickets,
 }: ServerErrorRetryProps) {
   const handleRetry = async () => {
     try {
       setLoadingTickets(true)
-      await mutateAsync()
+      await refetch()
       setLoadingTickets(false)
     } catch (error) {
       console.error("Error retrying:", error)

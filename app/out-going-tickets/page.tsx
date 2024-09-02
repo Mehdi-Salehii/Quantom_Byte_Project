@@ -31,7 +31,7 @@ const OutGoingTicketsPage = () => {
     isFetching,
     refetch,
   } = useQuery({
-    queryKey: ["tickets-sent"],
+    queryKey: ["sent-tickets"],
     queryFn: async () => {
       try {
         const { data } = await axios.get(`/api/tickets-sent?id=${userId}`)
