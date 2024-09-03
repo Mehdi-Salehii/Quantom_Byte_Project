@@ -11,7 +11,7 @@ export default function DetailsPageLoader() {
             <Skeleton className="h-6 w-20" />
           </div>
           <CardTitle>
-            <Skeleton className="mx-auto h-8 w-3/4" />
+            <Skeleton className="h-8 w-3/4" />
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -19,10 +19,6 @@ export default function DetailsPageLoader() {
             <div className="flex-1">
               <div className="text-xl font-semibold">
                 <Skeleton className="h-5 w-32" />
-              </div>
-              <div className="mt-2">
-                <Skeleton className="h-4 w-full" />
-                <Skeleton className="mt-2 h-4 w-3/4" />
               </div>
             </div>
           </div>
@@ -36,13 +32,7 @@ export default function DetailsPageLoader() {
             </div>
           </div>
           <div className="mt-6">
-            <div className="text-xl font-semibold">
-              <Skeleton className="h-5 w-40" />
-            </div>
-            <div className="mt-2">
-              <Skeleton className="h-4 w-full" />
-              <Skeleton className="mt-2 h-4 w-3/4" />
-            </div>
+            <Skeleton className="mt-2 h-40 w-full" />
           </div>
         </CardContent>
       </Card>
