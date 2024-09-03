@@ -48,7 +48,8 @@ const OutGoingTicketsPage = () => {
     },
     enabled: !!userId,
   })
-  const ticketsFromDb = ticketsSent?.length ? ticketsSent : []
+  const ticketsFromDb =
+    ticketsSent?.length && Array.isArray(ticketsSent) ? ticketsSent : []
   const dummyTickets = tickets.slice(0, 3)
 
   useEffect(() => {

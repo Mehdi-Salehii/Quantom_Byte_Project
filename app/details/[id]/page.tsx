@@ -84,7 +84,14 @@ export default function TicketDetails({ params }: { params: { id: string } }) {
     minute: "2-digit",
   }
   const userLocale = "en-US"
+  const dateValue: string | Date = ticketDetails?.created_at
 
+  const date = new Date(dateValue)
+  const isValidDate = date instanceof Date && !isNaN(date.getTime())
+
+  const dateString = isValidDate
+    ? new Intl.DateTimeFormat(userLocale, options).format(date)
+    : "Date Unavailable"
   return (
     <div className="container mx-auto my-10 flex justify-center space-x-5 px-4">
       {!isFetchingUser &&
@@ -114,11 +121,7 @@ export default function TicketDetails({ params }: { params: { id: string } }) {
               </CardHeader>
               <CardContent>
                 <div className="mb-7">
-                  <div className="text-foreground/70">
-                    {new Intl.DateTimeFormat(userLocale, options).format(
-                      new Date(ticketDetails?.created_at),
-                    )}
-                  </div>
+                  <div className="text-foreground/70">{dateString}</div>
                 </div>
                 <div className="flex flex-col md:flex-row md:justify-between">
                   <div className="flex-1">

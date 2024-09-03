@@ -23,7 +23,11 @@ export const columns: ColumnDef<TicketType>[] = [
       <div className="text-left font-bold text-foreground/80">Date</div>
     ),
     cell: ({ row }) => {
-      const date: Date = new Date(row.getValue("created_at"))
+      const dateValue: string | Date = row.getValue("created_at")
+
+      const date = new Date(dateValue)
+      const isValidDate = date instanceof Date && !isNaN(date.getTime())
+
       const options: Intl.DateTimeFormatOptions = {
         day: "2-digit",
         month: "long",
@@ -31,9 +35,9 @@ export const columns: ColumnDef<TicketType>[] = [
       }
       const userLocale = "en-US"
 
-      const dateString = new Intl.DateTimeFormat(userLocale, options).format(
-        date,
-      )
+      const dateString = isValidDate
+        ? new Intl.DateTimeFormat(userLocale, options).format(date)
+        : "Date Unavailable"
       return <div className="text-left">{dateString}</div>
     },
   },
