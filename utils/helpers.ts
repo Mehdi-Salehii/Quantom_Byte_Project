@@ -36,12 +36,12 @@ export const makeLastModifiedMessage = (updatedAt: string | Date): string => {
   const elapsedDays = Math.floor(elapsedHours / 24)
 
   if (elapsedTimeSeconds < 60) {
-    return `Last updated ${Math.floor(elapsedTimeSeconds)} seconds ago`
+    return `Last updated ${Math.floor(elapsedTimeSeconds)} second${elapsedMinutes > 1 ? "s" : ""} ago`
   } else if (elapsedMinutes < 60) {
-    return `Last updated ${elapsedMinutes} minutes ago`
+    return `Last updated ${elapsedMinutes} minute${elapsedMinutes > 1 ? "s" : ""} ago`
   } else if (elapsedHours < 24) {
-    return `Last updated ${elapsedHours} hours ago`
+    return `Last updated ${elapsedHours} hour${elapsedHours > 1 ? "s" : ""} ago`
   } else {
-    return `Last updated ${elapsedDays} days ago`
+    return `Last updated ${elapsedDays} day${elapsedDays > 1 ? "s" : ""} ago`
   }
 }
