@@ -166,7 +166,7 @@ export default function TicketDetails({ params }: { params: { id: string } }) {
             </Card>
             {showform && (
               <div className="w-full text-center sm:w-80">
-                <ManageTicketForm id={params.id} isDummy={!dummyTicket} />
+                <ManageTicketForm id={params.id} isDummy={!!dummyTicket} />
               </div>
             )}
           </div>
