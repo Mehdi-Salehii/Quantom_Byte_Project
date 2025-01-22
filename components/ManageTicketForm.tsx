@@ -48,11 +48,11 @@ const formSchema = z.object({
 
 type UpdateUserFormProps = {
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>
-
+  isDummy?: boolean
   id: string
 }
 
-export default function ManageTicketForm({ id }: UpdateUserFormProps) {
+export default function ManageTicketForm({ id, isDummy }: UpdateUserFormProps) {
   const { userId } = useAuth()
   const [status, setStatus] = useState("")
   const { toast } = useToast()
@@ -102,48 +102,52 @@ export default function ManageTicketForm({ id }: UpdateUserFormProps) {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
-        <FormField
-          control={form.control}
-          name="message"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="mx-auto">Message</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="Describe the issue "
-                  className="fon- resize-none placeholder:italic placeholder:text-border"
-                  {...field}
-                />
-              </FormControl>
+    !isDummy && (
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+          <FormField
+            control={form.control}
+            name="message"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="mx-auto">Message</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Describe the issue "
+                    className="fon- resize-none placeholder:italic placeholder:text-border"
+                    {...field}
+                  />
+                </FormControl>
 
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <div className="flex w-full justify-center space-x-3">
-          <button
-            onClick={() => setStatus("fulfilled")}
-            disabled={isSubmitting}
-            className={`block rounded bg-green-500 p-0 px-2 py-1 text-sm font-normal text-background disabled:cursor-not-allowed`}
-            type="submit"
-          >
-            {isSubmitting && status === "fulfilled"
-              ? "Submitting..."
-              : "Fulfill"}
-          </button>
-          <button
-            onClick={() => setStatus("rejected")}
-            disabled={isSubmitting}
-            className={`block rounded bg-red-500 p-0 px-2 py-1 text-sm font-normal text-background disabled:cursor-not-allowed`}
-            type="submit"
-          >
-            {isSubmitting && status === "rejected" ? "Submitting..." : "Reject"}
-          </button>
-        </div>
-      </form>
-    </Form>
+          <div className="flex w-full justify-center space-x-3">
+            <button
+              onClick={() => setStatus("fulfilled")}
+              disabled={isSubmitting}
+              className={`block rounded bg-green-500 p-0 px-2 py-1 text-sm font-normal text-background disabled:cursor-not-allowed`}
+              type="submit"
+            >
+              {isSubmitting && status === "fulfilled"
+                ? "Submitting..."
+                : "Fulfill"}
+            </button>
+            <button
+              onClick={() => setStatus("rejected")}
+              disabled={isSubmitting}
+              className={`block rounded bg-red-500 p-0 px-2 py-1 text-sm font-normal text-background disabled:cursor-not-allowed`}
+              type="submit"
+            >
+              {isSubmitting && status === "rejected"
+                ? "Submitting..."
+                : "Reject"}
+            </button>
+          </div>
+        </form>
+      </Form>
+    )
   )
 }
