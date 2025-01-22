@@ -11,7 +11,7 @@ export async function uploadFile(file: File, userId: string) {
   const filePath = `${userId}/${fileName}`
 
   const { data, error } = await supabase.storage
-    .from("quantom-byte")
+    .from("media")
     .upload(filePath, file)
 
   if (error) {
