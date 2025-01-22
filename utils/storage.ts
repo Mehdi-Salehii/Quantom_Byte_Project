@@ -9,12 +9,13 @@ export async function uploadFile(file: File, userId: string) {
   const fileExt = file.name.split(".").pop()
   const fileName = `${Date.now()}.${fileExt}`
   const filePath = `${userId}/${fileName}`
-
+  console.log(`uploading : file:${file} and filePath:${filePath}`)
   const { data, error } = await supabase.storage
     .from("media")
     .upload(filePath, file)
 
   if (error) {
+    console.log(`error : ${error.message}`)
     throw new Error(`Failed to upload file: ${error.message}`)
   }
 
