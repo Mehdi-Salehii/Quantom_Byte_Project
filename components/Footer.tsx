@@ -19,7 +19,7 @@ export const Footer = ({ className }: ClassProps) => {
       ])}
     >
       <div
-        className={`flex ${isSignedIn ? "gap-5" : ""} items-center justify-center text-center md:col-span-1 md:col-start-3`}
+        className={`flex ${isSignedIn ? "gap-5 md:gap-7 lg:gap-10" : ""} items-center justify-center text-center md:col-span-1 md:col-start-3`}
       >
         {isSignedIn ? (
           <div className="">
