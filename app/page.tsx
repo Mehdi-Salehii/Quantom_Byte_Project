@@ -10,7 +10,7 @@ export default function LandingPage() {
     <main>
       <section
         id="home"
-        className="md:vsh container mx-auto flex flex-col items-center justify-center px-4 py-1 text-center sm:px-6 md:flex-row md:items-center md:justify-between 2xl:py-7"
+        className="md:vsh container mx-auto flex flex-col items-center justify-center gap-5 px-4 py-1 py-5 text-center sm:px-6 md:flex-row md:items-center md:justify-between 2xl:py-7"
       >
         <div className="md:w-1/2">
           <h2 className="text-4xl font-bold leading-tight sm:text-5xl">
@@ -20,7 +20,7 @@ export default function LandingPage() {
             Quantum Byte specializes in delivering custom software solutions
             that drive growth and efficiency for businesses and individuals.
           </p>
-          <div className="mt-6 space-x-4">
+          <div className="my-6 space-x-4">
             <SignedOut>
               <SignUpButton mode="modal" forceRedirectUrl={"/dashboard"}>
                 <Button variant="default" size="lg">
