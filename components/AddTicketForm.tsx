@@ -132,7 +132,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
         setUploading(true)
         const filePath = await uploadFile(file, userId as string)
         setUploading(false)
-        fileUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/quantom-byte/${filePath}`
+        fileUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/media/${filePath}`
       }
 
       const ticketWithFile = {
