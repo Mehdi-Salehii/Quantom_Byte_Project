@@ -123,7 +123,7 @@ export default function ManageTicketForm({ id }: UpdateUserFormProps) {
           )}
         />
 
-        <div className="flex w-full flex-row-reverse justify-center space-x-3">
+        <div className="flex w-full flex-row-reverse justify-center gap-3">
           <button
             onClick={() => setStatus("fulfilled")}
             disabled={isSubmitting}
