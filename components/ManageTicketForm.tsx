@@ -112,7 +112,7 @@ export default function ManageTicketForm({ id }: UpdateUserFormProps) {
               <FormLabel className="mx-auto">Message</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Describe the issue "
+                  placeholder="Add a settlement message..."
                   className="fon- resize-none placeholder:italic placeholder:text-border"
                   {...field}
                 />
