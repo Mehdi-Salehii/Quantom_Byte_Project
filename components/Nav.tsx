@@ -24,7 +24,7 @@ export const Nav = ({ className, setIsOpen, open }: ClassProps) => {
               if (setIsOpen) setIsOpen(!open)
             }}
             className={twMerge(
-              `rounded px-5 text-sm text-primary transition-colors duration-200 hover:opacity-70 ${
+              `cursor-pointer rounded px-5 text-sm text-primary transition-colors duration-200 hover:opacity-50 ${
                 curPath === route.url ? "bg-primary text-foreground" : ""
               } py-1`,
             )}

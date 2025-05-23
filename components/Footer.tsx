@@ -38,19 +38,19 @@ export const Footer = ({ className }: ClassProps) => {
           <div className="flex gap-5 md:col-span-1 md:col-start-3">
             <Link
               href="#"
-              className="transition-colors duration-200 hover:text-pink-500"
+              className="cursor-pointer transition-colors duration-200 hover:text-pink-500"
             >
               <Instagram />
             </Link>
             <Link
               href="#"
-              className="transition-colors duration-200 hover:text-blue-500"
+              className="cursor-pointer transition-colors duration-200 hover:text-blue-500"
             >
               <Facebook />
             </Link>
             <Link
               href="#"
-              className="transition-colors duration-200 hover:text-foreground/50"
+              className="cursor-pointer transition-colors duration-200 hover:text-foreground/50"
             >
               <Github />
             </Link>
@@ -58,7 +58,7 @@ export const Footer = ({ className }: ClassProps) => {
         </div>
       </div>
       <div className="col-span-full text-sm text-foreground/50">
-        All rights reserved Quantom Byte {new Date().getFullYear()} &#169;
+        &#169; All rights reserved Quantom Byte {new Date().getFullYear()}
       </div>
     </footer>
   )
