@@ -9,7 +9,7 @@ import Link from "next/link"
 import { useUser } from "@clerk/nextjs"
 
 export const Footer = ({ className }: ClassProps) => {
-  const { isSignedIn, isLoaded } = useUser()
+  const { isSignedIn } = useUser()
 
   return (
     <footer
