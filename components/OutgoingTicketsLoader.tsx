@@ -3,7 +3,7 @@ import { Skeleton } from "./ui/skeleton"
 
 export default function OutgoingTicketsLoader() {
   return (
-    <div className="lg:8/12 mx-auto mt-10 grid px-1 xsm:w-11/12 sm:w-10/12 sm:px-3 md:w-9/12 lg:px-6 xl:w-8/12 2xl:w-7/12">
+    <div className="lg:8/12 mx-auto mt-10 grid xsm:w-11/12 sm:w-10/12 sm:px-3 md:w-9/12 lg:px-6 xl:w-8/12 2xl:w-7/12">
       <div className="col-span-full col-start-1 col-end-[2]">
         <div className="mb-8 text-center">
           <Skeleton className="mx-auto h-6 w-1/2 sm:w-40" />

@@ -35,7 +35,7 @@ export default function RootLayout({
           <body className="flex min-h-svh flex-col overflow-x-hidden transition-colors duration-300">
             <ThemeProvider attribute="class" defaultTheme="system">
               <Header />
-              <main className="flex-grow">{children}</main>
+              <main className="flex-grow px-2">{children}</main>
               <Toaster />
               <Footer />
             </ThemeProvider>
