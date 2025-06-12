@@ -32,7 +32,7 @@ export const Footer = ({ className }: ClassProps) => {
           ""
         )}
         <div className={`self-start`}>
-          <div className="relative mb-10 text-center font-semibold after:absolute after:-bottom-[4px] after:left-1/4 after:h-[1px] after:w-1/2 after:bg-border after:text-center after:content-['']">
+          <div className="relative mb-10 whitespace-nowrap text-center font-semibold after:absolute after:-bottom-[4px] after:left-1/4 after:h-[1px] after:w-1/2 after:bg-border after:text-center after:content-['']">
             Follow Us
           </div>
           <div className="flex gap-5 md:col-span-1 md:col-start-3">
