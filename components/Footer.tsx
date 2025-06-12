@@ -1,12 +1,12 @@
 "use client"
-import React, { useState } from "react"
+import React from "react"
 import { ClassProps, Nav } from "./Nav"
 
 import { twMerge } from "tailwind-merge"
 
-import { Facebook, Github, Instagram, Linkedin } from "lucide-react"
+import { Github, Linkedin } from "lucide-react"
 import Link from "next/link"
-import { SignedIn, useUser } from "@clerk/nextjs"
+import { useUser } from "@clerk/nextjs"
 
 export const Footer = ({ className }: ClassProps) => {
   const { isSignedIn, isLoaded } = useUser()
