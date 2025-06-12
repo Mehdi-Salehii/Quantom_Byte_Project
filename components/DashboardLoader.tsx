@@ -4,29 +4,29 @@ import { Skeleton } from "./ui/skeleton"
 export default function DashboardLoader() {
   return (
     <div className="w-full">
-      <div className="col-span-full col-start-1 col-end-[2]">
+      <div className="col-span-full col-start-1 col-end-[2] mx-auto">
         <div className="mb-8 text-center">
-          <Skeleton className="mx-auto h-6 w-40" />
+          <Skeleton className="mx-auto h-6 w-1/2 sm:w-40" />
         </div>
         <div className="mb-4 text-center">
-          <Skeleton className="h-9 w-96" />
+          <Skeleton className="h-9 w-full sm:w-96" />
         </div>
-        <div className="overflow-x-auto rounded-lg border">
-          <table className="min-w-full">
+        <div className="rounded-lg border">
+          <table className="w-full">
             <thead>
               <tr className="bg-foreground/10">
                 <th className="border-b px-4 py-3">
-                  <Skeleton className="h-4 w-8" />
+                  <Skeleton className="h-4 sm:w-8" />
                 </th>
                 <th className="border-b px-4 py-3">
-                  <Skeleton className="h-4 w-8" />
+                  <Skeleton className="h-4 sm:w-8" />
                 </th>
                 <th className="border-b px-4 py-3">
-                  <Skeleton className="h-4 w-12" />
+                  <Skeleton className="h-4 sm:w-12" />
                 </th>
 
                 <th className="border-b px-4 py-3">
-                  <Skeleton className="h-4 w-12" />
+                  <Skeleton className="h-4 sm:w-12" />
                 </th>
               </tr>
             </thead>
@@ -34,17 +34,17 @@ export default function DashboardLoader() {
               {Array.from({ length: 5 }).map((_, index) => (
                 <tr key={index}>
                   <td className="border-b px-4 py-4">
-                    <Skeleton className="h-4 w-52" />
+                    <Skeleton className="h-4 sm:w-52" />
                   </td>
                   <td className="border-b px-4 py-4">
-                    <Skeleton className="h-4 w-36" />
+                    <Skeleton className="h-4 sm:w-36" />
                   </td>
                   <td className="border-b px-4 py-4">
-                    <Skeleton className="h-4 w-12" />
+                    <Skeleton className="h-4 sm:w-12" />
                   </td>
 
                   <td className="border-b px-4 py-4">
-                    <Skeleton className="h-6 w-14 rounded-full" />
+                    <Skeleton className="h-6 rounded-full sm:w-14" />
                   </td>
                 </tr>
               ))}

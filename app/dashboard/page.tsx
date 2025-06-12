@@ -74,7 +74,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="mt-10 grid xsm:px-1 sm:grid-cols-[14fr_1fr_6fr] sm:px-3 lg:px-6 xl:grid-cols-[15fr_1fr_4fr]">
+      <div className="mt-10 grid px-2 sm:grid-cols-[14fr_1fr_6fr] sm:px-3 lg:px-6 xl:grid-cols-[15fr_1fr_4fr]">
         <div className="col-span-full col-start-1 col-end-[2]">
           {!isFetchingRecievedTickets && !isFetchingUser && userInMyDb && (
             <>
