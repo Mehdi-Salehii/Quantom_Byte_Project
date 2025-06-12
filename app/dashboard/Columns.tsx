@@ -14,7 +14,7 @@ export const columns: ColumnDef<TicketType>[] = [
     cell: ({ row }) => {
       const title: string = row.getValue("title")
 
-      return <div className="text-left">{title}</div>
+      return <div className="line-clamp-2 text-left">{title}</div>
     },
   },
   {
@@ -38,7 +38,7 @@ export const columns: ColumnDef<TicketType>[] = [
       const dateString = isValidDate
         ? new Intl.DateTimeFormat(userLocale, options).format(date)
         : "Date Unavailable"
-      return <div className="text-left">{dateString}</div>
+      return <div className="hidden text-left sm:block">{dateString}</div>
     },
   },
   {
