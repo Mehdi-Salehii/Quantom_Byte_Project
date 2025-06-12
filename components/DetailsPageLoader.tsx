@@ -4,7 +4,7 @@ import { Skeleton } from "./ui/skeleton"
 
 export default function DetailsPageLoader() {
   return (
-    <div className="mx-auto my-10 flex max-h-svh w-full justify-center overflow-hidden px-4 xsm:w-4/5 sm:w-1/2 md:w-[35%] lg:w-[30%]">
+    <div className="mx-auto mb-10 mt-7 flex max-h-svh w-full justify-center overflow-hidden px-4 xsm:w-4/5 sm:w-1/2 md:w-[35%] lg:w-[30%]">
       <Card className="w-full max-w-screen-md">
         <CardHeader className="space-y-4">
           <div className="self-center">

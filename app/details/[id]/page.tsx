@@ -7,7 +7,6 @@ import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import { useAuth } from "@clerk/nextjs"
 import { useState } from "react"
-import { TicketType } from "@/supabase/functions/common/schema"
 import ServerErrorOutgoing from "@/components/ServerErrorOutgoing"
 import DetailsPageLoader from "@/components/DetailsPageLoader"
 import ManageTicketForm from "@/components/ManageTicketForm"
@@ -93,12 +92,12 @@ export default function TicketDetails({ params }: { params: { id: string } }) {
     ? new Intl.DateTimeFormat(userLocale, options).format(date)
     : "Date Unavailable"
   return (
-    <div className="container mx-auto my-10 flex justify-center space-x-5 px-4">
+    <div className="container mx-auto flex justify-center space-x-5 px-4">
       {!isFetchingUser &&
         !isFetchingTicket &&
         !errorInDb &&
         !!ticketDetails && (
-          <div className="flex flex-col gap-5 sm:flex-row">
+          <div className="mt-7 flex flex-col gap-5 sm:flex-row">
             <Card
               className={`${(ticketDetails.status === "fulfilled" && "bg-green-200/30") || (ticketDetails.status === "rejected" && "bg-red-200/30") || (ticketDetails.status === "processing" && "bg-purple-200/30")}`}
             >
@@ -175,7 +174,7 @@ export default function TicketDetails({ params }: { params: { id: string } }) {
         <ServerErrorOutgoing refetch={refetch} />
       )}
       {(isFetchingTicket || isFetchingUser) && (
-        <div className="grid h-full w-full place-items-center">
+        <div className="h-full w-full">
           <DetailsPageLoader />
         </div>
       )}
