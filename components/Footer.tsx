@@ -4,7 +4,7 @@ import { ClassProps, Nav } from "./Nav"
 
 import { twMerge } from "tailwind-merge"
 
-import { Facebook, Github, Instagram } from "lucide-react"
+import { Facebook, Github, Instagram, Linkedin } from "lucide-react"
 import Link from "next/link"
 import { SignedIn, useUser } from "@clerk/nextjs"
 
@@ -37,19 +37,13 @@ export const Footer = ({ className }: ClassProps) => {
           </div>
           <div className="flex gap-5 md:col-span-1 md:col-start-3">
             <Link
-              href="#"
-              className="cursor-pointer transition-colors duration-200 hover:text-pink-500"
-            >
-              <Instagram />
-            </Link>
-            <Link
-              href="#"
+              href="https://www.linkedin.com/in/mehdi-salehi-484254331/"
               className="cursor-pointer transition-colors duration-200 hover:text-blue-500"
             >
-              <Facebook />
+              <Linkedin />
             </Link>
             <Link
-              href="#"
+              href="https://github.com/Mehdi-Salehii"
               className="cursor-pointer transition-colors duration-200 hover:text-foreground/50"
             >
               <Github />
