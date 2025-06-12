@@ -1,19 +1,14 @@
 "use client"
 import { TicketType } from "@/supabase/functions/common/schema"
-
-import { Table } from "@/components/ui/table"
 import { DataTable } from "./DataTable"
 import { columns } from "./Columns"
 import { useEffect, useState } from "react"
-import { AddTicketForm } from "@/components/AddTicketForm"
 import { modifyDescription } from "@/utils/helpers"
 import { tickets } from "@/utils/dummyData"
 import { useAuth } from "@clerk/nextjs"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
-import DashboardLoader from "@/components/DashboardLoader"
 import OutgoingTicketsLoader from "@/components/OutgoingTicketsLoader"
-import ServerErrorRetry from "@/components/ServerErrorRetry"
 import ServerErrorOutgoing from "@/components/ServerErrorOutgoing"
 
 const OutGoingTicketsPage = () => {
@@ -60,7 +55,7 @@ const OutGoingTicketsPage = () => {
     <>
       {!isFetching && errorInDb && <ServerErrorOutgoing refetch={refetch} />}
       {isFetching && (
-        <div className="grid h-full w-full place-items-center">
+        <div className="h-full w-full">
           <OutgoingTicketsLoader />
         </div>
       )}
