@@ -14,13 +14,15 @@ export const columns: ColumnDef<TicketType>[] = [
     cell: ({ row }) => {
       const title: string = row.getValue("title")
 
-      return <div className="text-left">{title}</div>
+      return <div className="line-clamp-2 text-left">{title}</div>
     },
   },
   {
     accessorKey: "created_at",
     header: () => (
-      <div className="text-left font-bold text-foreground/80">Date</div>
+      <div className="hidden text-left font-bold text-foreground/80 sm:block">
+        Date
+      </div>
     ),
     cell: ({ row }) => {
       const dateValue: string | Date = row.getValue("created_at")
@@ -38,7 +40,7 @@ export const columns: ColumnDef<TicketType>[] = [
       const dateString = isValidDate
         ? new Intl.DateTimeFormat(userLocale, options).format(date)
         : "Date Unavailable"
-      return <div className="text-left">{dateString}</div>
+      return <div className="hidden text-left sm:block">{dateString}</div>
     },
   },
   {
