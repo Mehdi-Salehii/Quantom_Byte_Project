@@ -41,7 +41,7 @@ export const Header = ({ className }: ClassProps) => {
     >
       <Logo className="mr-auto" />
       <SignedIn>
-        <Nav className="hidden font-semibold sm:flex" />
+        <Nav className="hidden font-semibold sm:flex" isHeaderNav />
         <Link href={"/update-information"} className="hidden sm:block">
           <UserRoundPen className="inline" width={50} height={20} />
         </Link>
