@@ -10,7 +10,7 @@ import axios from "axios"
 import DashboardLoader from "@/components/DashboardLoader"
 import CompleteProfile from "@/components/CompleteProfile"
 import ServerErrorRetry from "@/components/ServerErrorRetry"
-import useUserQuery from "../hooks/useUserQuery"
+import useUserQuery from "../hooks/query/useUserQuery"
 
 const Dashboard = () => {
   const [data, setData] = useState<TicketType[]>([])

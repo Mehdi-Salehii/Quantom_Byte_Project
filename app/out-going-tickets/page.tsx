@@ -5,11 +5,9 @@ import { columns } from "./Columns"
 import { useEffect, useState } from "react"
 import { modifyDescription } from "@/utils/helpers"
 import { tickets } from "@/utils/dummyData"
-import { useAuth } from "@clerk/nextjs"
-import { useQuery } from "@tanstack/react-query"
-import axios from "axios"
 import OutgoingTicketsLoader from "@/components/OutgoingTicketsLoader"
 import ServerErrorOutgoing from "@/components/ServerErrorOutgoing"
+import useOutgoingTicketsQuery from "../hooks/query/useOutgoingTicketsQuery"
 
 const OutGoingTicketsPage = () => {
   const [data, setData] = useState<TicketType[]>([])
@@ -18,31 +16,12 @@ const OutGoingTicketsPage = () => {
   if (data) {
     modifiedData = modifyDescription(data, 30)
   }
-  const { userId } = useAuth()
   const [errorInDb, setErrorInDb] = useState(false)
-
   const {
     data: ticketsSent,
     isFetching,
     refetch,
-  } = useQuery({
-    queryKey: ["sent-tickets"],
-    queryFn: async () => {
-      try {
-        const { data } = await axios.get(`/api/tickets-sent?id=${userId}`)
-
-        if (!data) {
-          setErrorInDb(true)
-          return
-        }
-
-        return data
-      } catch (err) {
-        console.error(err)
-      }
-    },
-    enabled: !!userId,
-  })
+  } = useOutgoingTicketsQuery(setErrorInDb)
   const ticketsFromDb =
     ticketsSent?.length && Array.isArray(ticketsSent) ? ticketsSent : []
   const dummyTickets = tickets.slice(0, 3)

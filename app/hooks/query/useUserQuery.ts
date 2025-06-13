@@ -16,6 +16,7 @@ const useUserQuery = () => {
       }
     },
     enabled: !!userId,
+    staleTime: 1000 * 60,
   })
   return { ...query, userId }
 }

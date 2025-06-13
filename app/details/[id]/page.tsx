@@ -10,7 +10,7 @@ import { useState } from "react"
 import ServerErrorOutgoing from "@/components/ServerErrorOutgoing"
 import DetailsPageLoader from "@/components/DetailsPageLoader"
 import ManageTicketForm from "@/components/ManageTicketForm"
-import useUserQuery from "@/app/hooks/useUserQuery"
+import useUserQuery from "@/app/hooks/query/useUserQuery"
 
 export default function TicketDetails({ params }: { params: { id: string } }) {
   const dummyTicket = tickets.find((t) => t.id === params.id)

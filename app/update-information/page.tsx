@@ -5,10 +5,9 @@ import { Calendar, User, Building2 } from "lucide-react"
 import UpdateUserForm from "@/components/UpdateUserForm"
 import { makeLastModifiedMessage } from "@/utils/helpers"
 import { useUser } from "@clerk/nextjs"
-import useUserQuery from "../hooks/useUserQuery"
+import useUserQuery from "../hooks/query/useUserQuery"
 
 export default function ProfilePage() {
-  
   const { user: userClerk } = useUser()
   const modifiedName = userClerk?.fullName
     ? userClerk?.fullName

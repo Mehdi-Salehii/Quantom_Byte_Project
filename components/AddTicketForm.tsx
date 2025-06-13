@@ -30,7 +30,7 @@ import { UserRoundPen } from "lucide-react"
 import { useQueryClient } from "@tanstack/react-query"
 import { useRef, useState } from "react"
 import { uploadFile } from "@/utils/storage"
-import useUserQuery from "@/app/hooks/useUserQuery"
+import useUserQuery from "@/app/hooks/query/useUserQuery"
 
 const departments = [
   "main office",
