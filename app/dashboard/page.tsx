@@ -30,7 +30,7 @@ const Dashboard = () => {
               <h1 className="mb-2 text-center font-semibold">
                 Tickets to your department
               </h1>
-              <DataTable columns={columns} data={recievedTickets ?? []} />
+              <DataTable columns={columns} data={data} />
             </>
           )}
 
