@@ -5,41 +5,19 @@ import { columns } from "./Columns"
 import { useState } from "react"
 import { AddTicketForm } from "@/components/AddTicketForm"
 import { tickets } from "@/utils/dummyData"
-import { useAuth, useSession } from "@clerk/nextjs"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import DashboardLoader from "@/components/DashboardLoader"
 import CompleteProfile from "@/components/CompleteProfile"
 import ServerErrorRetry from "@/components/ServerErrorRetry"
+import useUserQuery from "../hooks/useUserQuery"
 
 const Dashboard = () => {
   const [data, setData] = useState<TicketType[]>([])
-
-  const { isSignedIn } = useSession()
-  // let modifiedData = data ?? []
-
-  // if (data) {
-  //   modifiedData = modifyDescription(data, 30)
-  // }
-
-  const { userId } = useAuth()
-
   const [userInMyDb, setUserInMyDb] = useState(true)
   const [errorInDb, setErrorInDb] = useState(false)
   const [loadingTickets, setLoadingTickets] = useState(true)
-  const { data: user, isFetching: isFetchingUser } = useQuery({
-    queryKey: ["user"],
-    queryFn: async () => {
-      try {
-        const { data } = await axios.get(`/api/user?id=${userId}`)
-
-        return data
-      } catch (err) {
-        console.error(err)
-      }
-    },
-    enabled: !!userId,
-  })
+  const { data: user, isFetching: isFetchingUser } = useUserQuery()
   const {
     data: recievedTickets,
     isFetching: isFetchingRecievedTickets,

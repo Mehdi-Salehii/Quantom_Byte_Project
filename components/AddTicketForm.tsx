@@ -27,9 +27,10 @@ import { useToast } from "@/components/ui/use-toast"
 import { useAuth, useUser } from "@clerk/nextjs"
 
 import { UserRoundPen } from "lucide-react"
-import { useQuery, useQueryClient } from "@tanstack/react-query"
+import { useQueryClient } from "@tanstack/react-query"
 import { useRef, useState } from "react"
 import { uploadFile } from "@/utils/storage"
+import useUserQuery from "@/app/hooks/useUserQuery"
 
 const departments = [
   "main office",
@@ -99,26 +100,7 @@ export function AddTicketForm({ setOpen }: AddTicketFormProps) {
   const [filteredDepartments, setFilteredDepartments] = useState(departments)
   const [uploading, setUploading] = useState(false)
   const firstName = clerktest?.fullName
-  const { data: user, isFetching } = useQuery({
-    queryKey: ["user"],
-
-    queryFn: async () => {
-      try {
-        const { data } = await axios.get(`/api/user?id=${userId}`)
-        const filtered = departments.filter(
-          (dep) => dep !== data[0]?.user_department,
-        )
-
-        setFilteredDepartments(filtered)
-
-        return data
-      } catch (err) {
-        console.error(err)
-      }
-    },
-
-    enabled: !!userId,
-  })
+  const { data: user, isFetching } = useUserQuery()
 
   const queryClient = useQueryClient()
   async function onSubmit(values: z.infer<typeof formSchema>) {

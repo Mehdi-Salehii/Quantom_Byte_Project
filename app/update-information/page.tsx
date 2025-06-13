@@ -1,19 +1,14 @@
 "use client"
-
-import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, User, Building2 } from "lucide-react"
 import UpdateUserForm from "@/components/UpdateUserForm"
-import { useUserStore } from "@/utils/store"
 import { makeLastModifiedMessage } from "@/utils/helpers"
-import { useQuery } from "@tanstack/react-query"
-import axios from "axios"
-import { useAuth, useUser } from "@clerk/nextjs"
+import { useUser } from "@clerk/nextjs"
 import useUserQuery from "../hooks/useUserQuery"
 
 export default function ProfilePage() {
-  const { userId } = useAuth()
+  
   const { user: userClerk } = useUser()
   const modifiedName = userClerk?.fullName
     ? userClerk?.fullName
