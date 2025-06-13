@@ -10,6 +10,7 @@ import { makeLastModifiedMessage } from "@/utils/helpers"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import { useAuth, useUser } from "@clerk/nextjs"
+import useUserQuery from "../hooks/useUserQuery"
 
 export default function ProfilePage() {
   const { userId } = useAuth()
@@ -20,19 +21,7 @@ export default function ProfilePage() {
         .map((n) => n.at(0)?.toUpperCase() + n.slice(1))
         .join(" ")
     : ""
-  const { data: user, isFetching } = useQuery({
-    queryKey: ["user"],
-    queryFn: async () => {
-      try {
-        const { data } = await axios.get(`/api/user?id=${userId}`)
-
-        return data
-      } catch (err) {
-        console.error(err)
-      }
-    },
-    enabled: !!userId,
-  })
+  const { data: user, isFetching } = useUserQuery()
   return (
     <div className="container mx-auto my-10 px-4">
       <div className="mx-auto flex flex-col items-center gap-6 xsm:w-10/12 sm:flex-row sm:justify-between md:w-8/12 lg:w-7/12">
