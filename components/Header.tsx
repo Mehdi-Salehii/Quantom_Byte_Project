@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react"
-import { ClassProps, Nav } from "./Nav"
+import { ClassProps, NavLinks } from "./NavLkinks"
 import { ModeToggle } from "./ModeToggle"
 import { Logo } from "./Logo"
 
@@ -41,7 +41,7 @@ export const Header = ({ className }: ClassProps) => {
     >
       <Logo className="mr-auto" />
       <SignedIn>
-        <Nav className="hidden font-semibold sm:flex" isHeaderNav />
+        <NavLinks className="hidden font-semibold sm:flex" isHeaderNav />
         <Link href={"/update-information"} className="hidden sm:block">
           <UserRoundPen className="inline" width={50} height={20} />
         </Link>

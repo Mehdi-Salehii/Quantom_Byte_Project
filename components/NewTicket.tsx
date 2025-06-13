@@ -1,5 +1,5 @@
 import { SquarePen } from "lucide-react"
-import { ClassProps } from "./Nav"
+import { ClassProps } from "./NavLkinks"
 import { MouseEventHandler } from "react"
 type NewTicketPropsType = {
   onClick: MouseEventHandler<HTMLDivElement>

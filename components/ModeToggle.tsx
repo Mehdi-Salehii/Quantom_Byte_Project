@@ -10,7 +10,7 @@ import {
   PopoverTrigger,
   PopoverContent,
 } from "@/components/ui/popover"
-import { ClassProps } from "./Nav"
+import { ClassProps } from "./NavLkinks"
 
 export function ModeToggle({ className, setIsOpen }: ClassProps) {
   const { setTheme } = useTheme()

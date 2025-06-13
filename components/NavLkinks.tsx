@@ -14,7 +14,7 @@ const routes = [
   { url: "/out-going-tickets", name: "OutgoingTickets" },
   { url: "/dashboard", name: "Dashboard " },
 ]
-export const Nav = ({
+export const NavLinks = ({
   className,
   isHeaderNav,
   setIsOpen,

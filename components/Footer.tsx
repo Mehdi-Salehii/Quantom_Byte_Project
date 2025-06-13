@@ -1,6 +1,6 @@
 "use client"
 import React from "react"
-import { ClassProps, Nav } from "./Nav"
+import { ClassProps, NavLinks } from "./NavLkinks"
 
 import { twMerge } from "tailwind-merge"
 
@@ -26,7 +26,7 @@ export const Footer = ({ className }: ClassProps) => {
             <div className="relative mb-5 text-center font-semibold after:absolute after:-bottom-[4px] after:left-1/4 after:h-[1px] after:w-1/2 after:bg-border after:text-center after:content-['']">
               Useful Links
             </div>
-            <Nav />
+            <NavLinks />
           </div>
         ) : (
           ""

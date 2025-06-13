@@ -1,7 +1,7 @@
 import { UserRoundPen, X } from "lucide-react"
 import HamburgerIcon from "./Icons/HamburgerIcon"
 import { ModeToggle } from "./ModeToggle"
-import { ClassProps, Nav } from "./Nav"
+import { ClassProps, NavLinks } from "./NavLkinks"
 import { NewTicketPopover } from "./NewTicketPopover"
 import {
   Sheet,
@@ -98,7 +98,7 @@ export const Sheetwrap = ({
             </div>
 
             <SignedIn>
-              <Nav
+              <NavLinks
                 open={open}
                 setIsOpen={setIsOpen}
                 className="mx-auto flex flex-col items-end gap-5 font-semibold"
