@@ -4,13 +4,11 @@ import { DataTable } from "./DataTable"
 import { columns } from "./Columns"
 import { useState } from "react"
 import { AddTicketForm } from "@/components/AddTicketForm"
-import { tickets } from "@/utils/dummyData"
-import { useQuery } from "@tanstack/react-query"
-import axios from "axios"
 import DashboardLoader from "@/components/DashboardLoader"
 import CompleteProfile from "@/components/CompleteProfile"
 import ServerErrorRetry from "@/components/ServerErrorRetry"
 import useUserQuery from "../hooks/query/useUserQuery"
+import useRecievedTicketsQuery from "../hooks/query/useRecievedTicketsQuery"
 
 const Dashboard = () => {
   const [data, setData] = useState<TicketType[]>([])
@@ -22,32 +20,7 @@ const Dashboard = () => {
     data: recievedTickets,
     isFetching: isFetchingRecievedTickets,
     refetch,
-  } = useQuery({
-    queryKey: ["recieved-tickets"],
-    queryFn: async () => {
-      try {
-        const department = user?.[0]?.user_department
-        const { data: recievedTickets } = await axios.get(
-          `/api/tickets-recieved?department=${department}`,
-        )
-        if (Array.isArray(recievedTickets)) {
-          setData([
-            ...recievedTickets,
-            ...tickets.filter((t) => t.target_department === department),
-          ])
-        } else {
-          setData([
-            ...tickets.filter((t) => t.target_department === department),
-          ])
-        }
-        return data
-      } catch (err) {
-        console.error(err)
-      }
-    },
-    enabled: !!user,
-  })
-
+  } = useRecievedTicketsQuery(user, setData, data)
   return (
     <>
       <div className="mt-10 grid px-2 sm:grid-cols-[14fr_1fr_6fr] sm:px-3 lg:px-6 xl:grid-cols-[15fr_1fr_4fr]">
@@ -57,7 +30,7 @@ const Dashboard = () => {
               <h1 className="mb-2 text-center font-semibold">
                 Tickets to your department
               </h1>
-              <DataTable columns={columns} data={data} />
+              <DataTable columns={columns} data={recievedTickets ?? []} />
             </>
           )}
 
