@@ -1,17 +1,10 @@
-import {
-  DepartmentType,
-  TicketType,
-  UserType,
-} from "@/supabase/functions/common/schema"
+import { UserType } from "@/supabase/functions/common/schema"
 import { useQuery } from "@tanstack/react-query"
 import { tickets as dummyTickets } from "@/utils/dummyData"
 import axios from "axios"
 import { filterTickets } from "@/utils/helpers"
 
-const useRecievedTicketsQuery = (
-  user: UserType[],
-  //   setData: (inp: any) => void,
-) => {
+const useRecievedTicketsQuery = (user: UserType[]) => {
   return useQuery({
     queryKey: ["recieved-tickets"],
     queryFn: async () => {
@@ -27,10 +20,8 @@ const useRecievedTicketsQuery = (
             ...recievedTickets,
             ...filterTickets(dummyTickets, userDepartment),
           ]
-          //   setData(data)
         } else {
           data = [...filterTickets(dummyTickets, userDepartment)]
-          //   setData(data)
         }
       } catch (err) {
         console.error(err)

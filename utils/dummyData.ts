@@ -1,8 +1,4 @@
-import {
-  TicketType,
-  TicketTypeInsert,
-  UserType,
-} from "@/supabase/functions/common/schema"
+import { TicketType } from "@/supabase/functions/common/schema"
 
 export const tickets: TicketType[] = [
   {
