@@ -21,20 +21,18 @@ export const Footer = ({ className }: ClassProps) => {
       <div
         className={`flex ${isSignedIn ? "gap-5 md:gap-7 lg:gap-10" : ""} items-center justify-center text-center md:col-span-1 md:col-start-3`}
       >
-        {isSignedIn ? (
-          <div className="">
-            <div className="relative mb-5 text-center font-semibold after:absolute after:-bottom-[4px] after:left-1/4 after:h-[1px] after:w-1/2 after:bg-border after:text-center after:content-['']">
+        {isSignedIn && (
+          <div>
+            <h3 className="relative mb-5 text-center font-semibold after:absolute after:-bottom-[4px] after:left-1/4 after:h-[1px] after:w-1/2 after:bg-border after:text-center after:content-['']">
               Useful Links
-            </div>
+            </h3>
             <NavLinks />
           </div>
-        ) : (
-          ""
         )}
         <div className={`self-start`}>
-          <div className="relative mb-10 whitespace-nowrap text-center font-semibold after:absolute after:-bottom-[4px] after:left-1/4 after:h-[1px] after:w-1/2 after:bg-border after:text-center after:content-['']">
+          <h3 className="relative mb-10 whitespace-nowrap text-center font-semibold after:absolute after:-bottom-[4px] after:left-1/4 after:h-[1px] after:w-1/2 after:bg-border after:text-center after:content-['']">
             Follow Us
-          </div>
+          </h3>
           <div className="flex gap-5 md:col-span-1 md:col-start-3">
             <Link
               href="https://www.linkedin.com/in/mehdi-salehi-484254331/"
