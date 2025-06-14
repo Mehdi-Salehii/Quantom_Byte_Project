@@ -1,7 +1,5 @@
-import { TicketType, UserType } from "@/supabase/functions/common/schema"
-import axios from "axios"
-import { setIntervalAsync, clearIntervalAsync } from "set-interval-async/fixed"
-import { useUserStore } from "./store"
+import { DepartmentType, TicketType } from "@/supabase/functions/common/schema"
+
 export function modifyDescription(data: TicketType[], descLength: number) {
   if (data.length === 0) return []
   const howLong = descLength
@@ -45,3 +43,7 @@ export const makeLastModifiedMessage = (updatedAt: string | Date): string => {
     return `Last updated ${elapsedDays} day${elapsedDays > 1 ? "s" : ""} ago`
   }
 }
+export const filterTickets = (
+  tickets: TicketType[],
+  userDepartment: DepartmentType,
+) => tickets.filter((t) => t.target_department === userDepartment)
