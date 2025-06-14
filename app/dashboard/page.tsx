@@ -11,16 +11,15 @@ import useUserQuery from "../hooks/query/useUserQuery"
 import useRecievedTicketsQuery from "../hooks/query/useRecievedTicketsQuery"
 
 const Dashboard = () => {
-  const [data, setData] = useState<TicketType[]>([])
+  // const [data, setData] = useState<TicketType[]>([])
   const [userInMyDb, setUserInMyDb] = useState(true)
   const [errorInDb, setErrorInDb] = useState(false)
   const [loadingTickets, setLoadingTickets] = useState(true)
   const { data: user, isFetching: isFetchingUser } = useUserQuery()
-  const {
-    data: recievedTickets,
-    isFetching: isFetchingRecievedTickets,
-    refetch,
-  } = useRecievedTicketsQuery(user, setData, data)
+  const recievedTicketsQueryObj = useRecievedTicketsQuery(user)
+  const { isFetching: isFetchingRecievedTickets, refetch } =
+    recievedTicketsQueryObj
+  const data = recievedTicketsQueryObj.data!
   return (
     <>
       <div className="mt-10 grid px-2 sm:grid-cols-[14fr_1fr_6fr] sm:px-3 lg:px-6 xl:grid-cols-[15fr_1fr_4fr]">

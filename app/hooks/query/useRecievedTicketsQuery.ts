@@ -1,35 +1,34 @@
 import { TicketType, UserType } from "@/supabase/functions/common/schema"
 import { useQuery } from "@tanstack/react-query"
-import { tickets } from "@/utils/dummyData"
+import { tickets as dummyTickets } from "@/utils/dummyData"
 import axios from "axios"
 
 const useRecievedTicketsQuery = (
   user: UserType[],
-  setData: (inp: any) => void,
-  data: TicketType[],
+  //   setData: (inp: any) => void,
 ) => {
   return useQuery({
     queryKey: ["recieved-tickets"],
     queryFn: async () => {
+      let data
       try {
-        const department = user?.[0]?.user_department
+        const userDepartment = user?.[0]?.user_department
         const { data: recievedTickets } = await axios.get(
-          `/api/tickets-recieved?department=${department}`,
+          `/api/tickets-recieved?department=${userDepartment}`,
         )
+        const filterTickets = (tickets: TicketType[]) =>
+          tickets.filter((t) => t.target_department === userDepartment)
         if (Array.isArray(recievedTickets)) {
-          setData([
-            ...recievedTickets,
-            ...tickets.filter((t) => t.target_department === department),
-          ])
+          data = [...recievedTickets, ...filterTickets(dummyTickets)]
+          //   setData(data)
         } else {
-          setData([
-            ...tickets.filter((t) => t.target_department === department),
-          ])
+          data = [...filterTickets(dummyTickets)]
+          //   setData(data)
         }
-        return data
       } catch (err) {
         console.error(err)
       }
+      return data
     },
     enabled: !!user,
   })
